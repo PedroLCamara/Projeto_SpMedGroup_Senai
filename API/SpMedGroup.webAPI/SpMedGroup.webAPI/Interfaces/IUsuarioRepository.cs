@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SpMedGroup.webAPI.Interfaces
 {
     /// <summary>
-    /// Interface da entidade de usuário
+    /// Interface para a definição dos métodos da entidade de usuario
     /// </summary>
     interface IUsuarioRepository
     {

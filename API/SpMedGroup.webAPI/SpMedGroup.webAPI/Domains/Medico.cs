@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -13,10 +14,13 @@ namespace SpMedGroup.webAPI.Domains
         }
 
         public short IdMedico { get; set; }
+        [Required(ErrorMessage = "Id de usuário necessário")]
         public int IdUsuario { get; set; }
         public short? IdClinica { get; set; }
         public byte? IdEspecialidade { get; set; }
+        [Required(ErrorMessage = "Crm necessário")]
         public string Crm { get; set; }
+        [Required(ErrorMessage = "Nome necessário")]
         public string Nome { get; set; }
 
         public virtual Clinica IdClinicaNavigation { get; set; }

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace SpMedGroup.webAPI.Interfaces
 {
+    /// <summary>
+    /// Interface para a definição dos métodos da entidade de tipo usuario
+    /// </summary>
     interface ITipoUsuarioRepository
     {
         /// <summary>

@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace SpMedGroup.webAPI.Interfaces
 {
-    interface IPacienteRepositorycs
+    /// <summary>
+    /// Interface para a definição dos métodos da entidade de paciente
+    /// </summary>
+    interface IPacienteRepository
     {
         /// <summary>
         /// Método para a criação de um novo paciente
