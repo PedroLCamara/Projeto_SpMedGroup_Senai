@@ -85,7 +85,41 @@ namespace SpMedGroup.webAPI.Repositories
 
         public Consultum BuscarPorId(int IdConsulta)
         {
-            return Ctx.Consulta.Include(C => C.IdMedicoNavigation).Include(C => C.IdPacienteNavigation).FirstOrDefault(C => C.IdConsulta == IdConsulta);
+            List<Medico> ListaMedicos = Ctx.Medicos.Include(M => M.IdUsuarioNavigation).ToList();
+            List<Paciente> ListaPacientes = Ctx.Pacientes.Include(P => P.IdUsuarioNavigation).ToList();
+            foreach (Medico item in ListaMedicos)
+            {
+                Usuario UsuarioLista = new Usuario()
+                {
+                    Nome = item.IdUsuarioNavigation.Nome,
+                    Email = item.IdUsuarioNavigation.Email,
+                    DataDeNascimento = item.IdUsuarioNavigation.DataDeNascimento,
+                };
+
+                item.IdUsuarioNavigation = UsuarioLista;
+            }
+            foreach (Paciente item in ListaPacientes)
+            {
+                Usuario UsuarioLista = new Usuario()
+                {
+                    Nome = item.IdUsuarioNavigation.Nome,
+                    Email = item.IdUsuarioNavigation.Email,
+                    DataDeNascimento = item.IdUsuarioNavigation.DataDeNascimento,
+                };
+
+                item.IdUsuarioNavigation = UsuarioLista;
+            }
+            return Ctx.Consulta.Select(C => new Consultum()
+            {
+                IdConsulta = C.IdConsulta,
+                IdSituacao = C.IdSituacao,
+                IdPaciente = C.IdPaciente,
+                IdMedico = C.IdMedico,
+                DataHorario = C.DataHorario,
+                Descricao = C.Descricao,
+                IdMedicoNavigation = ListaMedicos.Find(M => M.IdMedico == C.IdMedico),
+                IdPacienteNavigation = ListaPacientes.Find(P => P.IdPaciente == C.IdPaciente)
+            }).FirstOrDefault(C => C.IdConsulta == IdConsulta);
         }
 
         public void Cancelar(int IdConsultaCancelada)
@@ -108,17 +142,118 @@ namespace SpMedGroup.webAPI.Repositories
 
         public List<Consultum> ListarPorMedico(int IdMedico)
         {
-            return Ctx.Consulta.Include(C => C.IdMedicoNavigation).Include(C => C.IdPacienteNavigation).Where(C => C.IdMedico == IdMedico).ToList();
+            List<Medico> ListaMedicos = Ctx.Medicos.Include(M => M.IdUsuarioNavigation).ToList();
+            List<Paciente> ListaPacientes = Ctx.Pacientes.Include(P => P.IdUsuarioNavigation).ToList();
+            foreach (Medico item in ListaMedicos)
+            {
+                Usuario UsuarioLista = new Usuario()
+                {
+                    Nome = item.IdUsuarioNavigation.Nome,
+                    Email = item.IdUsuarioNavigation.Email,
+                    DataDeNascimento = item.IdUsuarioNavigation.DataDeNascimento,
+                };
+
+                item.IdUsuarioNavigation = UsuarioLista;
+            }
+            foreach (Paciente item in ListaPacientes)
+            {
+                Usuario UsuarioLista = new Usuario()
+                {
+                    Nome = item.IdUsuarioNavigation.Nome,
+                    Email = item.IdUsuarioNavigation.Email,
+                    DataDeNascimento = item.IdUsuarioNavigation.DataDeNascimento,
+                };
+
+                item.IdUsuarioNavigation = UsuarioLista;
+            }
+            return Ctx.Consulta.Select(C => new Consultum()
+            {
+                IdConsulta = C.IdConsulta,
+                IdSituacao = C.IdSituacao,
+                IdPaciente = C.IdPaciente,
+                IdMedico = C.IdMedico,
+                DataHorario = C.DataHorario,
+                Descricao = C.Descricao,
+                IdMedicoNavigation = ListaMedicos.Find(M => M.IdMedico == C.IdMedico),
+                IdPacienteNavigation = ListaPacientes.Find(P => P.IdPaciente == C.IdPaciente)
+            }).Where(C => C.IdMedico == IdMedico).ToList();
         }
 
         public List<Consultum> ListarPorPaciente(int IdPaciente)
         {
-            return Ctx.Consulta.Include(C => C.IdMedicoNavigation).Include(C => C.IdPacienteNavigation).Where(C => C.IdPaciente == IdPaciente).ToList();
+            List<Medico> ListaMedicos = Ctx.Medicos.Include(M => M.IdUsuarioNavigation).ToList();
+            List<Paciente> ListaPacientes = Ctx.Pacientes.Include(P => P.IdUsuarioNavigation).ToList();
+            foreach (Medico item in ListaMedicos)
+            {
+                Usuario UsuarioLista = new Usuario()
+                {
+                    Nome = item.IdUsuarioNavigation.Nome,
+                    Email = item.IdUsuarioNavigation.Email,
+                    DataDeNascimento = item.IdUsuarioNavigation.DataDeNascimento,
+                };
+
+                item.IdUsuarioNavigation = UsuarioLista;
+            }
+            foreach (Paciente item in ListaPacientes)
+            {
+                Usuario UsuarioLista = new Usuario()
+                {
+                    Nome = item.IdUsuarioNavigation.Nome,
+                    Email = item.IdUsuarioNavigation.Email,
+                    DataDeNascimento = item.IdUsuarioNavigation.DataDeNascimento,
+                };
+
+                item.IdUsuarioNavigation = UsuarioLista;
+            }
+            return Ctx.Consulta.Select(C => new Consultum()
+            {
+                IdConsulta = C.IdConsulta,
+                IdSituacao = C.IdSituacao,
+                IdPaciente = C.IdPaciente,
+                IdMedico = C.IdMedico,
+                DataHorario = C.DataHorario,
+                Descricao = C.Descricao,
+                IdMedicoNavigation = ListaMedicos.Find(M => M.IdMedico == C.IdMedico),
+                IdPacienteNavigation = ListaPacientes.Find(P => P.IdPaciente == C.IdPaciente)
+            }).Where(C => C.IdPaciente == IdPaciente).ToList();
         }
 
         public List<Consultum> ListarTodas()
         {
-            return Ctx.Consulta.Include(C => C.IdMedicoNavigation).Include(C => C.IdPacienteNavigation).ToList();
+            List<Medico> ListaMedicos = Ctx.Medicos.Include(M => M.IdUsuarioNavigation).ToList();
+            List<Paciente> ListaPacientes = Ctx.Pacientes.Include(P => P.IdUsuarioNavigation).ToList();
+            foreach (Medico item in ListaMedicos)
+            {
+                Usuario UsuarioLista = new Usuario()
+                {
+                    Nome = item.IdUsuarioNavigation.Nome,
+                    Email = item.IdUsuarioNavigation.Email,
+                    DataDeNascimento = item.IdUsuarioNavigation.DataDeNascimento,
+                };
+
+                item.IdUsuarioNavigation = UsuarioLista;
+            }
+            foreach (Paciente item in ListaPacientes)
+            {
+                Usuario UsuarioLista = new Usuario()
+                {
+                    Nome = item.IdUsuarioNavigation.Nome,
+                    Email = item.IdUsuarioNavigation.Email,
+                    DataDeNascimento = item.IdUsuarioNavigation.DataDeNascimento,
+                };
+
+                item.IdUsuarioNavigation = UsuarioLista;
+            }
+            return Ctx.Consulta.Select(C => new Consultum() { 
+                IdConsulta = C.IdConsulta,
+                IdSituacao = C.IdSituacao,
+                IdPaciente = C.IdPaciente,
+                IdMedico = C.IdMedico,
+                DataHorario = C.DataHorario,
+                Descricao = C.Descricao,
+                IdMedicoNavigation = ListaMedicos.Find(M => M.IdMedico == C.IdMedico),
+                IdPacienteNavigation = ListaPacientes.Find(P => P.IdPaciente == C.IdPaciente)
+            }).ToList();
         }
     }
 }

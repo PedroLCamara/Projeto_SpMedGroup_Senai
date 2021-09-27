@@ -33,7 +33,24 @@ namespace SpMedGroup.webAPI.Repositories
 
         public Especialidade BuscarPorId(int IdEspecialidade)
         {
-            return Ctx.Especialidades.Include(E => E.Medicos).FirstOrDefault(E => E.IdEspecialidade == IdEspecialidade);
+            List<Medico> ListaMedicos = Ctx.Medicos.Include(M => M.IdUsuarioNavigation).ToList();
+            foreach (Medico item in ListaMedicos)
+            {
+                Usuario UsuarioLista = new Usuario()
+                {
+                    Nome = item.IdUsuarioNavigation.Nome,
+                    Email = item.IdUsuarioNavigation.Email,
+                    DataDeNascimento = item.IdUsuarioNavigation.DataDeNascimento,
+                };
+
+                item.IdUsuarioNavigation = UsuarioLista;
+            }
+            return Ctx.Especialidades.Select(E => new Especialidade()
+            {
+                IdEspecialidade = E.IdEspecialidade,
+                Nome = E.Nome,
+                Medicos = ListaMedicos.FindAll(M => M.IdEspecialidade == E.IdEspecialidade)
+            }).FirstOrDefault(E => E.IdEspecialidade == IdEspecialidade);
         }
 
         public void Cadastrar(Especialidade NovaEspecialidade)
@@ -50,7 +67,23 @@ namespace SpMedGroup.webAPI.Repositories
 
         public List<Especialidade> ListarTodas()
         {
-            return Ctx.Especialidades.Include(E => E.Medicos).ToList();
+            List<Medico> ListaMedicos = Ctx.Medicos.Include(M => M.IdUsuarioNavigation).ToList();
+            foreach (Medico item in ListaMedicos)
+            {
+                Usuario UsuarioLista = new Usuario()
+                {
+                    Nome = item.IdUsuarioNavigation.Nome,
+                    Email = item.IdUsuarioNavigation.Email,
+                    DataDeNascimento = item.IdUsuarioNavigation.DataDeNascimento,
+                };
+
+                item.IdUsuarioNavigation = UsuarioLista;
+            }
+            return Ctx.Especialidades.Select(E => new Especialidade() { 
+                IdEspecialidade = E.IdEspecialidade,
+                Nome = E.Nome,
+                Medicos = ListaMedicos.FindAll(M => M.IdEspecialidade == E.IdEspecialidade)
+            }).ToList();
         }
     }
 }

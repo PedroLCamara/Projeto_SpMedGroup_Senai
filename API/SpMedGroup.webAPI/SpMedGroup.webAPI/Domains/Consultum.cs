@@ -14,7 +14,7 @@ namespace SpMedGroup.webAPI.Domains
         public int IdPaciente { get; set; }
         [Required(ErrorMessage = "Id do médico necessário")]
         public short IdMedico { get; set; }
-        [Required(ErrorMessage = "Horário necessário")]
+        [Required(ErrorMessage = "Data e horário necessários")]
         public DateTime DataHorario { get; set; }
         public string Descricao { get; set; }
 

@@ -43,7 +43,29 @@ namespace SpMedGroup.webAPI.Repositories
 
         public Clinica BuscarPorId(int IdClinica)
         {
-            return Ctx.Clinicas.Include(C => C.Medicos).FirstOrDefault(C => C.IdClinica == IdClinica);
+            List<Medico> ListaMedicos = Ctx.Medicos.Include(M => M.IdUsuarioNavigation).ToList();
+            foreach (Medico item in ListaMedicos)
+            {
+                Usuario UsuarioLista = new Usuario()
+                {
+                    Nome = item.IdUsuarioNavigation.Nome,
+                    Email = item.IdUsuarioNavigation.Email,
+                    DataDeNascimento = item.IdUsuarioNavigation.DataDeNascimento,
+                };
+
+                item.IdUsuarioNavigation = UsuarioLista;
+            }
+            return Ctx.Clinicas.Select(C => new Clinica()
+            {
+                IdClinica = C.IdClinica,
+                HorarioDeAbertura = C.HorarioDeAbertura,
+                HorarioDeFechamento = C.HorarioDeFechamento,
+                Endereco = C.Endereco,
+                RazaoSocial = C.RazaoSocial,
+                NomeFantasia = C.NomeFantasia,
+                Cnpj = C.Cnpj,
+                Medicos = ListaMedicos.FindAll(M => M.IdClinica == C.IdClinica),
+            }).FirstOrDefault(C => C.IdClinica == IdClinica);
         }
 
         public void Cadastrar(Clinica NovaClinica)
@@ -60,7 +82,28 @@ namespace SpMedGroup.webAPI.Repositories
 
         public List<Clinica> ListarTodas()
         {
-            return Ctx.Clinicas.Include(C => C.Medicos).ToList();
+            List<Medico> ListaMedicos = Ctx.Medicos.Include(M => M.IdUsuarioNavigation).ToList();
+            foreach (Medico item in ListaMedicos)
+            {
+                Usuario UsuarioLista = new Usuario()
+                {
+                    Nome = item.IdUsuarioNavigation.Nome,
+                    Email = item.IdUsuarioNavigation.Email,
+                    DataDeNascimento = item.IdUsuarioNavigation.DataDeNascimento,
+                };
+
+                item.IdUsuarioNavigation = UsuarioLista;
+            }
+            return Ctx.Clinicas.Select(C => new Clinica() { 
+                IdClinica = C.IdClinica,
+                HorarioDeAbertura = C.HorarioDeAbertura,
+                HorarioDeFechamento = C.HorarioDeFechamento,
+                Endereco = C.Endereco,
+                RazaoSocial = C.RazaoSocial,
+                NomeFantasia = C.NomeFantasia,
+                Cnpj = C.Cnpj,
+                Medicos = ListaMedicos.FindAll(M => M.IdClinica == C.IdClinica),    
+            }).ToList();
         }
     }
 }

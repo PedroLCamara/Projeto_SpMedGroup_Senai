@@ -16,8 +16,6 @@ namespace SpMedGroup.webAPI.Domains
         public int IdPaciente { get; set; }
         [Required(ErrorMessage = "Id de usuário necessário")]
         public int IdUsuario { get; set; }
-        [Required(ErrorMessage = "Nome necessário")]
-        public string Nome { get; set; }
         public string Telefone { get; set; }
         [Required(ErrorMessage = "Cpf necessário")]
         public string Cpf { get; set; }

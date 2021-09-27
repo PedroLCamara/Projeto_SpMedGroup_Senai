@@ -22,7 +22,7 @@ namespace SpMedGroup.webAPI.Domains
         public string RazaoSocial { get; set; }
         [Required(ErrorMessage = "Nome fantasia necessário")]
         public string NomeFantasia { get; set; }
-        [Required(ErrorMessage = "Cnpj necessário")]
+        [Required(ErrorMessage = "CNPJ necessário")]
         public string Cnpj { get; set; }
 
         public virtual ICollection<Medico> Medicos { get; set; }

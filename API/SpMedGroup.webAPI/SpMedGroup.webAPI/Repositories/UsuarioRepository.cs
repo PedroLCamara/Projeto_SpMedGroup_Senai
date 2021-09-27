@@ -27,6 +27,7 @@ namespace SpMedGroup.webAPI.Repositories
             {
                 UsuarioBuscado = new Usuario()
                 {
+                    Nome = UsuarioAtualizado.Nome,
                     Email = UsuarioAtualizado.Email,
                     Senha = UsuarioAtualizado.Senha,
                     DataDeNascimento = UsuarioAtualizado.DataDeNascimento,
@@ -41,7 +42,16 @@ namespace SpMedGroup.webAPI.Repositories
 
         public Usuario BuscarPorId(int IdUsuario)
         {
-            return Ctx.Usuarios.Include(U => U.IdTipoUsuarioNavigation).Include(U => U.Paciente).Include(U => U.Medico).FirstOrDefault(U => U.IdUsuario == IdUsuario);
+            return Ctx.Usuarios.Select(U => new Usuario()
+            {
+                IdUsuario = U.IdUsuario,
+                Nome = U.Nome,
+                Email = U.Email,
+                IdTipoUsuario = U.IdTipoUsuario,
+                DataDeNascimento = U.DataDeNascimento,
+                Medico = U.Medico,
+                Paciente = U.Paciente
+            }).FirstOrDefault(U => U.IdUsuario == IdUsuario);
         }
 
         public void Cadastrar(Usuario NovoUsuario)
@@ -58,7 +68,15 @@ namespace SpMedGroup.webAPI.Repositories
 
         public List<Usuario> ListarTodos()
         {
-            return Ctx.Usuarios.Include(U => U.IdTipoUsuarioNavigation).Include(U => U.Paciente).Include(U => U.Medico).ToList();
+            return Ctx.Usuarios.Select(U => new Usuario() { 
+                IdUsuario = U.IdUsuario,
+                Nome = U.Nome,
+                Email = U.Email,
+                IdTipoUsuario = U.IdTipoUsuario,
+                DataDeNascimento = U.DataDeNascimento,
+                Medico = U.Medico,
+                Paciente = U.Paciente
+            }).ToList();
         }
 
         public Usuario Logar(string Email, string Senha)

@@ -134,9 +134,6 @@ namespace SpMedGroup.webAPI.Contexts
                 entity.HasIndex(e => e.IdUsuario, "UQ__Medico__5B65BF96900FDA88")
                     .IsUnique();
 
-                entity.HasIndex(e => e.Nome, "UQ__Medico__7D8FE3B26D9E8F44")
-                    .IsUnique();
-
                 entity.HasIndex(e => e.Crm, "UQ__Medico__C1F887FFDADC4825")
                     .IsUnique();
 
@@ -146,11 +143,6 @@ namespace SpMedGroup.webAPI.Contexts
                     .IsUnicode(false)
                     .HasColumnName("CRM")
                     .IsFixedLength(true);
-
-                entity.Property(e => e.Nome)
-                    .IsRequired()
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
 
                 entity.HasOne(d => d.IdClinicaNavigation)
                     .WithMany(p => p.Medicos)
@@ -195,11 +187,6 @@ namespace SpMedGroup.webAPI.Contexts
                 entity.Property(e => e.Endereco)
                     .IsRequired()
                     .HasMaxLength(300)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Nome)
-                    .IsRequired()
-                    .HasMaxLength(100)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Rg)
@@ -267,6 +254,10 @@ namespace SpMedGroup.webAPI.Contexts
                 entity.Property(e => e.Email)
                     .IsRequired()
                     .HasMaxLength(256)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Nome)
+                    .HasMaxLength(100)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Senha)

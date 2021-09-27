@@ -28,7 +28,6 @@ namespace SpMedGroup.webAPI.Repositories
             {
                 MedicoBuscado = new Medico()
                 {
-                    Nome = MedicoAtualizado.Nome,
                     Crm = MedicoAtualizado.Crm,
                     IdEspecialidade = MedicoAtualizado.IdEspecialidade,
                     IdClinica = MedicoAtualizado.IdClinica,
@@ -43,7 +42,28 @@ namespace SpMedGroup.webAPI.Repositories
 
         public Medico BuscarPorId(int IdMedico)
         {
-            return Ctx.Medicos.Include(M => M.IdUsuarioNavigation).FirstOrDefault(M => M.IdMedico == IdMedico);
+            List<Usuario> ListaUsuarios = new List<Usuario>();
+            foreach (Medico item in Ctx.Medicos.Include(M => M.IdUsuarioNavigation))
+            {
+                Usuario UsuarioLista = new Usuario()
+                {
+                    Nome = item.IdUsuarioNavigation.Nome,
+                    Email = item.IdUsuarioNavigation.Email,
+                    DataDeNascimento = item.IdUsuarioNavigation.DataDeNascimento
+                };
+
+                ListaUsuarios.Add(UsuarioLista);
+            }
+
+            return Ctx.Medicos.Select(M => new Medico()
+            {
+                IdMedico = M.IdMedico,
+                IdUsuario = M.IdUsuario,
+                IdClinica = M.IdClinica,
+                IdEspecialidade = M.IdEspecialidade,
+                Crm = M.Crm,
+                IdUsuarioNavigation = ListaUsuarios.Find(U => U.IdUsuario == M.IdUsuario)
+            }).FirstOrDefault(M => M.IdMedico == IdMedico);
         }
 
         public void Cadastrar(Medico NovoMedico)
@@ -60,13 +80,26 @@ namespace SpMedGroup.webAPI.Repositories
 
         public List<Medico> ListarTodos()
         {
+            List<Usuario> ListaUsuarios = new List<Usuario>();
+            foreach (Medico item in Ctx.Medicos.Include(M => M.IdUsuarioNavigation))
+            {
+                Usuario UsuarioLista = new Usuario()
+                {
+                    Nome = item.IdUsuarioNavigation.Nome,
+                    Email = item.IdUsuarioNavigation.Email,
+                    DataDeNascimento = item.IdUsuarioNavigation.DataDeNascimento
+                };
+
+                ListaUsuarios.Add(UsuarioLista);
+            }
+
             return Ctx.Medicos.Select(M => new Medico() { 
                 IdMedico = M.IdMedico,
                 IdUsuario = M.IdUsuario,
                 IdClinica = M.IdClinica,
                 IdEspecialidade = M.IdEspecialidade,
                 Crm = M.Crm,
-                Nome = M.Nome
+                IdUsuarioNavigation = ListaUsuarios.Find(U => U.IdUsuario == M.IdUsuario)
             }).ToList();
         }
     }

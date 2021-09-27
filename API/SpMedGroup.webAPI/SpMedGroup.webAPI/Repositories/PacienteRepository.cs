@@ -28,7 +28,6 @@ namespace SpMedGroup.webAPI.Repositories
             {
                 PacienteBuscado = new Paciente()
                 {
-                    Nome = PacienteAtualizado.Nome,
                     Telefone = PacienteAtualizado.Telefone,
                     Cpf = PacienteAtualizado.Cpf,
                     Endereco = PacienteAtualizado.Endereco,
@@ -44,7 +43,28 @@ namespace SpMedGroup.webAPI.Repositories
 
         public Paciente BuscarPorId(int IdPaciente)
         {
-            return Ctx.Pacientes.Include(P => P.IdUsuarioNavigation).FirstOrDefault(P => P.IdPaciente == IdPaciente);
+            List<Usuario> ListaUsuarios = new List<Usuario>();
+            foreach (Paciente item in Ctx.Pacientes.Include(M => M.IdUsuarioNavigation))
+            {
+                Usuario UsuarioLista = new Usuario()
+                {
+                    Nome = item.IdUsuarioNavigation.Nome,
+                    Email = item.IdUsuarioNavigation.Email,
+                    DataDeNascimento = item.IdUsuarioNavigation.DataDeNascimento
+                };
+
+                ListaUsuarios.Add(UsuarioLista);
+            }
+            return Ctx.Pacientes.Select(P => new Paciente()
+            {
+                IdPaciente = P.IdPaciente,
+                IdUsuario = P.IdUsuario,
+                Telefone = P.Telefone,
+                Cpf = P.Cpf,
+                Endereco = P.Endereco,
+                Rg = P.Rg,
+                IdUsuarioNavigation = ListaUsuarios.Find(U => U.IdUsuario == P.IdUsuario)
+            }).FirstOrDefault(P => P.IdPaciente == IdPaciente);
         }
 
         public void Cadastrar(Paciente NovoPaciente)
@@ -61,7 +81,28 @@ namespace SpMedGroup.webAPI.Repositories
 
         public List<Paciente> ListarTodos()
         {
-            return Ctx.Pacientes.Include(P => P.IdUsuarioNavigation).ToList();
+            List<Usuario> ListaUsuarios = new List<Usuario>();
+            foreach (Paciente item in Ctx.Pacientes.Include(M => M.IdUsuarioNavigation))
+            {
+                Usuario UsuarioLista = new Usuario()
+                {
+                    Nome = item.IdUsuarioNavigation.Nome,
+                    Email = item.IdUsuarioNavigation.Email,
+                    DataDeNascimento = item.IdUsuarioNavigation.DataDeNascimento
+                };
+
+                ListaUsuarios.Add(UsuarioLista);
+            }
+
+            return Ctx.Pacientes.Select(P => new Paciente() { 
+                IdPaciente = P.IdPaciente,
+                IdUsuario = P.IdUsuario,
+                Telefone = P.Telefone,
+                Cpf = P.Cpf,
+                Endereco = P.Endereco,
+                Rg = P.Rg,
+                IdUsuarioNavigation = ListaUsuarios.Find(U => U.IdUsuario == P.IdUsuario)
+            }).ToList();
         }
     }
 }

@@ -14,7 +14,7 @@ namespace SpMedGroup.webAPI.Domains
         }
 
         public byte IdEspecialidade { get; set; }
-        [Required(ErrorMessage = "Nome necessário")]
+        [Required(ErrorMessage = "Nome da especialidade necessário")]
         public string Nome { get; set; }
 
         public virtual ICollection<Medico> Medicos { get; set; }
