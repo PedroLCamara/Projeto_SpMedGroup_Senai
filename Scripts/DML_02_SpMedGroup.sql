@@ -126,3 +126,55 @@ Update Usuario
 SET DataDeNascimento = '05/03/2018'
 WHERE Email = 'mariana@outlook.com';
 GO
+
+--Pequenas alterações
+
+UPDATE Usuario
+SET Nome = 'Ricardo Lemos'
+WHERE IdUsuario = 10;
+GO
+
+UPDATE Usuario
+SET Nome = 'Roberto Possarle'
+WHERE IdUsuario = 11;
+GO
+
+UPDATE Usuario
+SET Nome = 'Helena Strada'
+WHERE IdUsuario = 12;
+GO
+
+UPDATE Usuario 
+SET Nome = 'Ligia'
+WHERE IdUsuario = 3;
+GO
+
+UPDATE Usuario 
+SET Nome = 'Alexandre'
+WHERE IdUsuario = 4;
+GO
+
+UPDATE Usuario 
+SET Nome = 'Fernando'
+WHERE IdUsuario = 5;
+GO
+
+UPDATE Usuario 
+SET Nome = 'Henrique'
+WHERE IdUsuario = 6;
+GO
+
+UPDATE Usuario 
+SET Nome = 'João'
+WHERE IdUsuario = 7;
+GO
+
+UPDATE Usuario 
+SET Nome = 'Bruno'
+WHERE IdUsuario = 8;
+GO
+
+UPDATE Usuario 
+SET Nome = 'Mariana'
+WHERE IdUsuario = 9;
+GO

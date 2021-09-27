@@ -80,3 +80,21 @@ CREATE TABLE Consulta(
 	Descricao VARCHAR(1000) NOT NULL DEFAULT('Não especificada')
 );
 GO
+
+--Pequenas alterações 
+
+ALTER TABLE Paciente
+DROP COLUMN Nome;
+GO
+
+ALTER TABLE Medico
+DROP CONSTRAINT UQ__Medico__7D8FE3B26D9E8F44;
+GO
+
+ALTER TABLE Medico
+DROP COLUMN Nome;
+GO
+
+ALTER TABLE Usuario
+ADD Nome VARCHAR(100);
+GO
