@@ -18,7 +18,7 @@ namespace SpMedGroup.webAPI.Domains
         public int IdUsuario { get; set; }
         [Required(ErrorMessage = "Id da clínica necessário")]
         public short? IdClinica { get; set; }
-        [Required(ErrorMessage = "Id da especialidade necessário")]
+        [Required(ErrorMessage = "Especialidade necessária")]
         public byte? IdEspecialidade { get; set; }
         [Required(ErrorMessage = "CRM necessário")]
         public string Crm { get; set; }

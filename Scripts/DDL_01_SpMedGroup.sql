@@ -81,7 +81,7 @@ CREATE TABLE Consulta(
 );
 GO
 
---Pequenas alterações 
+--Pequenas alterações pré API
 
 ALTER TABLE Paciente
 DROP COLUMN Nome;
@@ -97,4 +97,20 @@ GO
 
 ALTER TABLE Usuario
 ADD Nome VARCHAR(100);
+GO
+
+ALTER TABLE Usuario
+ALTER COLUMN Nome VARCHAR(100) NOT NULL;
+GO
+
+ALTER TABLE Usuario
+ADD ImagemPerfil VARCHAR(257) DEFAULT('padrao.jpg') NOT NULL;
+GO
+
+ALTER TABLE Usuario
+DROP COLUMN ImagemPerfil;
+GO
+
+ALTER TABLE Usuario
+DROP CONSTRAINT DF__Usuario__ImagemP__2739D489;
 GO

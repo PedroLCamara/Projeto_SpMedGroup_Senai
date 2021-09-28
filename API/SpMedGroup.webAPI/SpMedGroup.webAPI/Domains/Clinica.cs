@@ -20,7 +20,7 @@ namespace SpMedGroup.webAPI.Domains
         public string Endereco { get; set; }
         [Required(ErrorMessage = "Razão social necessária")]
         public string RazaoSocial { get; set; }
-        [Required(ErrorMessage = "Nome fantasia necessário")]
+        [Required(ErrorMessage = "Nome Fantasia necessário")]
         public string NomeFantasia { get; set; }
         [Required(ErrorMessage = "CNPJ necessário")]
         public string Cnpj { get; set; }

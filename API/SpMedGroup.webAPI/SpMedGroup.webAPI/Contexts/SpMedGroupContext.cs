@@ -256,7 +256,14 @@ namespace SpMedGroup.webAPI.Contexts
                     .HasMaxLength(256)
                     .IsUnicode(false);
 
+                entity.Property(e => e.ImagemPerfil)
+                    .IsRequired()
+                    .HasMaxLength(257)
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("('padrao.jpg')");
+
                 entity.Property(e => e.Nome)
+                    .IsRequired()
                     .HasMaxLength(100)
                     .IsUnicode(false);
 

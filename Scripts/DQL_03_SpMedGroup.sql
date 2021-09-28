@@ -12,7 +12,7 @@ SELECT * FROM TipoUsuario;
 GO
 
 --Exibe todas as informações da tabela de usuários com sua data de nascimento convertida para o padrão brasileiro de 10 dígitos
-SELECT IdUsuario, Nome, IdTipoUsuario, Email, Senha, CONVERT(VARCHAR(10), DataDeNascimento, 103)[DataDeNascimento], (CAST((DATEDIFF(DAY, CONVERT(DATE, DataDeNascimento, 103), CONVERT(DATE, GETDATE(), 103))/365.25) AS TINYINT))[Idade] FROM Usuario;
+SELECT IdUsuario, Nome, IdTipoUsuario, Email, Senha, CONVERT(VARCHAR(10), DataDeNascimento, 103)[DataDeNascimento], (CAST((DATEDIFF(DAY, CONVERT(DATE, DataDeNascimento, 103), CONVERT(DATE, GETDATE(), 103))/365.25) AS TINYINT))[Idade], ImagemPerfil FROM Usuario;
 GO
 
 --Exibe todas as informações da tabela de pacientes com sua data de nascimento convertida para o padrão brasileiro de 10 dígitos

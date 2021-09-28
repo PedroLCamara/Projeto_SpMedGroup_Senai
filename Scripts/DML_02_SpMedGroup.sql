@@ -127,7 +127,7 @@ SET DataDeNascimento = '05/03/2018'
 WHERE Email = 'mariana@outlook.com';
 GO
 
---Pequenas alterações
+--Pequenas alterações pré API
 
 UPDATE Usuario
 SET Nome = 'Ricardo Lemos'

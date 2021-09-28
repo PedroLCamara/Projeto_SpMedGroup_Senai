@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Xunit;
 
 #nullable disable
 
@@ -17,11 +18,11 @@ namespace SpMedGroup.webAPI.Domains
         [Required(ErrorMessage = "Id de usuário necessário")]
         public int IdUsuario { get; set; }
         public string Telefone { get; set; }
-        [Required(ErrorMessage = "Cpf necessário")]
+        [Required(ErrorMessage = "CPF necessário")]
         public string Cpf { get; set; }
         [Required(ErrorMessage = "Endereço necessário")]
         public string Endereco { get; set; }
-        [Required(ErrorMessage = "Rg necessário")]
+        [Required(ErrorMessage = "RG necessário")]
         public string Rg { get; set; }
 
         public virtual Usuario IdUsuarioNavigation { get; set; }

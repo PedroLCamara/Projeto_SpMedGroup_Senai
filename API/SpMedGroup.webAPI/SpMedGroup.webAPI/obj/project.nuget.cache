@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "WPUEcDRhjP2zTVMQ00KzhGI75NmG2CBcqYyfXoCDG1IddRu8B9T7hWWJKnS3AfM9kuqdo5P327V08aYdVJUf0w==",
+  "dgSpecHash": "/qmYPlsAvHmAKYqftDc/wJyQU5aUIJCHqZugmuPU+y6hiDIANuYCajgGccifp8X7eTi9z87anGzsA6KbvFnDeg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Pedro\\Desktop\\Senai\\2oSemestre\\SPMedGroup\\API\\SpMedGroup.webAPI\\SpMedGroup.webAPI\\SpMedGroup.webAPI.csproj",
+  "projectFilePath": "C:\\Users\\Pedro\\Desktop\\SpMedGroup\\Projeto_SpMedGroup_Senai\\API\\SpMedGroup.webAPI\\SpMedGroup.webAPI\\SpMedGroup.webAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Pedro\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Pedro\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.10\\microsoft.aspnetcore.authentication.jwtbearer.5.0.10.nupkg.sha512",
@@ -143,7 +143,9 @@
     "C:\\Users\\Pedro\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\Pedro\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\Pedro\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\Pedro\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
+    "C:\\Users\\Pedro\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
+    "C:\\Users\\Pedro\\.nuget\\packages\\xunit.abstractions\\2.0.3\\xunit.abstractions.2.0.3.nupkg.sha512",
+    "C:\\Users\\Pedro\\.nuget\\packages\\xunit.extensibility.core\\2.4.1\\xunit.extensibility.core.2.4.1.nupkg.sha512"
   ],
   "logs": []
 }
