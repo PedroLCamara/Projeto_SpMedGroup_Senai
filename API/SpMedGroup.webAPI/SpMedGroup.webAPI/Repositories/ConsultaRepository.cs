@@ -17,25 +17,22 @@ namespace SpMedGroup.webAPI.Repositories
         /// <summary>
         /// Objeto do tipo contexto para as interações com o BD
         /// </summary>
-        private SpMedGroupContext Ctx { get; set; }
+        private SpMedGroupContext Ctx = new SpMedGroupContext();
 
-        public ConsultaRepository()
-        {
-            List<Consultum> Consultas= Ctx.Consulta.ToList();
-
-            foreach (Consultum item in Consultas)
-            {
-                if (item.IdSituacao != 3)
-                {
-                    if (item.DataHorario < DateTime.Now)
-                    {
-                        item.IdSituacao = 2;
-                        Ctx.Update(item);
-                    }
-                }
-            }
-            Ctx.SaveChanges();
-        }
+        //método que atualizava automaticamente o status para "realizado" em consultas com data menor que a atual, mas deu conflito com o atualizar :(((
+        //public consultarepository()
+        //{
+        //    foreach (consultum item in ctx.consulta.tolist())
+        //    {
+        //        if (item.idsituacao != 3 && item.datahorario < datetime.now)
+        //        {
+        //            consultum consultaatualizada = item;
+        //            consultaatualizada.idsituacao = 2;
+        //            ctx.consulta.update(consultaatualizada);
+        //            ctx.savechanges();
+        //        }
+        //    }
+        //}
 
         public void Agendar(Consultum NovaConsulta)
         {
@@ -46,10 +43,19 @@ namespace SpMedGroup.webAPI.Repositories
 
         public void AlterarDescricao(int IdConsulta, string Descricao)
         {
-            Consultum ConsultaBuscada = BuscarPorId(IdConsulta);
+            Consultum ConsultaAtualizada = BuscarPorId(IdConsulta);
 
-            if (ConsultaBuscada != null)
+            if (ConsultaAtualizada != null)
             {
+                Consultum ConsultaBuscada = new()
+                {
+                    IdPaciente = ConsultaAtualizada.IdPaciente,
+                    IdMedico = ConsultaAtualizada.IdMedico,
+                    DataHorario = ConsultaAtualizada.DataHorario,
+                    Descricao = ConsultaAtualizada.Descricao,
+                    IdSituacao = ConsultaAtualizada.IdSituacao,
+                    IdConsulta = IdConsulta
+                };
                 ConsultaBuscada.Descricao = Descricao;
                 Ctx.Consulta.Update(ConsultaBuscada);
                 Ctx.SaveChanges();
@@ -71,12 +77,13 @@ namespace SpMedGroup.webAPI.Repositories
                     IdSituacao = ConsultaAtualizada.IdSituacao,
                     IdConsulta = IdConsultaAtualizada
                 };
-                if (ConsultaBuscada.IdSituacao != 3)
+                if (ConsultaBuscada.IdSituacao != 3 && ConsultaBuscada.DataHorario < DateTime.Now)
                 {
-                    if (ConsultaAtualizada.DataHorario < DateTime.Now)
-                    {
-                        ConsultaBuscada.IdSituacao = 2;
-                    }
+                    ConsultaBuscada.IdSituacao = 2;
+                }
+                else if (ConsultaBuscada.IdSituacao != 3)
+                {
+                    ConsultaBuscada.IdSituacao = 1;
                 }
                 Ctx.Update(ConsultaBuscada);
                 Ctx.SaveChanges();
@@ -85,30 +92,6 @@ namespace SpMedGroup.webAPI.Repositories
 
         public Consultum BuscarPorId(int IdConsulta)
         {
-            List<Medico> ListaMedicos = Ctx.Medicos.Include(M => M.IdUsuarioNavigation).ToList();
-            List<Paciente> ListaPacientes = Ctx.Pacientes.Include(P => P.IdUsuarioNavigation).ToList();
-            foreach (Medico item in ListaMedicos)
-            {
-                Usuario UsuarioLista = new Usuario()
-                {
-                    Nome = item.IdUsuarioNavigation.Nome,
-                    Email = item.IdUsuarioNavigation.Email,
-                    DataDeNascimento = item.IdUsuarioNavigation.DataDeNascimento,
-                };
-
-                item.IdUsuarioNavigation = UsuarioLista;
-            }
-            foreach (Paciente item in ListaPacientes)
-            {
-                Usuario UsuarioLista = new Usuario()
-                {
-                    Nome = item.IdUsuarioNavigation.Nome,
-                    Email = item.IdUsuarioNavigation.Email,
-                    DataDeNascimento = item.IdUsuarioNavigation.DataDeNascimento,
-                };
-
-                item.IdUsuarioNavigation = UsuarioLista;
-            }
             return Ctx.Consulta.Select(C => new Consultum()
             {
                 IdConsulta = C.IdConsulta,
@@ -117,17 +100,64 @@ namespace SpMedGroup.webAPI.Repositories
                 IdMedico = C.IdMedico,
                 DataHorario = C.DataHorario,
                 Descricao = C.Descricao,
-                IdMedicoNavigation = ListaMedicos.Find(M => M.IdMedico == C.IdMedico),
-                IdPacienteNavigation = ListaPacientes.Find(P => P.IdPaciente == C.IdPaciente)
+                IdMedicoNavigation = new Medico()
+                {
+                    IdUsuario = C.IdMedicoNavigation.IdUsuario,
+                    IdClinica = C.IdMedicoNavigation.IdClinica,
+                    IdEspecialidade = C.IdMedicoNavigation.IdEspecialidade,
+                    IdEspecialidadeNavigation = new Especialidade()
+                    {
+                        Nome = C.IdMedicoNavigation.IdEspecialidadeNavigation.Nome
+                    },
+                    IdClinicaNavigation = new Clinica()
+                    {
+                        HorarioDeAbertura = C.IdMedicoNavigation.IdClinicaNavigation.HorarioDeAbertura,
+                        HorarioDeFechamento = C.IdMedicoNavigation.IdClinicaNavigation.HorarioDeFechamento,
+                        Endereco = C.IdMedicoNavigation.IdClinicaNavigation.Endereco,
+                        RazaoSocial = C.IdMedicoNavigation.IdClinicaNavigation.RazaoSocial,
+                        NomeFantasia = C.IdMedicoNavigation.IdClinicaNavigation.NomeFantasia,
+                        Cnpj = C.IdMedicoNavigation.IdClinicaNavigation.Cnpj
+                    },
+                    IdUsuarioNavigation = new Usuario()
+                    {
+                        Email = C.IdMedicoNavigation.IdUsuarioNavigation.Email,
+                        Nome = C.IdMedicoNavigation.IdUsuarioNavigation.Nome,
+                        DataDeNascimento = C.IdMedicoNavigation.IdUsuarioNavigation.DataDeNascimento
+                    },
+                    Crm = C.IdMedicoNavigation.Crm,
+                },
+                IdPacienteNavigation = new Paciente()
+                {
+                    IdUsuario = C.IdPacienteNavigation.IdUsuario,
+                    Telefone = C.IdPacienteNavigation.Telefone,
+                    Cpf = C.IdPacienteNavigation.Cpf,
+                    Endereco = C.IdPacienteNavigation.Endereco,
+                    Rg = C.IdPacienteNavigation.Rg,
+                    IdUsuarioNavigation = new Usuario()
+                    {
+                        Email = C.IdPacienteNavigation.IdUsuarioNavigation.Email,
+                        Nome = C.IdPacienteNavigation.IdUsuarioNavigation.Nome,
+                        DataDeNascimento = C.IdPacienteNavigation.IdUsuarioNavigation.DataDeNascimento
+                    }
+                }
             }).FirstOrDefault(C => C.IdConsulta == IdConsulta);
         }
 
         public void Cancelar(int IdConsultaCancelada)
         {
-            Consultum ConsultaBuscada = BuscarPorId(IdConsultaCancelada);
+            Consultum ConsultaAtualizada = BuscarPorId(IdConsultaCancelada);
 
-            if (ConsultaBuscada != null)
+            if (ConsultaAtualizada != null)
             {
+                Consultum ConsultaBuscada = new()
+                {
+                    IdPaciente = ConsultaAtualizada.IdPaciente,
+                    IdMedico = ConsultaAtualizada.IdMedico,
+                    DataHorario = ConsultaAtualizada.DataHorario,
+                    Descricao = ConsultaAtualizada.Descricao,
+                    IdSituacao = ConsultaAtualizada.IdSituacao,
+                    IdConsulta = IdConsultaCancelada
+                };
                 ConsultaBuscada.IdSituacao = 3;
                 Ctx.Consulta.Update(ConsultaBuscada);
                 Ctx.SaveChanges();
@@ -136,36 +166,27 @@ namespace SpMedGroup.webAPI.Repositories
 
         public void Deletar(int IdConsultaDeletada)
         {
-            Ctx.Remove(BuscarPorId(IdConsultaDeletada));
-            Ctx.SaveChanges();
+            Consultum ConsultaDeletada = BuscarPorId(IdConsultaDeletada);
+
+            if (ConsultaDeletada != null)
+            {
+                Consultum ConsultaBuscada = new()
+                {
+                    IdPaciente = ConsultaDeletada.IdPaciente,
+                    IdMedico = ConsultaDeletada.IdMedico,
+                    DataHorario = ConsultaDeletada.DataHorario,
+                    Descricao = ConsultaDeletada.Descricao,
+                    IdSituacao = ConsultaDeletada.IdSituacao,
+                    IdConsulta = IdConsultaDeletada
+                };
+                ConsultaBuscada.IdSituacao = 3;
+                Ctx.Consulta.Remove(ConsultaBuscada);
+                Ctx.SaveChanges();
+            };
         }
 
-        public List<Consultum> ListarPorMedico(int IdMedico)
+        public List<Consultum> ListarPorMedico(int IdUsuarioMedico)
         {
-            List<Medico> ListaMedicos = Ctx.Medicos.Include(M => M.IdUsuarioNavigation).ToList();
-            List<Paciente> ListaPacientes = Ctx.Pacientes.Include(P => P.IdUsuarioNavigation).ToList();
-            foreach (Medico item in ListaMedicos)
-            {
-                Usuario UsuarioLista = new Usuario()
-                {
-                    Nome = item.IdUsuarioNavigation.Nome,
-                    Email = item.IdUsuarioNavigation.Email,
-                    DataDeNascimento = item.IdUsuarioNavigation.DataDeNascimento,
-                };
-
-                item.IdUsuarioNavigation = UsuarioLista;
-            }
-            foreach (Paciente item in ListaPacientes)
-            {
-                Usuario UsuarioLista = new Usuario()
-                {
-                    Nome = item.IdUsuarioNavigation.Nome,
-                    Email = item.IdUsuarioNavigation.Email,
-                    DataDeNascimento = item.IdUsuarioNavigation.DataDeNascimento,
-                };
-
-                item.IdUsuarioNavigation = UsuarioLista;
-            }
             return Ctx.Consulta.Select(C => new Consultum()
             {
                 IdConsulta = C.IdConsulta,
@@ -174,37 +195,51 @@ namespace SpMedGroup.webAPI.Repositories
                 IdMedico = C.IdMedico,
                 DataHorario = C.DataHorario,
                 Descricao = C.Descricao,
-                IdMedicoNavigation = ListaMedicos.Find(M => M.IdMedico == C.IdMedico),
-                IdPacienteNavigation = ListaPacientes.Find(P => P.IdPaciente == C.IdPaciente)
-            }).Where(C => C.IdMedico == IdMedico).ToList();
+                IdMedicoNavigation = new Medico()
+                {
+                    IdUsuario = C.IdMedicoNavigation.IdUsuario,
+                    IdClinica = C.IdMedicoNavigation.IdClinica,
+                    IdEspecialidade = C.IdMedicoNavigation.IdEspecialidade,
+                    IdEspecialidadeNavigation = new Especialidade()
+                    {
+                        Nome = C.IdMedicoNavigation.IdEspecialidadeNavigation.Nome
+                    },
+                    IdClinicaNavigation = new Clinica()
+                    {
+                        HorarioDeAbertura = C.IdMedicoNavigation.IdClinicaNavigation.HorarioDeAbertura,
+                        HorarioDeFechamento = C.IdMedicoNavigation.IdClinicaNavigation.HorarioDeFechamento,
+                        Endereco = C.IdMedicoNavigation.IdClinicaNavigation.Endereco,
+                        RazaoSocial = C.IdMedicoNavigation.IdClinicaNavigation.RazaoSocial,
+                        NomeFantasia = C.IdMedicoNavigation.IdClinicaNavigation.NomeFantasia,
+                        Cnpj = C.IdMedicoNavigation.IdClinicaNavigation.Cnpj
+                    },
+                    IdUsuarioNavigation = new Usuario()
+                    {
+                        Email = C.IdMedicoNavigation.IdUsuarioNavigation.Email,
+                        Nome = C.IdMedicoNavigation.IdUsuarioNavigation.Nome,
+                        DataDeNascimento = C.IdMedicoNavigation.IdUsuarioNavigation.DataDeNascimento
+                    },
+                    Crm = C.IdMedicoNavigation.Crm,
+                },
+                IdPacienteNavigation = new Paciente()
+                {
+                    IdUsuario = C.IdPacienteNavigation.IdUsuario,
+                    Telefone = C.IdPacienteNavigation.Telefone,
+                    Cpf = C.IdPacienteNavigation.Cpf,
+                    Endereco = C.IdPacienteNavigation.Endereco,
+                    Rg = C.IdPacienteNavigation.Rg,
+                    IdUsuarioNavigation = new Usuario()
+                    {
+                        Email = C.IdPacienteNavigation.IdUsuarioNavigation.Email,
+                        Nome = C.IdPacienteNavigation.IdUsuarioNavigation.Nome,
+                        DataDeNascimento = C.IdPacienteNavigation.IdUsuarioNavigation.DataDeNascimento
+                    }
+                }
+            }).Where(C => C.IdMedicoNavigation.IdUsuario == IdUsuarioMedico).ToList();
         }
 
-        public List<Consultum> ListarPorPaciente(int IdPaciente)
+        public List<Consultum> ListarPorPaciente(int IdUsuarioPaciente)
         {
-            List<Medico> ListaMedicos = Ctx.Medicos.Include(M => M.IdUsuarioNavigation).ToList();
-            List<Paciente> ListaPacientes = Ctx.Pacientes.Include(P => P.IdUsuarioNavigation).ToList();
-            foreach (Medico item in ListaMedicos)
-            {
-                Usuario UsuarioLista = new Usuario()
-                {
-                    Nome = item.IdUsuarioNavigation.Nome,
-                    Email = item.IdUsuarioNavigation.Email,
-                    DataDeNascimento = item.IdUsuarioNavigation.DataDeNascimento,
-                };
-
-                item.IdUsuarioNavigation = UsuarioLista;
-            }
-            foreach (Paciente item in ListaPacientes)
-            {
-                Usuario UsuarioLista = new Usuario()
-                {
-                    Nome = item.IdUsuarioNavigation.Nome,
-                    Email = item.IdUsuarioNavigation.Email,
-                    DataDeNascimento = item.IdUsuarioNavigation.DataDeNascimento,
-                };
-
-                item.IdUsuarioNavigation = UsuarioLista;
-            }
             return Ctx.Consulta.Select(C => new Consultum()
             {
                 IdConsulta = C.IdConsulta,
@@ -213,37 +248,51 @@ namespace SpMedGroup.webAPI.Repositories
                 IdMedico = C.IdMedico,
                 DataHorario = C.DataHorario,
                 Descricao = C.Descricao,
-                IdMedicoNavigation = ListaMedicos.Find(M => M.IdMedico == C.IdMedico),
-                IdPacienteNavigation = ListaPacientes.Find(P => P.IdPaciente == C.IdPaciente)
-            }).Where(C => C.IdPaciente == IdPaciente).ToList();
+                IdMedicoNavigation = new Medico()
+                {
+                    IdUsuario = C.IdMedicoNavigation.IdUsuario,
+                    IdClinica = C.IdMedicoNavigation.IdClinica,
+                    IdEspecialidade = C.IdMedicoNavigation.IdEspecialidade,
+                    IdEspecialidadeNavigation = new Especialidade()
+                    {
+                        Nome = C.IdMedicoNavigation.IdEspecialidadeNavigation.Nome
+                    },
+                    IdClinicaNavigation = new Clinica()
+                    {
+                        HorarioDeAbertura = C.IdMedicoNavigation.IdClinicaNavigation.HorarioDeAbertura,
+                        HorarioDeFechamento = C.IdMedicoNavigation.IdClinicaNavigation.HorarioDeFechamento,
+                        Endereco = C.IdMedicoNavigation.IdClinicaNavigation.Endereco,
+                        RazaoSocial = C.IdMedicoNavigation.IdClinicaNavigation.RazaoSocial,
+                        NomeFantasia = C.IdMedicoNavigation.IdClinicaNavigation.NomeFantasia,
+                        Cnpj = C.IdMedicoNavigation.IdClinicaNavigation.Cnpj
+                    },
+                    IdUsuarioNavigation = new Usuario()
+                    {
+                        Email = C.IdMedicoNavigation.IdUsuarioNavigation.Email,
+                        Nome = C.IdMedicoNavigation.IdUsuarioNavigation.Nome,
+                        DataDeNascimento = C.IdMedicoNavigation.IdUsuarioNavigation.DataDeNascimento
+                    },
+                    Crm = C.IdMedicoNavigation.Crm,
+                },
+                IdPacienteNavigation = new Paciente()
+                {
+                    IdUsuario = C.IdPacienteNavigation.IdUsuario,
+                    Telefone = C.IdPacienteNavigation.Telefone,
+                    Cpf = C.IdPacienteNavigation.Cpf,
+                    Endereco = C.IdPacienteNavigation.Endereco,
+                    Rg = C.IdPacienteNavigation.Rg,
+                    IdUsuarioNavigation = new Usuario()
+                    {
+                        Email = C.IdPacienteNavigation.IdUsuarioNavigation.Email,
+                        Nome = C.IdPacienteNavigation.IdUsuarioNavigation.Nome,
+                        DataDeNascimento = C.IdPacienteNavigation.IdUsuarioNavigation.DataDeNascimento
+                    }
+                }
+            }).Where(C => C.IdPacienteNavigation.IdUsuario == IdUsuarioPaciente).ToList();
         }
 
         public List<Consultum> ListarTodas()
         {
-            List<Medico> ListaMedicos = Ctx.Medicos.Include(M => M.IdUsuarioNavigation).ToList();
-            List<Paciente> ListaPacientes = Ctx.Pacientes.Include(P => P.IdUsuarioNavigation).ToList();
-            foreach (Medico item in ListaMedicos)
-            {
-                Usuario UsuarioLista = new Usuario()
-                {
-                    Nome = item.IdUsuarioNavigation.Nome,
-                    Email = item.IdUsuarioNavigation.Email,
-                    DataDeNascimento = item.IdUsuarioNavigation.DataDeNascimento,
-                };
-
-                item.IdUsuarioNavigation = UsuarioLista;
-            }
-            foreach (Paciente item in ListaPacientes)
-            {
-                Usuario UsuarioLista = new Usuario()
-                {
-                    Nome = item.IdUsuarioNavigation.Nome,
-                    Email = item.IdUsuarioNavigation.Email,
-                    DataDeNascimento = item.IdUsuarioNavigation.DataDeNascimento,
-                };
-
-                item.IdUsuarioNavigation = UsuarioLista;
-            }
             return Ctx.Consulta.Select(C => new Consultum() { 
                 IdConsulta = C.IdConsulta,
                 IdSituacao = C.IdSituacao,
@@ -251,8 +300,44 @@ namespace SpMedGroup.webAPI.Repositories
                 IdMedico = C.IdMedico,
                 DataHorario = C.DataHorario,
                 Descricao = C.Descricao,
-                IdMedicoNavigation = ListaMedicos.Find(M => M.IdMedico == C.IdMedico),
-                IdPacienteNavigation = ListaPacientes.Find(P => P.IdPaciente == C.IdPaciente)
+                IdMedicoNavigation = new Medico()
+                {
+                    IdUsuario = C.IdMedicoNavigation.IdUsuario,
+                    IdClinica = C.IdMedicoNavigation.IdClinica,
+                    IdEspecialidade = C.IdMedicoNavigation.IdEspecialidade,
+                    IdEspecialidadeNavigation = new Especialidade() { 
+                        Nome = C.IdMedicoNavigation.IdEspecialidadeNavigation.Nome
+                    },
+                    IdClinicaNavigation = new Clinica()
+                    {
+                        HorarioDeAbertura = C.IdMedicoNavigation.IdClinicaNavigation.HorarioDeAbertura,
+                        HorarioDeFechamento = C.IdMedicoNavigation.IdClinicaNavigation.HorarioDeFechamento,
+                        Endereco = C.IdMedicoNavigation.IdClinicaNavigation.Endereco,
+                        RazaoSocial = C.IdMedicoNavigation.IdClinicaNavigation.RazaoSocial,
+                        NomeFantasia = C.IdMedicoNavigation.IdClinicaNavigation.NomeFantasia,
+                        Cnpj = C.IdMedicoNavigation.IdClinicaNavigation.Cnpj
+                    },
+                    IdUsuarioNavigation = new Usuario()
+                    {
+                        Email = C.IdMedicoNavigation.IdUsuarioNavigation.Email,
+                        Nome = C.IdMedicoNavigation.IdUsuarioNavigation.Nome,
+                        DataDeNascimento = C.IdMedicoNavigation.IdUsuarioNavigation.DataDeNascimento
+                    },
+                    Crm = C.IdMedicoNavigation.Crm,
+                },
+                IdPacienteNavigation = new Paciente(){
+                    IdUsuario = C.IdPacienteNavigation.IdUsuario,
+                    Telefone = C.IdPacienteNavigation.Telefone,
+                    Cpf = C.IdPacienteNavigation.Cpf,
+                    Endereco = C.IdPacienteNavigation.Endereco,
+                    Rg = C.IdPacienteNavigation.Rg,
+                    IdUsuarioNavigation = new Usuario()
+                    {
+                        Email = C.IdPacienteNavigation.IdUsuarioNavigation.Email,
+                        Nome = C.IdPacienteNavigation.IdUsuarioNavigation.Nome,
+                        DataDeNascimento = C.IdPacienteNavigation.IdUsuarioNavigation.DataDeNascimento
+                    }
+                }
             }).ToList();
         }
     }

@@ -16,15 +16,19 @@ namespace SpMedGroup.webAPI.Repositories
         /// <summary>
         /// Objeto do tipo contexto para as interações com o BD
         /// </summary>
-        private SpMedGroupContext Ctx { get; set; }
+        private SpMedGroupContext Ctx = new SpMedGroupContext();
 
         public void Atualizar(TipoUsuario TipoUsuarioAtualizado, int IdTipoUsuarioAtualizado)
         {
-            TipoUsuario TipoUsuarioBuscado = new TipoUsuario();
+            TipoUsuario TipoUsuarioBuscado = BuscarPorId(IdTipoUsuarioAtualizado);
 
             if (TipoUsuarioBuscado != null)
             {
-                TipoUsuarioBuscado.TituloTipoUsuario = TipoUsuarioAtualizado.TituloTipoUsuario;
+                TipoUsuarioBuscado = new()
+                {
+                    TituloTipoUsuario = TipoUsuarioAtualizado.TituloTipoUsuario,
+                    IdTipoUsuario = Convert.ToByte(IdTipoUsuarioAtualizado)
+                };
                 Ctx.Update(TipoUsuarioBuscado);
                 Ctx.SaveChanges();
             }
@@ -32,27 +36,16 @@ namespace SpMedGroup.webAPI.Repositories
 
         public TipoUsuario BuscarPorId(int IdTipoUsuario)
         {
-            List<Usuario> ListaUsuarios = new List<Usuario>();
-            foreach (TipoUsuario item in Ctx.TipoUsuarios.Select(Tpu => new TipoUsuario() { Usuarios = Tpu.Usuarios }).ToList())
-            {
-                foreach (Usuario item2 in item.Usuarios)
-                {
-                    Usuario UsuarioLista = new()
-                    {
-                        IdUsuario = item2.IdUsuario,
-                        Email = item2.Email,
-                        DataDeNascimento = item2.DataDeNascimento
-                    };
-
-                    ListaUsuarios.Add(UsuarioLista);
-                }
-            }
-
             return Ctx.TipoUsuarios.Select(TpU => new TipoUsuario()
             {
                 IdTipoUsuario = TpU.IdTipoUsuario,
                 TituloTipoUsuario = TpU.TituloTipoUsuario,
-                Usuarios = ListaUsuarios
+                Usuarios = TpU.Usuarios.Select(U => new Usuario()
+                {
+                    Email = U.Email,
+                    Nome = U.Nome,
+                    DataDeNascimento = U.DataDeNascimento
+                }).ToList()
             }
             ).FirstOrDefault(TpU => TpU.IdTipoUsuario == IdTipoUsuario);
         }
@@ -65,33 +58,32 @@ namespace SpMedGroup.webAPI.Repositories
 
         public void Deletar(int IdTipoUsuarioDeletado)
         {
-            Ctx.TipoUsuarios.Remove(BuscarPorId(IdTipoUsuarioDeletado));
-            Ctx.SaveChanges();
+            TipoUsuario TipoUsuarioBuscado = BuscarPorId(IdTipoUsuarioDeletado);
+
+            if (TipoUsuarioBuscado != null)
+            {
+                TipoUsuario TipoUsuarioDeletado = new()
+                {
+                    TituloTipoUsuario = TipoUsuarioBuscado.TituloTipoUsuario,
+                    IdTipoUsuario = Convert.ToByte(IdTipoUsuarioDeletado)
+                };
+                Ctx.Remove(TipoUsuarioBuscado);
+                Ctx.SaveChanges();
+            }
         }
 
         public List<TipoUsuario> ListarTodas()
         {
-            List<Usuario> ListaUsuarios = new List<Usuario>();
-            foreach (TipoUsuario item in Ctx.TipoUsuarios.Select(Tpu => new TipoUsuario() { Usuarios = Tpu.Usuarios }).ToList())
-            {
-                foreach (Usuario item2 in item.Usuarios)
-                {
-                    Usuario UsuarioLista = new()
-                    {
-                        IdUsuario = item2.IdUsuario,
-                        Email = item2.Email,
-                        DataDeNascimento = item2.DataDeNascimento
-                    };
-
-                    ListaUsuarios.Add(UsuarioLista);
-                }
-            }
-
             return Ctx.TipoUsuarios.Select(TpU => new TipoUsuario()
             {
                 IdTipoUsuario = TpU.IdTipoUsuario,
                 TituloTipoUsuario = TpU.TituloTipoUsuario,
-                Usuarios = ListaUsuarios
+                Usuarios = TpU.Usuarios.Select(U => new Usuario()
+                {
+                    Email = U.Email,
+                    Nome = U.Nome,
+                    DataDeNascimento = U.DataDeNascimento
+                }).ToList()
             }
             ).ToList();
         }

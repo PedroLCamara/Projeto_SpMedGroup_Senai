@@ -17,7 +17,7 @@ namespace SpMedGroup.webAPI.Repositories
         /// <summary>
         /// Objeto do tipo contexto para as interações com o BD
         /// </summary>
-        private SpMedGroupContext Ctx { get; set; }
+        private SpMedGroupContext Ctx = new SpMedGroupContext();
 
         public void Atualizar(Clinica ClinicaAtualizada, int IdClinicaAtualizada)
         {
@@ -43,18 +43,6 @@ namespace SpMedGroup.webAPI.Repositories
 
         public Clinica BuscarPorId(int IdClinica)
         {
-            List<Medico> ListaMedicos = Ctx.Medicos.Include(M => M.IdUsuarioNavigation).ToList();
-            foreach (Medico item in ListaMedicos)
-            {
-                Usuario UsuarioLista = new Usuario()
-                {
-                    Nome = item.IdUsuarioNavigation.Nome,
-                    Email = item.IdUsuarioNavigation.Email,
-                    DataDeNascimento = item.IdUsuarioNavigation.DataDeNascimento,
-                };
-
-                item.IdUsuarioNavigation = UsuarioLista;
-            }
             return Ctx.Clinicas.Select(C => new Clinica()
             {
                 IdClinica = C.IdClinica,
@@ -64,7 +52,20 @@ namespace SpMedGroup.webAPI.Repositories
                 RazaoSocial = C.RazaoSocial,
                 NomeFantasia = C.NomeFantasia,
                 Cnpj = C.Cnpj,
-                Medicos = ListaMedicos.FindAll(M => M.IdClinica == C.IdClinica),
+                Medicos = C.Medicos.Select(M => new Medico()
+                {
+                    IdMedico = M.IdMedico,
+                    IdUsuario = M.IdMedico,
+                    IdClinica = M.IdClinica,
+                    IdEspecialidade = M.IdEspecialidade,
+                    Crm = M.Crm,
+                    IdUsuarioNavigation = new Usuario()
+                    {
+                        IdTipoUsuario = M.IdUsuarioNavigation.IdTipoUsuario,
+                        Email = M.IdUsuarioNavigation.Email,
+                        DataDeNascimento = M.IdUsuarioNavigation.DataDeNascimento
+                    }
+                }).ToList()
             }).FirstOrDefault(C => C.IdClinica == IdClinica);
         }
 
@@ -82,18 +83,6 @@ namespace SpMedGroup.webAPI.Repositories
 
         public List<Clinica> ListarTodas()
         {
-            List<Medico> ListaMedicos = Ctx.Medicos.Include(M => M.IdUsuarioNavigation).ToList();
-            foreach (Medico item in ListaMedicos)
-            {
-                Usuario UsuarioLista = new Usuario()
-                {
-                    Nome = item.IdUsuarioNavigation.Nome,
-                    Email = item.IdUsuarioNavigation.Email,
-                    DataDeNascimento = item.IdUsuarioNavigation.DataDeNascimento,
-                };
-
-                item.IdUsuarioNavigation = UsuarioLista;
-            }
             return Ctx.Clinicas.Select(C => new Clinica() { 
                 IdClinica = C.IdClinica,
                 HorarioDeAbertura = C.HorarioDeAbertura,
@@ -102,7 +91,23 @@ namespace SpMedGroup.webAPI.Repositories
                 RazaoSocial = C.RazaoSocial,
                 NomeFantasia = C.NomeFantasia,
                 Cnpj = C.Cnpj,
-                Medicos = ListaMedicos.FindAll(M => M.IdClinica == C.IdClinica),    
+                Medicos = C.Medicos.Select(M => new Medico() { 
+                    IdMedico = M.IdMedico,
+                    IdUsuario = M.IdMedico,
+                    IdClinica = M.IdClinica,
+                    IdEspecialidade = M.IdEspecialidade,
+                    Crm = M.Crm,
+                    IdUsuarioNavigation = new Usuario()
+                    {
+                        Nome = M.IdUsuarioNavigation.Nome,
+                        Email = M.IdUsuarioNavigation.Email,
+                        DataDeNascimento = M.IdUsuarioNavigation.DataDeNascimento
+                    },
+                    IdEspecialidadeNavigation = new Especialidade()
+                    {
+                        Nome = M.IdEspecialidadeNavigation.Nome
+                    }
+                }).ToList()
             }).ToList();
         }
     }

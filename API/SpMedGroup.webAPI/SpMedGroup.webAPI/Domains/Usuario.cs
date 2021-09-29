@@ -15,7 +15,6 @@ namespace SpMedGroup.webAPI.Domains
         public string Senha { get; set; }
         [Required(ErrorMessage = "Id do tipo de usuário necessário")]
         public byte IdTipoUsuario { get; set; }
-        [Required(ErrorMessage = "Data de nascimento necessária")]
         public DateTime? DataDeNascimento { get; set; }
         [Required(ErrorMessage = "Nome necessário")]
         public string Nome { get; set; }

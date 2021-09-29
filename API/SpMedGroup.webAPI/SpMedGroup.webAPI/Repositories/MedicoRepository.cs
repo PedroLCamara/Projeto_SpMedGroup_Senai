@@ -17,7 +17,7 @@ namespace SpMedGroup.webAPI.Repositories
         /// <summary>
         /// Objeto do tipo contexto para as interações com o BD
         /// </summary>
-        private SpMedGroupContext Ctx { get; set; }
+        private SpMedGroupContext Ctx = new SpMedGroupContext();
 
         public void Atualizar(Medico MedicoAtualizado, int IdMedicoAtualizado)
         {
@@ -42,19 +42,6 @@ namespace SpMedGroup.webAPI.Repositories
 
         public Medico BuscarPorId(int IdMedico)
         {
-            List<Usuario> ListaUsuarios = new List<Usuario>();
-            foreach (Medico item in Ctx.Medicos.Include(M => M.IdUsuarioNavigation))
-            {
-                Usuario UsuarioLista = new Usuario()
-                {
-                    Nome = item.IdUsuarioNavigation.Nome,
-                    Email = item.IdUsuarioNavigation.Email,
-                    DataDeNascimento = item.IdUsuarioNavigation.DataDeNascimento
-                };
-
-                ListaUsuarios.Add(UsuarioLista);
-            }
-
             return Ctx.Medicos.Select(M => new Medico()
             {
                 IdMedico = M.IdMedico,
@@ -62,7 +49,12 @@ namespace SpMedGroup.webAPI.Repositories
                 IdClinica = M.IdClinica,
                 IdEspecialidade = M.IdEspecialidade,
                 Crm = M.Crm,
-                IdUsuarioNavigation = ListaUsuarios.Find(U => U.IdUsuario == M.IdUsuario)
+                IdUsuarioNavigation = new Usuario()
+                {
+                    DataDeNascimento = M.IdUsuarioNavigation.DataDeNascimento,
+                    Email = M.IdUsuarioNavigation.Email,
+                    Nome = M.IdUsuarioNavigation.Nome
+                }
             }).FirstOrDefault(M => M.IdMedico == IdMedico);
         }
 
@@ -74,32 +66,39 @@ namespace SpMedGroup.webAPI.Repositories
 
         public void Deletar(int IdMedicoDeletado)
         {
-            Ctx.Remove(BuscarPorId(IdMedicoDeletado));
-            Ctx.SaveChanges();
+            Medico MedicoDeletado = BuscarPorId(IdMedicoDeletado);
+            int IdUsuario = MedicoDeletado.IdUsuario;
+
+            if (MedicoDeletado != null)
+            {
+                Medico MedicoBuscado = new Medico()
+                {
+                    Crm = MedicoDeletado.Crm,
+                    IdEspecialidade = MedicoDeletado.IdEspecialidade,
+                    IdClinica = MedicoDeletado.IdClinica,
+                    IdMedico = Convert.ToInt16(IdMedicoDeletado),
+                    IdUsuario = IdUsuario
+                };
+
+                Ctx.Medicos.Remove(MedicoBuscado);
+                Ctx.SaveChanges();
+            }
         }
 
         public List<Medico> ListarTodos()
         {
-            List<Usuario> ListaUsuarios = new List<Usuario>();
-            foreach (Medico item in Ctx.Medicos.Include(M => M.IdUsuarioNavigation))
-            {
-                Usuario UsuarioLista = new Usuario()
-                {
-                    Nome = item.IdUsuarioNavigation.Nome,
-                    Email = item.IdUsuarioNavigation.Email,
-                    DataDeNascimento = item.IdUsuarioNavigation.DataDeNascimento
-                };
-
-                ListaUsuarios.Add(UsuarioLista);
-            }
-
             return Ctx.Medicos.Select(M => new Medico() { 
                 IdMedico = M.IdMedico,
                 IdUsuario = M.IdUsuario,
                 IdClinica = M.IdClinica,
                 IdEspecialidade = M.IdEspecialidade,
                 Crm = M.Crm,
-                IdUsuarioNavigation = ListaUsuarios.Find(U => U.IdUsuario == M.IdUsuario)
+                IdUsuarioNavigation = new Usuario()
+                {
+                    DataDeNascimento = M.IdUsuarioNavigation.DataDeNascimento,
+                    Email = M.IdUsuarioNavigation.Email,
+                    Nome = M.IdUsuarioNavigation.Nome
+                }
             }).ToList();
         }
     }

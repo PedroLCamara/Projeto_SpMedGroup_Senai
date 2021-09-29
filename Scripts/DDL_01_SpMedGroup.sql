@@ -106,11 +106,3 @@ GO
 ALTER TABLE Usuario
 ADD ImagemPerfil VARCHAR(257) DEFAULT('padrao.jpg') NOT NULL;
 GO
-
-ALTER TABLE Usuario
-DROP COLUMN ImagemPerfil;
-GO
-
-ALTER TABLE Usuario
-DROP CONSTRAINT DF__Usuario__ImagemP__2739D489;
-GO

@@ -94,7 +94,7 @@ namespace SpMedGroup.webAPI.Controllers
             }
         }
 
-        [HttpPut("{IdUsuarioDeletado}")]
+        [HttpDelete("{IdUsuarioDeletado}")]
         [Authorize( Roles = "1")]
         public IActionResult Deletar(int IdUsuarioDeletado)
         {

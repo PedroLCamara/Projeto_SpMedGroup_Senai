@@ -30,7 +30,11 @@ namespace SpMedGroup.webAPI.Controllers
             try
             {
                 int IdUsuario = Convert.ToInt32(HttpContext.User.Claims.FirstOrDefault(C => C.Type == JwtRegisteredClaimNames.Jti).Value);
-                return Ok(URepositorio.RetornarImgPerfil(IdUsuario));
+                if (URepositorio.RetornarImgPerfil(IdUsuario) != null)
+                {
+                    return Ok(URepositorio.RetornarImgPerfil(IdUsuario));
+                }
+                else return NotFound("Imagem de perfil inexistente para esse usuário");
             }
             catch (Exception Erro)
             {

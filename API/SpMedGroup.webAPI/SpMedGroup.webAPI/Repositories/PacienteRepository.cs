@@ -17,7 +17,7 @@ namespace SpMedGroup.webAPI.Repositories
         /// <summary>
         /// Objeto do tipo contexto para as interações com o BD
         /// </summary>
-        private SpMedGroupContext Ctx { get; set; }
+        private SpMedGroupContext Ctx = new SpMedGroupContext();
 
         public void Atualizar(Paciente PacienteAtualizado, int IdPacienteAtualizado)
         {
@@ -43,18 +43,6 @@ namespace SpMedGroup.webAPI.Repositories
 
         public Paciente BuscarPorId(int IdPaciente)
         {
-            List<Usuario> ListaUsuarios = new List<Usuario>();
-            foreach (Paciente item in Ctx.Pacientes.Include(M => M.IdUsuarioNavigation))
-            {
-                Usuario UsuarioLista = new Usuario()
-                {
-                    Nome = item.IdUsuarioNavigation.Nome,
-                    Email = item.IdUsuarioNavigation.Email,
-                    DataDeNascimento = item.IdUsuarioNavigation.DataDeNascimento
-                };
-
-                ListaUsuarios.Add(UsuarioLista);
-            }
             return Ctx.Pacientes.Select(P => new Paciente()
             {
                 IdPaciente = P.IdPaciente,
@@ -63,7 +51,12 @@ namespace SpMedGroup.webAPI.Repositories
                 Cpf = P.Cpf,
                 Endereco = P.Endereco,
                 Rg = P.Rg,
-                IdUsuarioNavigation = ListaUsuarios.Find(U => U.IdUsuario == P.IdUsuario)
+                IdUsuarioNavigation = new Usuario()
+                {
+                    Nome = P.IdUsuarioNavigation.Nome,
+                    Email = P.IdUsuarioNavigation.Email,
+                    DataDeNascimento = P.IdUsuarioNavigation.DataDeNascimento
+                }
             }).FirstOrDefault(P => P.IdPaciente == IdPaciente);
         }
 
@@ -75,25 +68,28 @@ namespace SpMedGroup.webAPI.Repositories
 
         public void Deletar(int IdPacienteDeletado)
         {
-            Ctx.Pacientes.Remove(BuscarPorId(IdPacienteDeletado));
-            Ctx.SaveChanges();
+            Paciente PacienteDeletado = BuscarPorId(IdPacienteDeletado);
+            int IdUsuario = PacienteDeletado.IdUsuario;
+
+            if (PacienteDeletado != null)
+            {
+                Paciente PacienteBuscado = new Paciente()
+                {
+                    Telefone = PacienteDeletado.Telefone,
+                    Cpf = PacienteDeletado.Cpf,
+                    Endereco = PacienteDeletado.Endereco,
+                    Rg = PacienteDeletado.Rg,
+                    IdPaciente = IdPacienteDeletado,
+                    IdUsuario = IdUsuario
+                };
+
+                Ctx.Pacientes.Remove(PacienteBuscado);
+                Ctx.SaveChanges();
+            }
         }
 
         public List<Paciente> ListarTodos()
         {
-            List<Usuario> ListaUsuarios = new List<Usuario>();
-            foreach (Paciente item in Ctx.Pacientes.Include(M => M.IdUsuarioNavigation))
-            {
-                Usuario UsuarioLista = new Usuario()
-                {
-                    Nome = item.IdUsuarioNavigation.Nome,
-                    Email = item.IdUsuarioNavigation.Email,
-                    DataDeNascimento = item.IdUsuarioNavigation.DataDeNascimento
-                };
-
-                ListaUsuarios.Add(UsuarioLista);
-            }
-
             return Ctx.Pacientes.Select(P => new Paciente() { 
                 IdPaciente = P.IdPaciente,
                 IdUsuario = P.IdUsuario,
@@ -101,7 +97,12 @@ namespace SpMedGroup.webAPI.Repositories
                 Cpf = P.Cpf,
                 Endereco = P.Endereco,
                 Rg = P.Rg,
-                IdUsuarioNavigation = ListaUsuarios.Find(U => U.IdUsuario == P.IdUsuario)
+                IdUsuarioNavigation = new Usuario()
+                {
+                    Nome = P.IdUsuarioNavigation.Nome,
+                    Email = P.IdUsuarioNavigation.Email,
+                    DataDeNascimento = P.IdUsuarioNavigation.DataDeNascimento
+                }
             }).ToList();
         }
     }

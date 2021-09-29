@@ -17,14 +17,20 @@ namespace SpMedGroup.webAPI.Repositories
         /// <summary>
         /// Objeto do tipo contexto para as interações com o BD
         /// </summary>
-        private SpMedGroupContext Ctx { get; set; }
+        private SpMedGroupContext Ctx = new SpMedGroupContext();
 
         public void Atualizar(Situacao SituacaoAtualizada, int IdSituacaoAtualizada)
         {
             Situacao SituacaoBuscada = BuscarPorId(IdSituacaoAtualizada);
+
             if (SituacaoBuscada != null)
             {
-                SituacaoBuscada.Nome = SituacaoAtualizada.Nome;
+                SituacaoBuscada = new Situacao()
+                {
+                    Nome = SituacaoAtualizada.Nome,
+                    IdSituacao = Convert.ToByte(IdSituacaoAtualizada)
+                };
+
                 Ctx.Situacaos.Update(SituacaoBuscada);
                 Ctx.SaveChanges();
             }
@@ -32,7 +38,11 @@ namespace SpMedGroup.webAPI.Repositories
 
         public Situacao BuscarPorId(int IdSituacao)
         {
-            return Ctx.Situacaos.Include(S => S.Consulta).FirstOrDefault(S => S.IdSituacao == IdSituacao);
+            return Ctx.Situacaos.Select(S => new Situacao() { 
+                IdSituacao = S.IdSituacao,
+                Nome = S.Nome,
+                Consulta = S.Consulta
+            }).FirstOrDefault(S => S.IdSituacao == IdSituacao);
         }
 
         public void Cadastrar(Situacao NovaSituacao)
@@ -43,13 +53,27 @@ namespace SpMedGroup.webAPI.Repositories
 
         public void Deletar(int IdSituacaoDeletada)
         {
-            Ctx.Situacaos.Add(BuscarPorId(IdSituacaoDeletada));
-            Ctx.SaveChanges();
+            Situacao SituacaoDeletada = BuscarPorId(IdSituacaoDeletada);
+            if (SituacaoDeletada != null)
+            {
+                Situacao SituacaoBuscada = new()
+                {
+                    Nome = SituacaoDeletada.Nome,
+                    IdSituacao = Convert.ToByte(IdSituacaoDeletada)
+                };
+                Ctx.Situacaos.Remove(SituacaoBuscada);
+                Ctx.SaveChanges();
+            }
         }
 
         public List<Situacao> ListarTodas()
         {
-            return Ctx.Situacaos.Include(S => S.Consulta).ToList();
+            return Ctx.Situacaos.Select(S => new Situacao()
+            {
+                IdSituacao = S.IdSituacao,
+                Nome = S.Nome,
+                Consulta = S.Consulta
+            }).ToList();
         }
     }
 }

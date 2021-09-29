@@ -6,12 +6,15 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
+using SpMedGroup.webAPI.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using SpMedGroup.webAPI.Repositories;
+using SpMedGroup.webAPI.Domains;
 
 namespace SpMedGroup.webAPI
 {
@@ -65,19 +68,19 @@ namespace SpMedGroup.webAPI
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseRouting();
-
             app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "SpMedGroup.webAPI");
+                c.RoutePrefix = string.Empty;
+            });
+
+            app.UseRouting();
 
             app.UseAuthentication();
 
             app.UseAuthorization();
-
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Gufi.webAPI");
-                c.RoutePrefix = string.Empty;
-            });
 
             app.UseEndpoints(endpoints =>
             {

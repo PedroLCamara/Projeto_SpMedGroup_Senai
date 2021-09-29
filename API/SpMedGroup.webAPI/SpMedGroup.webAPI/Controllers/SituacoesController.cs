@@ -58,9 +58,10 @@ namespace SpMedGroup.webAPI.Controllers
         {
             try
             {
-                if (SRepositorio.BuscarPorId(IdSituacao) != null)
+                Situacao SituacaoBuscada = SRepositorio.BuscarPorId(IdSituacao);
+                if (SituacaoBuscada != null)
                 {
-                    return Ok(SRepositorio.BuscarPorId(IdSituacao));
+                    return Ok(SituacaoBuscada);
                 }
                 else return NotFound("Id de situacao inválido");
             }

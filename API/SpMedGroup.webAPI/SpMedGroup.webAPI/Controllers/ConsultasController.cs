@@ -26,7 +26,7 @@ namespace SpMedGroup.webAPI.Controllers
             CRepositorio = new ConsultaRepository();
         }
 
-        [HttpPatch("{IdConsultaCancelada}")]
+        [HttpPatch("Cancelar/{IdConsultaCancelada}")]
         [Authorize(Roles = "1")]
         public IActionResult CancelarConsulta(int IdConsultaCancelada)
         {
@@ -69,7 +69,7 @@ namespace SpMedGroup.webAPI.Controllers
             }
         }
 
-        [HttpPatch("{IdConsulta}")]
+        [HttpPatch("AlterarDescricao/{IdConsulta}")]
         [Authorize(Roles = "2")]
         public IActionResult AlterarDescricao(DescricaoViewModel NovaDescricao, int IdConsulta)
         {
@@ -93,26 +93,27 @@ namespace SpMedGroup.webAPI.Controllers
             {
                 return Ok(CRepositorio.ListarTodas());
             }
-            catch (Exception Erro)
+            catch (Exception erro)
             {
-                return BadRequest(Erro);
+                return BadRequest(erro);
                 throw;
             }
         }
 
-        [HttpGet("ListarPorUsuario")]
+        [HttpGet("ListarMinhas")]
         [Authorize( Roles = "2,3")]
-        public IActionResult ListarPorUsuario()
+        public IActionResult ListarMinhas()
         {
             try
             {
+                int IdUsuario = Convert.ToInt32(HttpContext.User.Claims.FirstOrDefault(C => C.Type == JwtRegisteredClaimNames.Jti).Value);
                 if (HttpContext.User.Claims.FirstOrDefault(C => C.Type == ClaimTypes.Role).Value == "2")
                 {
-                   return Ok(CRepositorio.ListarPorMedico(Convert.ToInt32(HttpContext.User.Claims.FirstOrDefault(C => C.Type == JwtRegisteredClaimNames.Jti).Value)));
+                   return Ok(CRepositorio.ListarPorMedico(IdUsuario));
                 }
                 else
                 {
-                    return Ok(CRepositorio.ListarPorPaciente(Convert.ToInt32(HttpContext.User.Claims.FirstOrDefault(C => C.Type == JwtRegisteredClaimNames.Jti).Value)));
+                    return Ok(CRepositorio.ListarPorPaciente(IdUsuario));
                 }
             }
             catch (Exception Erro)

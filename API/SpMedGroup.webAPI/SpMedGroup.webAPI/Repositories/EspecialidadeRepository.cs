@@ -17,7 +17,7 @@ namespace SpMedGroup.webAPI.Repositories
         /// <summary>
         /// Objeto do tipo contexto para as interações com o BD
         /// </summary>
-        private SpMedGroupContext Ctx { get; set; }
+        private SpMedGroupContext Ctx = new SpMedGroupContext();
 
         public void Atualizar(Especialidade EspecialidadeAtualizada, int IdEspecialidadeAtualizada)
         {
@@ -25,7 +25,11 @@ namespace SpMedGroup.webAPI.Repositories
 
             if (EspecialidadeBuscada != null)
             {
-                EspecialidadeBuscada.Nome = EspecialidadeAtualizada.Nome;
+                EspecialidadeBuscada = new()
+                {
+                    Nome = EspecialidadeAtualizada.Nome,
+                    IdEspecialidade = Convert.ToByte(IdEspecialidadeAtualizada)
+                };
                 Ctx.Especialidades.Update(EspecialidadeBuscada);
                 Ctx.SaveChanges();
             }
@@ -33,23 +37,23 @@ namespace SpMedGroup.webAPI.Repositories
 
         public Especialidade BuscarPorId(int IdEspecialidade)
         {
-            List<Medico> ListaMedicos = Ctx.Medicos.Include(M => M.IdUsuarioNavigation).ToList();
-            foreach (Medico item in ListaMedicos)
-            {
-                Usuario UsuarioLista = new Usuario()
-                {
-                    Nome = item.IdUsuarioNavigation.Nome,
-                    Email = item.IdUsuarioNavigation.Email,
-                    DataDeNascimento = item.IdUsuarioNavigation.DataDeNascimento,
-                };
-
-                item.IdUsuarioNavigation = UsuarioLista;
-            }
             return Ctx.Especialidades.Select(E => new Especialidade()
             {
                 IdEspecialidade = E.IdEspecialidade,
                 Nome = E.Nome,
-                Medicos = ListaMedicos.FindAll(M => M.IdEspecialidade == E.IdEspecialidade)
+                Medicos = E.Medicos.Select(M => new Medico() { 
+                    IdMedico = M.IdMedico,
+                    IdUsuario = M.IdUsuario,
+                    IdClinica = M.IdClinica,
+                    IdEspecialidade = M.IdEspecialidade,
+                    Crm = M.Crm,
+                    IdUsuarioNavigation = new Usuario()
+                    {
+                        Email = M.IdUsuarioNavigation.Email,
+                        DataDeNascimento = M.IdUsuarioNavigation.DataDeNascimento,
+                        Nome = M.IdUsuarioNavigation.Nome
+                    }
+                }).ToList()
             }).FirstOrDefault(E => E.IdEspecialidade == IdEspecialidade);
         }
 
@@ -67,22 +71,24 @@ namespace SpMedGroup.webAPI.Repositories
 
         public List<Especialidade> ListarTodas()
         {
-            List<Medico> ListaMedicos = Ctx.Medicos.Include(M => M.IdUsuarioNavigation).ToList();
-            foreach (Medico item in ListaMedicos)
+            return Ctx.Especialidades.Select(E => new Especialidade()
             {
-                Usuario UsuarioLista = new Usuario()
-                {
-                    Nome = item.IdUsuarioNavigation.Nome,
-                    Email = item.IdUsuarioNavigation.Email,
-                    DataDeNascimento = item.IdUsuarioNavigation.DataDeNascimento,
-                };
-
-                item.IdUsuarioNavigation = UsuarioLista;
-            }
-            return Ctx.Especialidades.Select(E => new Especialidade() { 
                 IdEspecialidade = E.IdEspecialidade,
                 Nome = E.Nome,
-                Medicos = ListaMedicos.FindAll(M => M.IdEspecialidade == E.IdEspecialidade)
+                Medicos = E.Medicos.Select(M => new Medico()
+                {
+                    IdMedico = M.IdMedico,
+                    IdUsuario = M.IdUsuario,
+                    IdClinica = M.IdClinica,
+                    IdEspecialidade = M.IdEspecialidade,
+                    Crm = M.Crm,
+                    IdUsuarioNavigation = new Usuario()
+                    {
+                        Email = M.IdUsuarioNavigation.Email,
+                        DataDeNascimento = M.IdUsuarioNavigation.DataDeNascimento,
+                        Nome = M.IdUsuarioNavigation.Nome
+                    }
+                }).ToList()
             }).ToList();
         }
     }

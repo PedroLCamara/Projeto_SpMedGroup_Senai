@@ -93,7 +93,7 @@ namespace SpMedGroup.webAPI.Controllers
             }
         }
         
-        [HttpDelete("{IdPacienteAtualizado}")]
+        [HttpPut("{IdPacienteAtualizado}")]
         [Authorize(Roles = "1")]
         public IActionResult Atualizar(int IdPacienteAtualizado, Paciente PacienteAtualizado)
         {

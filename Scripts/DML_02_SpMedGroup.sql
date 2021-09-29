@@ -178,3 +178,7 @@ UPDATE Usuario
 SET Nome = 'Mariana'
 WHERE IdUsuario = 9;
 GO
+
+INSERT INTO Usuario(IdTipoUsuario, Email, Senha, DataDeNascimento, Nome)
+VALUES (1, 'admin@admin.com', 'admin123', '28/09/2021', 'Administrador');
+GO

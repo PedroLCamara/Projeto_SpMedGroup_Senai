@@ -19,7 +19,7 @@ namespace SpMedGroup.webAPI.Repositories
         /// <summary>
         /// Objeto do tipo contexto para as interações com o BD
         /// </summary>
-        private SpMedGroupContext Ctx { get; set; }
+        private SpMedGroupContext Ctx = new SpMedGroupContext();
 
         public void Atualizar(Usuario UsuarioAtualizado, int IdUsuarioAtualizado)
         {
@@ -27,15 +27,12 @@ namespace SpMedGroup.webAPI.Repositories
 
             if (UsuarioBuscado != null)
             {
-                UsuarioBuscado = new Usuario()
-                {
-                    Nome = UsuarioAtualizado.Nome,
-                    Email = UsuarioAtualizado.Email,
-                    Senha = UsuarioAtualizado.Senha,
-                    DataDeNascimento = UsuarioAtualizado.DataDeNascimento,
-                    IdTipoUsuario = UsuarioAtualizado.IdTipoUsuario,
-                    IdUsuario = IdUsuarioAtualizado
-                };
+                UsuarioBuscado.Nome = UsuarioAtualizado.Nome;
+                UsuarioBuscado.Email = UsuarioAtualizado.Email;
+                UsuarioBuscado.Senha = UsuarioAtualizado.Senha;
+                UsuarioBuscado.DataDeNascimento = UsuarioAtualizado.DataDeNascimento;
+                UsuarioBuscado.IdTipoUsuario = UsuarioAtualizado.IdTipoUsuario;
+                UsuarioBuscado.IdUsuario = IdUsuarioAtualizado;
 
                 Ctx.Usuarios.Update(UsuarioBuscado);
                 Ctx.SaveChanges();
@@ -52,7 +49,8 @@ namespace SpMedGroup.webAPI.Repositories
                 IdTipoUsuario = U.IdTipoUsuario,
                 DataDeNascimento = U.DataDeNascimento,
                 Medico = U.Medico,
-                Paciente = U.Paciente
+                Paciente = U.Paciente,
+                ImagemPerfil = U.ImagemPerfil
             }).FirstOrDefault(U => U.IdUsuario == IdUsuario);
         }
 
@@ -77,18 +75,19 @@ namespace SpMedGroup.webAPI.Repositories
                 IdTipoUsuario = U.IdTipoUsuario,
                 DataDeNascimento = U.DataDeNascimento,
                 Medico = U.Medico,
-                Paciente = U.Paciente
+                Paciente = U.Paciente,
+                ImagemPerfil = U.ImagemPerfil
             }).ToList();
         }
 
         public Usuario Logar(string Email, string Senha)
         {
-            return Ctx.Usuarios.Include(U => U.IdTipoUsuarioNavigation).Include(U => U.Paciente).Include(U => U.Medico).FirstOrDefault(U => U.Email == Email && U.Senha == Senha);
+            return Ctx.Usuarios.FirstOrDefault(U => U.Email == Email && U.Senha == Senha);
         }
 
         public string RetornarImgPerfil(int IdUsuario)
         {
-            string NomeArquivo = BuscarPorId(IdUsuario).ImagemPerfil;
+            string NomeArquivo = Ctx.Usuarios.FirstOrDefault(U => U.IdUsuario == IdUsuario).ImagemPerfil;
             string Caminho = Path.Combine("PerfilImgs", NomeArquivo);
             if (File.Exists(Caminho))
             {
@@ -107,7 +106,7 @@ namespace SpMedGroup.webAPI.Repositories
                 Img.CopyTo(Stream);
             }
 
-            Usuario UsuarioNovaFoto = BuscarPorId(IdUsuario);
+            Usuario UsuarioNovaFoto = Ctx.Usuarios.FirstOrDefault(U => U.IdUsuario == IdUsuario);
             UsuarioNovaFoto.ImagemPerfil = NomeArquivo;
 
             Ctx.Usuarios.Update(UsuarioNovaFoto);
