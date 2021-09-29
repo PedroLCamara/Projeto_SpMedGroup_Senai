@@ -29,8 +29,11 @@ namespace SpMedGroup.webAPI.Controllers
         {
             try
             {
+                if (NovoUsuario.DataDeNascimento > DateTime.Now)
+                {
+                    return BadRequest("O usuário deve ter uma data de nascimento menor ou igual a atual");
+                }
                 URepositorio.Cadastrar(NovoUsuario);
-
                 return StatusCode(201);
             }
             catch (Exception Erro)
@@ -80,6 +83,10 @@ namespace SpMedGroup.webAPI.Controllers
         {
             try
             {
+                if (UsuarioAtualizado.DataDeNascimento > DateTime.Now)
+                {
+                    return BadRequest("O usuário deve ter uma data de nascimento menor ou igual a atual");
+                }
                 if (URepositorio.BuscarPorId(IdUsuarioAtualizado) != null)
                 {
                     URepositorio.Atualizar(UsuarioAtualizado, IdUsuarioAtualizado);

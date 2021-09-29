@@ -17,10 +17,12 @@ namespace SpMedGroup.webAPI.Controllers
     public class MedicosController : ControllerBase
     {
         private IMedicoRepository MRepositorio { get; set; }
+        private IUsuarioRepository URepositorio { get; set; }
 
         public MedicosController()
         {
             MRepositorio = new MedicoRepository();
+            URepositorio = new UsuarioRepository();
         }
 
         [HttpPost]
@@ -29,6 +31,10 @@ namespace SpMedGroup.webAPI.Controllers
         {
             try
             {
+                if (URepositorio.BuscarPorId(NovoMedico.IdUsuario).IdTipoUsuario != 2)
+                {
+                    return BadRequest("O usuário do cadastro deve ter um tipo de usuário 'Médico'(Id=2)");
+                }
                 MRepositorio.Cadastrar(NovoMedico);
                 return StatusCode(201);
             }
@@ -99,6 +105,10 @@ namespace SpMedGroup.webAPI.Controllers
         {
             try
             {
+                if (URepositorio.BuscarPorId(MedicoAtualizado.IdUsuario).IdTipoUsuario != 2)
+                {
+                    return BadRequest("O usuário da atualização deve ter um tipo de usuário 'Médico'(Id=2)");
+                }
                 if (MRepositorio.BuscarPorId(IdMedicoAtualizado) != null)
                 {
                     MRepositorio.Atualizar(MedicoAtualizado, IdMedicoAtualizado);

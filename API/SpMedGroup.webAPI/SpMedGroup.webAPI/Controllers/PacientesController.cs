@@ -17,10 +17,12 @@ namespace SpMedGroup.webAPI.Controllers
     public class PacientesController : ControllerBase
     {
         private IPacienteRepository PRepositorio { get; set; }
+        private IUsuarioRepository URepositorio { get; set; }
 
         public PacientesController()
         {
             PRepositorio = new PacienteRepository();
+            URepositorio = new UsuarioRepository();
         }
 
         [HttpPost]
@@ -29,6 +31,10 @@ namespace SpMedGroup.webAPI.Controllers
         {
             try
             {
+                if (URepositorio.BuscarPorId(NovoPaciente.IdUsuario).IdTipoUsuario != 3)
+                {
+                    return BadRequest("O usuário do cadastro deve ter um tipo de usuário 'Paciente'(Id=3)");
+                }
                 PRepositorio.Cadastrar(NovoPaciente);
                 return StatusCode(201);
             }
@@ -99,6 +105,10 @@ namespace SpMedGroup.webAPI.Controllers
         {
             try
             {
+                if (URepositorio.BuscarPorId(PacienteAtualizado.IdUsuario).IdTipoUsuario != 3)
+                {
+                    return BadRequest("O usuário da atualização deve ter um tipo de usuário 'Paciente'(Id=3)");
+                }
                 if (PRepositorio.BuscarPorId(IdPacienteAtualizado) != null)
                 {
                     PRepositorio.Atualizar(PacienteAtualizado, IdPacienteAtualizado);

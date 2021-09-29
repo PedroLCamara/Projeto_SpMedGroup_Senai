@@ -11,6 +11,7 @@ namespace SpMedGroup.webAPI.Domains
         public int IdUsuario { get; set; }
         [Required(ErrorMessage = "Email necessário")]
         public string Email { get; set; }
+        [StringLength(16, MinimumLength = 8, ErrorMessage = "Tamanho da senha deve ser maior que 8 caractéres e não deve exceder 16")]
         [Required(ErrorMessage = "Senha necessária")]
         public string Senha { get; set; }
         [Required(ErrorMessage = "Id do tipo de usuário necessário")]
