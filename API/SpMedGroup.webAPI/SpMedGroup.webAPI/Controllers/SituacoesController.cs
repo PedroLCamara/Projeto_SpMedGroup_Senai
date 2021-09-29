@@ -40,6 +40,7 @@ namespace SpMedGroup.webAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "1")]
         public IActionResult ListarTodas()
         {
             try
@@ -54,6 +55,7 @@ namespace SpMedGroup.webAPI.Controllers
         }
 
         [HttpGet("{IdSituacao}")]
+        [Authorize(Roles = "1")]
         public IActionResult BuscarPorId(int IdSituacao)
         {
             try
