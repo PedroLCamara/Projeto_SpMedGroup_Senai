@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    word-wrap: normal;
+    font-family: 'Questrial', sans-serif;
+}
+
+header{
+    background-color: white;
+    height: 145px;
+}
+
+.ContainerGrid{
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.ContainerHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.NavHeader{
+    display: flex;
+    width: 1010px;
+    justify-content: space-between;
+}
+
+.LinkPagina{
+    text-decoration: none;
+    color: #52615E;
+    font-size: 34px;
+    font-weight: 400;
+}
+
+.LinkPaginaAtual{
+    text-decoration: none;
+    color: #2E9984;
+    font-size: 34px;
+    font-weight: 400;
+    text-decoration-line: underline;
+}
+
+.Banner{
+    background-image: url(../assets_/Background.jpg);
+    height: 512px;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: bottom;
+}
+
+.ContainerBanner{
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Banner h1{
+    width: 620px;
+    color: white;
+    font-size: 64px;
+    font-weight: 400;
+}
+
+.ContainerBanner a{
+    color: white;
+    background-color: #5FAD9E;
+    padding: 30px;
+    border-radius: 25px;
+    font-weight: 400;
+    font-size: 40px;
+}
