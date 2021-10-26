@@ -31,23 +31,34 @@ header{
     height: 100%;
 }
 
+.LogoHeader{
+    margin-right: 82px;
+}
+
 .NavHeader{
     display: flex;
-    width: 1010px;
+    width: 100%;;
     justify-content: space-between;
+    align-items: center;
 }
 
 .LinkPagina{
     text-decoration: none;
     color: #52615E;
-    font-size: 34px;
+    font-size: 34px; /* Diminuir na de admin  */
     font-weight: 400;
+}
+
+.LinkImagem img{
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
 }
 
 .LinkPaginaAtual{
     text-decoration: none;
     color: #2E9984;
-    font-size: 34px;
+    font-size: 34px; /* Diminuir na de admin  */
     font-weight: 400;
     text-decoration-line: underline;
 }
