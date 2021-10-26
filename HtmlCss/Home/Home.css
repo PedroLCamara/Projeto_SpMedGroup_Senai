@@ -16,6 +16,7 @@ header{
     z-index: 99;
     top: 0px;
     margin-bottom: 145px;
+    border-bottom: 5px solid #2E9984;
 }
 
 .ContainerGrid{
@@ -87,15 +88,23 @@ main{
     font-size: 40px;
 }
 
+.ClinicasParceiras{
+    margin-bottom: 100px;
+}
+
 .ContainerClinicasParceiras{
     display: flex;
     justify-content: space-between;
+    padding-left: 254px;
+    position: relative;
+    height: 530px;
 }
 
 .QuadradoClinicasParceiras{
     width: 366px;
     height: 402px;
     background-color: #5FAD9E;
+    margin-right: 71px;
 }
 
 .ImagemClinicasParceiras{
@@ -103,4 +112,153 @@ main{
     height: 495px;
     position: absolute;
     z-index: 98;
+    top: 35px;
+    left: 0px;
+    object-fit: cover;
+}
+
+.BoxClinicasParceiras{
+    font-weight: 400;
+    width: 508px;
+    height: 100%;
+    padding-top: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.BoxClinicasParceiras p{
+    font-size: 45px;
+    color: #52615E;
+}
+
+.BoxClinicasParceiras a{
+    color: white;
+    background-color: #5FAD9E;
+    padding: 30px;
+    border-radius: 25px;
+    font-weight: 400;
+    font-size: 40px;
+    text-align: center;
+}
+
+.Consultas{
+    margin-bottom: 100px;
+}
+
+.ContainerConsultas{
+    display: flex;
+    justify-content: space-between;
+    padding-right: 254px;
+    position: relative;
+    height: 530px;
+}
+
+.QuadradoConsultas{
+    width: 366px;
+    height: 402px;
+    background-color: #5FAD9E;
+    margin-left: 71px;
+}
+
+.ImagemConsultas{
+    width: 588px;
+    height: 497px;
+    position: absolute;
+    z-index: 98;
+    top: 33px;
+    right: 0px;
+    object-fit: cover;
+}
+
+.BoxConsultas{
+    font-weight: 400;
+    width: 508px;
+    height: 100%;
+    padding-top: 110px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.BoxConsultas p{
+    font-size: 45px;
+    color: #52615E;
+    text-align: right;
+}
+
+.BoxConsultas a{
+    color: white;
+    background-color: #5FAD9E;
+    padding: 30px;
+    border-radius: 25px;
+    font-weight: 400;
+    font-size: 40px;
+    text-align: center;
+}
+
+footer{
+    background-color: #356158;
+    height: 360px;
+}
+
+.ContainerFooter{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.BoxFooterEsquerda{
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-evenly;
+    height: 100%;
+}
+
+.BoxFooterEsquerda span{
+    color: white;
+    font-size: 30px;
+    text-align: right;
+}
+
+.BoxFooterEsquerda ul{
+    color: white;
+    font-size: 22px;
+    text-align: right;
+    list-style: inside;
+}
+
+.BoxFooterEsquerda ul li{
+    margin-bottom: 20px;
+}
+
+.BoxFooterDireita{
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    height: 100%;
+}
+
+.BoxFooterDireita span{
+    color: white;
+    font-size: 30px;
+    text-align: left;
+}
+
+.BoxFooterDireita ul{
+    color: white;
+    font-size: 22px;
+    text-align: left;
+    list-style: inside;
+}
+
+.BoxFooterDireita ul li{
+    margin-bottom: 20px;
 }
