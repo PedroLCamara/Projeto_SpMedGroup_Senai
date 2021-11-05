@@ -3,6 +3,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/77a9a4e10d.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="Administracao.css">
     <title>Document</title>
 </head>
@@ -22,14 +23,319 @@
     </header>
 
     <main class="AdminMain">
-        <section>
+        <section class="AdminAcoes">
             <div class="BoxAdminPadrao">
                 <div class="ContainerBoxAdminPadrao ContainerGrid">
+                    <h1>Usuários</h1>
                     <div class="ListarTodos">
-                        <a></a>
+                        
+                        <button>Listar todos</button>
                         <table>
-                            
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Nome</th>
+                                    <th>Email</th>
+                                    <th>Tipo</th>
+                                    <th>Data de nascimento</th>
+                                    <th>Excluir</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>nome</td>
+                                    <td>email</td>
+                                    <td>tipo</td>
+                                    <td>data de nascimento</td>
+                                    <td><button><i class="fas fa-trash"></i></button></td>
+                                </tr>
+                            </tbody>
                         </table>
+                    </div>
+                    <div class="Atualizar">
+                        <form>
+                            <div class="InputsEnvio">
+                                <button>Atualizar</button>
+                                <input type="number" />
+                            </div>
+                            <div class="InputsDados">
+                                <div class="CampoDado">
+                                    <label>Nome</label>
+                                    <input type="text" />
+                                </div>
+                                <div class="CampoDado">
+                                    <label>Email</label>
+                                    <input type="email" />
+                                </div>
+                                <div class="CampoDado">
+                                    <label>Senha</label>
+                                    <input type="password" />
+                                </div>
+                                <div class="CampoDado">
+                                    <label>Tipo de usuário</label>
+                                    <select></select>
+                                </div>
+                                <div class="CampoDado">
+                                    <label>Data de nascimento</label>
+                                    <input type="date" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            <div class="BoxAdminPadrao">
+                <div class="ContainerBoxAdminPadrao ContainerGrid">
+                    <h1>Médicos</h1>
+                    <div class="ListarTodos">
+                        
+                        <button>Listar todos</button>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Id de usuário</th>
+                                    <th>CRM</th>
+                                    <th>Clínica</th>
+                                    <th>Especialidade</th>
+                                    <th>Excluir</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>id de usuário</td>
+                                    <td>crm</td>
+                                    <td>clinica</td>
+                                    <td>especialidade</td>
+                                    <td><button><i class="fas fa-trash"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="Atualizar">
+                        <form>
+                            <div class="InputsEnvio">
+                                <button>Atualizar</button>
+                                <input type="number" />
+                            </div>
+                            <div class="InputsDados">
+                                <div class="CampoDado">
+                                    <label>CRM</label>
+                                    <input type="text" />
+                                </div>
+                                <div class="CampoDado">
+                                    <label>Especialidade</label>
+                                    <input type="email" />
+                                </div>
+                                <div class="CampoDado">
+                                    <label>Clínica</label>
+                                    <input type="password" />
+                                </div>
+                                <div class="CampoDado">
+                                    <label>Usuário</label>
+                                    <select></select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="BoxAdminPadrao">
+                <div class="ContainerBoxAdminPadrao ContainerGrid">
+                    <h1>Pacientes</h1>
+                    <div class="ListarTodos">
+                        
+                        <button>Listar todos</button>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Id de usuário</th>
+                                    <th>CPF</th>
+                                    <th>Endereço</th>
+                                    <th>Telefone</th>
+                                    <th>RG</th>
+                                    <th>Excluir</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>id de usuário</td>
+                                    <td>cpf</td>
+                                    <td>endereço</td>
+                                    <td>telefone</td>
+                                    <td>rg</td>
+                                    <td><button><i class="fas fa-trash"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="Atualizar">
+                        <form>
+                            <div class="InputsEnvio">
+                                <button>Atualizar</button>
+                                <input type="number" />
+                            </div>
+                            <div class="InputsDados">
+                                <div class="CampoDado">
+                                    <label>CPF</label>
+                                    <input type="text" />
+                                </div>
+                                <div class="CampoDado">
+                                    <label>RG</label>
+                                    <input type="email" />
+                                </div>
+                                <div class="CampoDado">
+                                    <label>Telefone</label>
+                                    <input type="password" />
+                                </div>
+                                <div class="CampoDado">
+                                    <label>Endereço</label>
+                                    <input type="password" />
+                                </div>
+                                <div class="CampoDado">
+                                    <label>Usuário</label>
+                                    <select></select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="BoxAdminPadrao">
+                <div class="ContainerBoxAdminPadrao ContainerGrid">
+                    <h1>Especialidades</h1>
+                    <div class="ListarTodos">
+                        
+                        <button>Listar todas</button>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Nome</th>
+                                    <th>Excluir</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>nome</td>
+                                    <td><button><i class="fas fa-trash"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="Atualizar">
+                        <form>
+                            <div class="InputsEnvio">
+                                <button>Atualizar</button>
+                                <input type="number" />
+                            </div>
+                            <div class="InputsDados">
+                                <div class="CampoDado">
+                                    <label>Nome</label>
+                                    <input type="text" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="CadastrarAdmin">
+                        <button>Cadastrar</button>
+                        <div class="CampoCadastro">
+                            <label>Nome</label>
+                            <input type="text" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="BoxAdminPadrao">
+                <div class="ContainerBoxAdminPadrao ContainerGrid">
+                    <h1>Tipos de usuários</h1>
+                    <div class="ListarTodos">
+                        
+                        <button>Listar todos</button>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Título</th>
+                                    <th>Excluir</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>título</td>
+                                    <td><button><i class="fas fa-trash"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="Atualizar">
+                        <form>
+                            <div class="InputsEnvio">
+                                <button>Atualizar</button>
+                                <input type="number" />
+                            </div>
+                            <div class="InputsDados">
+                                <div class="CampoDado">
+                                    <label>Título</label>
+                                    <input type="text" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="CadastrarAdmin">
+                        <button>Cadastrar</button>
+                        <div class="CampoCadastro">
+                            <label>Título</label>
+                            <input type="text" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="BoxAdminPadrao">
+                <div class="ContainerBoxAdminPadrao ContainerGrid">
+                    <h1>Clínicas</h1>
+                    <div class="Deletar">
+                        <button>Deletar</button>
+                        <input type="number" />
+                    </div>
+                    <div class="Atualizar">
+                        <form>
+                            <div class="InputsEnvio">
+                                <button>Atualizar</button>
+                                <input type="number" />
+                            </div>
+                            <div class="InputsDados">
+                                <div class="CampoDado">
+                                    <label>Endereço</label>
+                                    <input type="text" />
+                                </div>
+                                <div class="CampoDado">
+                                    <label>CNPJ</label>
+                                    <input type="text" />
+                                </div>
+                                <div class="CampoDado">
+                                    <label>Nome Fantasia</label>
+                                    <input type="text" />
+                                </div>
+                                <div class="CampoDado">
+                                    <label>Razão Social</label>
+                                    <input type="text" />
+                                </div>
+                                <div class="CampoDado">
+                                    <label>Horário de abertura</label>
+                                    <input type="time" />
+                                </div>
+                                <div class="CampoDado">
+                                    <label>Horário de fechamento</label>
+                                    <input type="time" />
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

@@ -77,6 +77,19 @@ main{
     background: rgba(123, 224, 203, 0.3);
 }
 
+.AdminAcoes{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ContainerBoxAdminPadrao{
+    padding: 40px 80px 40px 80px;
+    background: #FFFFFF;
+    box-shadow: 8px 8px 8px 8px rgba(0, 0, 0, 0.25);
+    border-radius: 50px;
+}
+
 
 /* Resto da main */
 
