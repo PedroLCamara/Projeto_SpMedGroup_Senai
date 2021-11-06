@@ -73,7 +73,7 @@ main{
 
 
 .AdminMain{
-    padding-top: 120px;
+    padding-bottom: 120px;
     background: rgba(123, 224, 203, 0.3);
 }
 
@@ -88,6 +88,261 @@ main{
     background: #FFFFFF;
     box-shadow: 8px 8px 8px 8px rgba(0, 0, 0, 0.25);
     border-radius: 50px;
+}
+
+.ContainerBoxAdminPadrao h1{
+    color: #1D6153;
+    font-size: 48px;
+    font-weight: 400;
+    margin-bottom: 50px;
+}
+
+.ContainerBoxAdminPadrao .ListarTodos{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 50px;
+}
+
+.ListarTodos button{
+    background: none;
+    border: none;
+    text-decoration: none;
+    text-decoration-line: underline;
+    color: #1D6153;
+    font-size: 36px;
+    font-weight: 400;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.ListarTodos table{
+    width: 100%;
+    border-collapse:collapse;
+    border:solid #52615E 1px;
+}
+
+.ListarTodos td, th{
+    border-left:solid #52615E 1px;
+    border-top:solid #52615E 1px;
+    padding: 10px;
+    text-align: center;
+}
+
+.ListarTodos th {
+    font-size: 36px;
+    font-weight: 400;
+    color: #52615E;
+    border-top: none;
+}
+
+.ListarTodos td {
+    font-size: 30px;
+    font-weight: 400;
+    color: #52615E;
+}
+
+.ListarTodos td button{
+    color: #52615E;
+    margin-bottom: 0px;
+}
+
+.ListarTodos td:first-child, th:first-child {
+    border-left: none;
+}
+
+.ContainerBoxAdminPadrao .Atualizar{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.Atualizar form{
+    width: 100%;
+}
+
+.Atualizar .ElementosEnvio{
+    display: flex;
+    width: 570px;
+    justify-content: space-between;
+    align-items: center;
+    height: auto;
+}
+
+.Atualizar .ElementosEnvio button{
+    background: none;
+    border: none;
+    text-decoration-line: underline;
+    color: #1D6153;
+    font-size: 36px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.Atualizar .ElementosEnvio input{
+    width: 400px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    border: 1px solid #52615E;
+    font-size: 36px;
+    color: #52615E;
+    font-weight: 400;
+    padding-left: 20px;
+}
+
+.Atualizar .ElementosDados{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.Atualizar .ElementosDados .LinhaDados{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.Atualizar .ElementosDados input, select{
+    width: 422px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    border: 1px solid #52615E;
+    font-size: 36px;
+    font-weight: 400;
+    padding-left: 20px;
+}
+
+.Atualizar .CampoDado{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 100px;
+    justify-content: space-between;
+    margin-top: 50px;
+}
+
+.Atualizar .CampoDado label{
+    font-size: 36px;
+    color: #52615E;
+    font-weight: 400;
+}
+
+.ContainerBoxAdminPadrao .Deletar{
+    display: flex;
+    width: 570px;
+    justify-content: space-between;
+    align-items: center;
+    height: auto;
+    margin-bottom: 50px;
+}
+
+.ContainerBoxAdminPadrao .Deletar button{
+    background: none;
+    border: none;
+    text-decoration-line: underline;
+    color: #1D6153;
+    font-size: 36px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.ContainerBoxAdminPadrao .Deletar input{
+    width: 400px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    border: 1px solid #52615E;
+    font-size: 36px;
+    color: #52615E;
+    font-weight: 400;
+    padding-left: 20px;
+}
+
+.ContainerBoxAdminCentralizado{
+    padding: 40px 80px 40px 80px;
+    background: #FFFFFF;
+    box-shadow: 8px 8px 8px 8px rgba(0, 0, 0, 0.25);
+    border-radius: 50px;
+}
+
+.ContainerBoxAdminCentralizado h1{
+    color: #1D6153;
+    font-size: 48px;
+    font-weight: 400;
+    margin-bottom: 50px;
+}
+
+.ContainerBoxAdminCentralizado .ListarTodos{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.ContainerBoxAdminCentralizado .Atualizar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.ContainerBoxAdminCentralizado .Atualizar form{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.ContainerBoxAdminCentralizado .CadastrarAdmin{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.ContainerBoxAdminCentralizado .CadastrarAdmin button{
+    background: none;
+    border: none;
+    text-decoration-line: underline;
+    color: #1D6153;
+    font-size: 36px;
+    font-weight: 400;
+    cursor: pointer;
+    margin-bottom: 40px;
+}
+
+.ContainerBoxAdminCentralizado .CadastrarAdmin .CampoCadastro{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.ContainerBoxAdminCentralizado .CadastrarAdmin label{
+    font-size: 36px;
+    color: #52615E;
+    font-weight: 400;
+}
+
+.ContainerBoxAdminCentralizado .CadastrarAdmin input{
+    width: 400px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    border: 1px solid #52615E;
+    font-size: 36px;
+    color: #52615E;
+    font-weight: 400;
+    padding-left: 20px;
+}
+
+.BoxAdmin{
+    margin-top: 120px;
 }
 
 

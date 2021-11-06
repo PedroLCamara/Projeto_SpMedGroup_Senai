@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/77a9a4e10d.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="Administracao.css">
-    <title>Document</title>
+    <title>SpMed - Administração</title>
 </head>
 <body>
     <header>
@@ -24,7 +24,7 @@
 
     <main class="AdminMain">
         <section class="AdminAcoes">
-            <div class="BoxAdminPadrao">
+            <div class="BoxAdminPadrao BoxAdmin">
                 <div class="ContainerBoxAdminPadrao ContainerGrid">
                     <h1>Usuários</h1>
                     <div class="ListarTodos">
@@ -55,26 +55,30 @@
                     </div>
                     <div class="Atualizar">
                         <form>
-                            <div class="InputsEnvio">
+                            <div class="ElementosEnvio">
                                 <button>Atualizar</button>
-                                <input type="number" />
+                                <input type="number" placeholder="Id"/>
                             </div>
-                            <div class="InputsDados">
-                                <div class="CampoDado">
-                                    <label>Nome</label>
-                                    <input type="text" />
+                            <div class="ElementosDados">
+                                <div class="LinhaDados">
+                                    <div class="CampoDado">
+                                        <label>Nome</label>
+                                        <input type="text" />
+                                    </div>
+                                    <div class="CampoDado">
+                                        <label>Email</label>
+                                        <input type="email" />
+                                    </div>
                                 </div>
-                                <div class="CampoDado">
-                                    <label>Email</label>
-                                    <input type="email" />
-                                </div>
-                                <div class="CampoDado">
-                                    <label>Senha</label>
-                                    <input type="password" />
-                                </div>
-                                <div class="CampoDado">
-                                    <label>Tipo de usuário</label>
-                                    <select></select>
+                                <div class="LinhaDados">
+                                    <div class="CampoDado">
+                                        <label>Senha</label>
+                                        <input type="password" />
+                                    </div>
+                                    <div class="CampoDado">
+                                        <label>Tipo de usuário</label>
+                                        <select></select>
+                                    </div>
                                 </div>
                                 <div class="CampoDado">
                                     <label>Data de nascimento</label>
@@ -84,7 +88,7 @@
                         </form>
                     </div>
                 </div>
-            <div class="BoxAdminPadrao">
+            <div class="BoxAdminPadrao BoxAdmin">
                 <div class="ContainerBoxAdminPadrao ContainerGrid">
                     <h1>Médicos</h1>
                     <div class="ListarTodos">
@@ -115,33 +119,37 @@
                     </div>
                     <div class="Atualizar">
                         <form>
-                            <div class="InputsEnvio">
+                            <div class="ElementosEnvio">
                                 <button>Atualizar</button>
-                                <input type="number" />
+                                <input type="number" placeholder="Id"/>
                             </div>
-                            <div class="InputsDados">
-                                <div class="CampoDado">
-                                    <label>CRM</label>
-                                    <input type="text" />
+                            <div class="ElementosDados">
+                                <div class="LinhaDados">
+                                    <div class="CampoDado">
+                                        <label>CRM</label>
+                                        <input type="text" />
+                                    </div>
+                                    <div class="CampoDado">
+                                        <label>Especialidade</label>
+                                        <input type="email" />
+                                    </div>
                                 </div>
-                                <div class="CampoDado">
-                                    <label>Especialidade</label>
-                                    <input type="email" />
-                                </div>
-                                <div class="CampoDado">
-                                    <label>Clínica</label>
-                                    <input type="password" />
-                                </div>
-                                <div class="CampoDado">
-                                    <label>Usuário</label>
-                                    <select></select>
+                                <div class="LinhaDados">
+                                    <div class="CampoDado">
+                                        <label>Clínica</label>
+                                        <input type="password" />
+                                    </div>
+                                    <div class="CampoDado">
+                                        <label>Usuário</label>
+                                        <select></select>
+                                    </div>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-            <div class="BoxAdminPadrao">
+            <div class="BoxAdminPadrao BoxAdmin">
                 <div class="ContainerBoxAdminPadrao ContainerGrid">
                     <h1>Pacientes</h1>
                     <div class="ListarTodos">
@@ -174,26 +182,30 @@
                     </div>
                     <div class="Atualizar">
                         <form>
-                            <div class="InputsEnvio">
+                            <div class="ElementosEnvio">
                                 <button>Atualizar</button>
-                                <input type="number" />
+                                <input type="number" placeholder="Id"/>
                             </div>
-                            <div class="InputsDados">
-                                <div class="CampoDado">
-                                    <label>CPF</label>
-                                    <input type="text" />
+                            <div class="ElementosDados">
+                                <div class="LinhaDados">
+                                    <div class="CampoDado">
+                                        <label>CPF</label>
+                                        <input type="text" />
+                                    </div>
+                                    <div class="CampoDado">
+                                        <label>RG</label>
+                                        <input type="email" />
+                                    </div>
                                 </div>
-                                <div class="CampoDado">
-                                    <label>RG</label>
-                                    <input type="email" />
-                                </div>
-                                <div class="CampoDado">
-                                    <label>Telefone</label>
-                                    <input type="password" />
-                                </div>
-                                <div class="CampoDado">
-                                    <label>Endereço</label>
-                                    <input type="password" />
+                                <div class="LinhaDados">
+                                    <div class="CampoDado">
+                                        <label>Telefone</label>
+                                        <input type="password" />
+                                    </div>
+                                    <div class="CampoDado">
+                                        <label>Endereço</label>
+                                        <input type="password" />
+                                    </div>
                                 </div>
                                 <div class="CampoDado">
                                     <label>Usuário</label>
@@ -204,8 +216,8 @@
                     </div>
                 </div>
             </div>
-            <div class="BoxAdminPadrao">
-                <div class="ContainerBoxAdminPadrao ContainerGrid">
+            <div class="BoxAdminCentralizado BoxAdmin">
+                <div class="ContainerBoxAdminCentralizado ContainerGrid">
                     <h1>Especialidades</h1>
                     <div class="ListarTodos">
                         
@@ -229,11 +241,11 @@
                     </div>
                     <div class="Atualizar">
                         <form>
-                            <div class="InputsEnvio">
+                            <div class="ElementosEnvio">
                                 <button>Atualizar</button>
-                                <input type="number" />
+                                <input type="number" placeholder="Id"/>
                             </div>
-                            <div class="InputsDados">
+                            <div class="ElementosDados">
                                 <div class="CampoDado">
                                     <label>Nome</label>
                                     <input type="text" />
@@ -250,8 +262,8 @@
                     </div>
                 </div>
             </div>
-            <div class="BoxAdminPadrao">
-                <div class="ContainerBoxAdminPadrao ContainerGrid">
+            <div class="BoxAdminCentralizado BoxAdmin">
+                <div class="ContainerBoxAdminCentralizado ContainerGrid">
                     <h1>Tipos de usuários</h1>
                     <div class="ListarTodos">
                         
@@ -275,11 +287,11 @@
                     </div>
                     <div class="Atualizar">
                         <form>
-                            <div class="InputsEnvio">
+                            <div class="ElementosEnvio">
                                 <button>Atualizar</button>
-                                <input type="number" />
+                                <input type="number" placeholder="Id"/>
                             </div>
-                            <div class="InputsDados">
+                            <div class="ElementosDados">
                                 <div class="CampoDado">
                                     <label>Título</label>
                                     <input type="text" />
@@ -296,43 +308,49 @@
                     </div>
                 </div>
             </div>
-            <div class="BoxAdminPadrao">
+            <div class="BoxAdminPadrao BoxAdmin">
                 <div class="ContainerBoxAdminPadrao ContainerGrid">
                     <h1>Clínicas</h1>
                     <div class="Deletar">
                         <button>Deletar</button>
-                        <input type="number" />
+                        <input type="number" placeholder="Id"/>
                     </div>
                     <div class="Atualizar">
                         <form>
-                            <div class="InputsEnvio">
+                            <div class="ElementosEnvio">
                                 <button>Atualizar</button>
-                                <input type="number" />
+                                <input type="number" placeholder="Id"/>
                             </div>
-                            <div class="InputsDados">
-                                <div class="CampoDado">
-                                    <label>Endereço</label>
-                                    <input type="text" />
+                            <div class="ElementosDados">
+                                <div class="LinhaDados">
+                                    <div class="CampoDado">
+                                        <label>Endereço</label>
+                                        <input type="text" />
+                                    </div>
+                                    <div class="CampoDado">
+                                        <label>CNPJ</label>
+                                        <input type="text" />
+                                    </div>
                                 </div>
-                                <div class="CampoDado">
-                                    <label>CNPJ</label>
-                                    <input type="text" />
+                                <div class="LinhaDados">
+                                    <div class="CampoDado">
+                                        <label>Nome Fantasia</label>
+                                        <input type="text" />
+                                    </div>
+                                    <div class="CampoDado">
+                                        <label>Razão Social</label>
+                                        <input type="text" />
+                                    </div>
                                 </div>
-                                <div class="CampoDado">
-                                    <label>Nome Fantasia</label>
-                                    <input type="text" />
-                                </div>
-                                <div class="CampoDado">
-                                    <label>Razão Social</label>
-                                    <input type="text" />
-                                </div>
-                                <div class="CampoDado">
-                                    <label>Horário de abertura</label>
-                                    <input type="time" />
-                                </div>
-                                <div class="CampoDado">
-                                    <label>Horário de fechamento</label>
-                                    <input type="time" />
+                                <div class="LinhaDados">
+                                    <div class="CampoDado">
+                                        <label>Horário de abertura</label>
+                                        <input type="time" />
+                                    </div>
+                                    <div class="CampoDado">
+                                        <label>Horário de fechamento</label>
+                                        <input type="time" />
+                                    </div>
                                 </div>
                             </div>
                         </form>
