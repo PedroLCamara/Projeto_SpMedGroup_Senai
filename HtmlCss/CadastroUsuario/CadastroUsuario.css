@@ -246,3 +246,66 @@ footer{
 .BoxFooterDireita ul li{
     margin-bottom: 20px;
 }
+
+@media(max-width:760px){
+
+    /* Header, footer e grid abaixo */
+
+
+    .ContainerGrid{
+        width: 730px;
+    }
+
+    .LogoHeader{
+        margin-right: 30px;
+        width: 75px;
+        height: 75px;
+    }
+
+    .LinkPaginaAtual{
+        font-size: 22px;
+    }
+
+    .LinkPagina{
+        font-size: 22px;
+    }
+
+    .LinkImagem img{
+        height: 50px;
+        width: 50px;
+    }
+
+    .BoxFooterEsquerda{
+        width: 250px;
+    }
+
+    .BoxFooterEsquerda span{
+        font-size: 22px;
+    }
+
+    .BoxFooterEsquerda ul{
+        font-size: 15px;
+    }
+
+    .ContainerFooter img{
+        height: 75px;
+        height: 75px;
+    }
+
+    .BoxFooterDireita{
+        width: 250px;
+    }
+
+    .BoxFooterDireita span{
+        font-size: 22px;
+    }
+
+    .BoxFooterDireita ul{
+        font-size: 15px;
+    }
+
+
+    /* Header, footer e gridacima */
+
+
+}

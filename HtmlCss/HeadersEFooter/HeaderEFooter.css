@@ -45,7 +45,7 @@ header{
 .LinkPagina{
     text-decoration: none;
     color: #52615E;
-    font-size: 34px; /* Diminuir na de admin  */
+    font-size: 34px;
     font-weight: 400;
 }
 
@@ -58,94 +58,10 @@ header{
 .LinkPaginaAtual{
     text-decoration: none;
     color: #2E9984;
-    font-size: 34px; /* Diminuir na de admin  */
+    font-size: 34px; 
     font-weight: 400;
     text-decoration-line: underline;
 }
-
-main{
-    margin-top: 145px;
-}
-
-
-
-/* Resto da main */
-
-
-.LoginMain{
-    background: linear-gradient(0deg, rgba(123, 224, 203, 0.4), rgba(123, 224, 203, 0.4)), url(../assets_/abstract-blur-in-hospital.jpg);
-    background-size: cover;
-    padding-bottom: 150px;
-}
-
-.ContainerLogin{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 150px;
-}
-
-.ContainerLogin form{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-between;
-    padding: 40px;
-    background-color: white;
-    border-radius: 50px;
-    box-shadow: 8px 8px 8px 8px rgba(0, 0, 0, 0.25);
-    width: 520px;
-    height: 545px;
-}
-
-.ContainerLogin h1{
-    color: #1D6153;
-    font-weight: 400;
-    font-size: 48px;
-}
-
-.CampoFormLogin{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-between;
-    height: 100px;
-}
-
-.CampoFormLogin label{
-    color: #52615E;
-    font-size: 36px;
-    font-weight: 400;
-}
-
-.CampoFormLogin input{
-    width: 420px;
-    height: 48px;
-    border-radius: 10px;
-    border: 1px solid black;
-    font-weight: 400;
-    font-size: 28px;
-}
-
-.SubmitFormLogin{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 78px;
-    padding: 30px;
-    border: none;
-    border-radius: 10px;
-    font-size: 48px;
-    font-weight: 400;
-    color: white;
-    background-color: #5FAD9E;
-}
-
-
-/* Resto da main */
-
-
 
 footer{
     background-color: #356158;
@@ -211,11 +127,7 @@ footer{
     margin-bottom: 20px;
 }
 
-@media(max-width:760px){
-
-    /* Header, footer e grid abaixo */
-
-
+@media (max-width: 760px){
     .ContainerGrid{
         width: 730px;
     }
@@ -267,9 +179,4 @@ footer{
     .BoxFooterDireita ul{
         font-size: 15px;
     }
-
-
-    /* Header, footer e gridacima */
-
-
 }

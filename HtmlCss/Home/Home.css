@@ -273,3 +273,114 @@ footer{
 .BoxFooterDireita ul li{
     margin-bottom: 20px;
 }
+
+@media(max-width:760px){
+
+    /* Header, footer e grid abaixo */
+
+
+    .ContainerGrid{
+        width: 730px;
+    }
+
+    .LogoHeader{
+        margin-right: 30px;
+        width: 75px;
+        height: 75px;
+    }
+
+    .LinkPaginaAtual{
+        font-size: 22px;
+    }
+
+    .LinkPagina{
+        font-size: 22px;
+    }
+
+    .LinkImagem img{
+        height: 50px;
+        width: 50px;
+    }
+
+    .BoxFooterEsquerda{
+        width: 250px;
+    }
+
+    .BoxFooterEsquerda span{
+        font-size: 22px;
+    }
+
+    .BoxFooterEsquerda ul{
+        font-size: 15px;
+    }
+
+    .ContainerFooter img{
+        height: 75px;
+        height: 75px;
+    }
+
+    .BoxFooterDireita{
+        width: 250px;
+    }
+
+    .BoxFooterDireita span{
+        font-size: 22px;
+    }
+
+    .BoxFooterDireita ul{
+        font-size: 15px;
+    }
+
+
+    /* Header, footer e gridacima */
+
+
+    .Banner{
+        height: 300px;
+    }
+
+    .Banner h1{
+        font-size: 42px;
+    }
+
+    .ContainerBanner a{
+        font-size: 25px;
+        text-align: center;
+    }
+
+    .ContainerClinicasParceiras, .ContainerConsultas{
+        height: 321px;
+    }
+
+    .ImagemClinicasParceiras, .ImagemConsultas{
+        width: 400px;
+        height: 300px;
+        top: 22px;
+    }
+
+    .QuadradoClinicasParceiras, .QuadradoConsultas{
+        width: 366px;
+        height: 250px;
+    }
+
+    .QuadradoClinicasParceiras{
+        margin-right: 50px;
+    }
+
+    .QuadradoConsultas{
+        margin-left: 50px;
+    }
+
+    .BoxClinicasParceiras, .BoxConsultas{
+        padding-top: 0px;
+    }
+
+    .BoxClinicasParceiras p, .BoxConsultas p{
+        font-size: 25px;
+    }
+
+    .BoxClinicasParceiras a, .BoxConsultas a{
+        padding: 20px;
+        font-size: 25px;
+    }
+}
