@@ -59,7 +59,7 @@ namespace SpMedGroup.webAPI.Controllers
         }
 
         [HttpGet("{IdUsuario}")]
-        [Authorize (Roles = "1")]
+        [Authorize (Roles = "1,2,3")]
         public IActionResult BuscarPorId(int IdUsuario)
         {
             try

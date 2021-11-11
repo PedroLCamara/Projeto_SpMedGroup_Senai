@@ -4,8 +4,10 @@ import ImgMinhasConsultas from '../../assets_/woman-visiting-female-doctor.jpg';
 import Footer from '../../Components/Footer/Footer.jsx';
 import Header from '../../Components/Header/Header.jsx';
 import {Link} from 'react-router-dom';
+import {UsuarioAutenticado} from '../../Services/auth.js'
 
 function App() {
+    document.title = "SpMed - Home";
     return (
         <div>
             <Header></Header>
@@ -13,7 +15,10 @@ function App() {
                 <section class="Banner">
                     <div class="ContainerGrid ContainerBanner">
                         <h1>Administre suas consultas médicas de qualquer lugar!</h1>
-                        <Link Link to="/Login" className="Link">Já é cadastrado? Entre!</Link>
+                        {
+                            UsuarioAutenticado() === false ?
+                            <Link Link to="/Login" className="Link">Já é cadastrado? Entre!</Link> : <Link Link to='/Perfil' className="Link">Vá ao seu perfil!</Link> 
+                        }
                     </div>
                 </section>
                 <section class="ClinicasParceiras">

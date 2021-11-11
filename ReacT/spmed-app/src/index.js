@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Home from './pages/Home/App';
+import Login from './pages/Login/Login';
+import Perfil from './pages/Perfil/Perfil.jsx';
 
 import {
   Routes,
@@ -10,7 +12,6 @@ import {
   Redirect,
 } from 'react-router-dom';
 
-import Login from './pages/Login/Login';
 
 import reportWebVitals from './reportWebVitals';
 
@@ -20,6 +21,7 @@ const Routing = (
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/Login" element={<Login />} />
+        <Route path="/Perfil" element={<Perfil />} />
       </Routes>
     </div>
   </Router>

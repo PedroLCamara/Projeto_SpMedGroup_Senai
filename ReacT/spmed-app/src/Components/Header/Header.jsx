@@ -1,24 +1,76 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Logo from '../../assets_/LogoPadrao.png'
 import '../../Css/HeaderEFooter.css'
+import { TokenConvertido, UsuarioAutenticado } from '../../Services/auth.js'
+import ImgPerfil from '../PerfilFoto/PerfilFoto.jsx'
 
-export default class Rodape extends Component {
+export default class Header extends Component {
     render() {
-        return (
-            <header>
-                <div class="ContainerGrid ContainerHeader">
-                    <Link to="/">
-                        <img class="LogoHeader" src={Logo} alt="Logo da empresa SpMedicalGroup" />
-                    </Link>
-                    <nav class="NavHeader">
-                        <Link to="/" class="LinkPaginaAtual">Início</Link>
-                        <Link to="/" class="LinkPagina">Clínicas parceiras</Link>
-                        <Link to="/" class="LinkPagina">Minhas Consultas</Link>
-                        <Link to="/Login" class="LinkPagina">Login</Link>
-                    </nav>
-                </div>
-            </header>
-        )
+        if (UsuarioAutenticado() === false) {
+            return (
+                <header>
+                    <div class="ContainerGrid ContainerHeader">
+                        <Link to="/">
+                            <img class="LogoHeader" src={Logo} alt="Logo da empresa SpMedicalGroup" />
+                        </Link>
+                        <nav class="NavHeader">
+                            {
+                                document.title === "SpMed - Home" ?
+                                    <Link to="/" class="LinkPaginaAtual">Início</Link> : <Link to="/" class="LinkPagina">Início</Link>
+                            }
+                            <Link to="/Login" class="LinkPagina">Clínicas parceiras</Link>
+                            <Link to="/Login" class="LinkPagina">Minhas Consultas</Link>
+                            {
+                                document.title === "SpMed - Login" ?
+                                    <Link to="/Login" class="LinkPaginaAtual">Login</Link> : <Link to="/Login" class="LinkPagina">Login</Link>
+                            }
+                        </nav>
+                    </div>
+                </header>
+            )
+        }
+        else if (TokenConvertido().Role === "1") {
+            return (
+                <header>
+                    <div class="ContainerGrid ContainerHeader">
+                        <Link to="/">
+                            <img class="LogoHeader" src={Logo} alt="Logo da empresa SpMedicalGroup" />
+                        </Link>
+                        <nav class="NavHeader">
+                            {
+                                document.title === "SpMed - Home" ?
+                                    <Link to="/" class="LinkPaginaAtual">Início</Link> : <Link to="/" class="LinkPagina">Início</Link>
+                            }
+                            <a class="LinkPagina">Clínicas</a>
+                            <a class="LinkPagina">Consultas</a>
+                            <a class="LinkPagina">Administração</a>
+                            <a class="LinkPagina">Cadastro</a>
+                            <Link to="/Perfil" class="LinkImagem"> <ImgPerfil></ImgPerfil> </Link>
+                        </nav>
+                    </div>
+                </header>
+            )
+        }
+        else if (TokenConvertido().Role === "2" || TokenConvertido().Role === "3") {
+            return (
+                <header>
+                    <div class="ContainerGrid ContainerHeader">
+                        <Link to="/">
+                            <img class="LogoHeader" src={Logo} alt="Logo da empresa SpMedicalGroup" />
+                        </Link>
+                        <nav class="NavHeader">
+                            {
+                                document.title === "SpMed - Home" ?
+                                    <Link to="/" class="LinkPaginaAtual">Início</Link> : <Link to="/" class="LinkPagina">Início</Link>
+                            }
+                            <a class="LinkPagina">Clínicas parceiras</a>
+                            <a class="LinkPagina">Minhas Consultas</a>
+                            <a class="LinkImagem"> <ImgPerfil></ImgPerfil> </a>
+                        </nav>
+                    </div>
+                </header>
+            )
+        }
     }
 }

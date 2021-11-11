@@ -3,11 +3,14 @@ import axios from 'axios';
 import '../../Css/Login.css'
 import Footer from '../../Components/Footer/Footer.jsx';
 import Header from '../../Components/Header/Header.jsx';
+import {useNavigate} from 'react-router-dom';
 
 export default function Login() {
     const [Email, setEmail] = useState('');
     const [Senha, setSenha] = useState('');
     const [IsLoading, setIsLoading] = useState(false);
+    let Navigate = useNavigate();
+    document.title = "SpMed - Login";
 
     function Entrar(Event){
         Event.preventDefault();
@@ -21,9 +24,9 @@ export default function Login() {
 
         axios.post('http://localhost:5000/api/Login', DadosLogin).then( (resposta) => {
             if (resposta.status == 200) {
-                localStorage.setItem('usuario-login', resposta.data.token);
+                localStorage.setItem('usuario-login', resposta.data.tokenRetorno);
                 setIsLoading(false);
-                console.log("LOGOU!!!")
+                Navigate('/')
             }
         }).catch((erro) => {
             setIsLoading(false);
