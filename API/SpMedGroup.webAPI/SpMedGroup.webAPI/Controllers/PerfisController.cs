@@ -49,7 +49,7 @@ namespace SpMedGroup.webAPI.Controllers
         {
             try
             {
-                if (Img.Length > 10000)
+                if (Img.Length > 10000000)
                 {
                     return BadRequest("Tamanho da imagem não deve exceder 10MB");
                 }

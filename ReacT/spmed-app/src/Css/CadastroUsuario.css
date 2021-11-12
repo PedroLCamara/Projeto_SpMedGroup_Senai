@@ -68,104 +68,119 @@ main{
 }
 
 
+
 /* Resto da main */
 
-
-.MainPerfil{
+.CadastroMain{
     padding-top: 120px;
     padding-bottom: 120px;
     background-color: rgba(123, 224, 203, 0.3);
 }
 
-.ContainerPerfil{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 485px;
-    padding: 32px 82px 32px 82px;
+.CadastroUsuario{
+    margin-bottom: 120px;
+}
+
+.CadastroPaciente{
+    margin-bottom: 120px;
+}
+
+.ContainerCadastro{
     background: #FFFFFF;
     box-shadow: 8px 8px 8px 8px rgba(0, 0, 0, 0.25);
     border-radius: 50px;
-    width: 1200px;
-}
-
-.MsgErro{
-    color: red;
-}
-.ContainerPerfil h1{
-    font-weight: 400;
-    font-size: 48px;
-    color: #1D6153;
-}
-.InfosPerfil{
+    height: 720px;
+    padding: 40px 80px 40px 80px;
     display: flex;
-    width: 100%;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: flex-start;
-    height: 260px;
+    justify-content: space-between;
 }
 
-.InfosPerfil img{
-    border-radius: 50%;
-    margin-right: 30px;
-    width: 256px;
-    height: 256px;
+.ContainerCadastro h1{
+    color: #1D6153;
+    font-size: 48px;
+    font-weight: 400;
 }
 
-.ColunaInfosPerfil{
-    height: 100%;
+.ContainerCadastro form{
+    width: 100%;
+    height: 560px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
 }
 
-.CampoInfosPerfil{
-    display: flex;
-    align-items: baseline;
-}
-
-.CampoInfosPerfil h2{
-    font-weight: 400;
-    font-size: 36px;
-    color: #1D6153;
-    margin-right: 15px;
-}
-
-.CampoInfosPerfil span{
-    color: #52615E;
-    font-size: 20px;
-    font-weight: 400;
-}
-
-.LinksPerfil{
+.LinhaFormCadastro{
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
 
-.LinksPerfil input{
-    display: none;
+.CampoCadastro{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
-.LinksPerfil label, .LinksPerfil button{
-    font-size: 26px;
-    text-decoration-line: underline;
+.CampoCadastro label{
+    color: #52615E;
+    font-size: 36px;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+.ContainerCadastro input{
+    width: 420px;
+    height: 48px;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-weight: 400;
+    font-size: 28px;
+}
+
+.ContainerCadastro select{
+    width: 420px;
+    height: 48px;
+    border: 1px solid black; 
+    border-radius: 10px;
+    font-weight: 400;
+    font-size: 28px;
+    background-color: white;
+}
+
+.BoxBotaoCadastro{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 440px;
+}
+
+.BoxBotaoCadastro button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 78px;
+    padding: 30px;
     border: none;
-    background: none;
+    border-radius: 10px;
+    font-size: 48px;
+    font-weight: 400;
+    color: white;
+    background-color: #5FAD9E;
 }
 
-.PerfilAltImg{
-    color: #1D6153;
+.BoxBotaoCadastro a{
+    font-size: 24px;
+    color: #52615E;
+    text-decoration-line: underline;
 }
-
-.PerfilLogout{
-    color: red;
-}
-
 
 
 /* Resto da main */
+
 
 
 footer{
@@ -293,19 +308,4 @@ footer{
     /* Header, footer e gridacima */
 
 
-    .ContainerPerfil{
-        align-items: center;
-        height: 900px;
-    }
-
-    .InfosPerfil{
-        flex-direction: column;
-        width: 100%;
-        align-items: center;
-        height: 675px;
-    }
-    .ColunaInfosPerfil{
-        margin-bottom: 30px;
-        width: 50%;
-    }
 }

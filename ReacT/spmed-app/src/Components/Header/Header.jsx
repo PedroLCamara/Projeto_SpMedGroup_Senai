@@ -45,7 +45,10 @@ export default class Header extends Component {
                             <a class="LinkPagina">Clínicas</a>
                             <a class="LinkPagina">Consultas</a>
                             <a class="LinkPagina">Administração</a>
-                            <a class="LinkPagina">Cadastro</a>
+                            {
+                                document.title === 'SpMed - Cadastro' ?
+                                <Link to="/Cadastro" class="LinkPaginaAtual">Cadastro</Link> : <Link to="/Cadastro" class="LinkPagina">Cadastro</Link>
+                            }
                             <Link to="/Perfil" class="LinkImagem"> <ImgPerfil></ImgPerfil> </Link>
                         </nav>
                     </div>
@@ -66,7 +69,7 @@ export default class Header extends Component {
                             }
                             <a class="LinkPagina">Clínicas parceiras</a>
                             <a class="LinkPagina">Minhas Consultas</a>
-                            <a class="LinkImagem"> <ImgPerfil></ImgPerfil> </a>
+                            <Link to="/Perfil" class="LinkImagem"> <ImgPerfil></ImgPerfil> </Link>
                         </nav>
                     </div>
                 </header>

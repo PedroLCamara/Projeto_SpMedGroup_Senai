@@ -3,7 +3,7 @@ import axios from 'axios';
 import '../../Css/Perfil.css';
 import Footer from '../../Components/Footer/Footer.jsx';
 import Header from '../../Components/Header/Header.jsx';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { TokenConvertido, UsuarioAutenticado } from '../../Services/auth.js'
 import ImgPerfil from '../../Components/PerfilFoto/PerfilFoto.jsx'
 
@@ -12,10 +12,12 @@ export default function Perfil() {
     const [Email, setEmail] = useState('');
     const [Telefone, setTelefone] = useState('');
     const [Cpf, setCpf] = useState('');
-    const [Idade, setIdade] = useState( 0 );
+    const [Idade, setIdade] = useState(0);
     const [Endereco, setEndereco] = useState('');
     const [Rg, setRg] = useState('');
+    const [MsgErro, setMsgErro] = useState('');
     document.title = 'SpMed - Perfil';
+    let Navigate = useNavigate();
 
     function CalcularIdade(DataDeNascimento) {
         let DataAtual = new Date();
@@ -23,24 +25,56 @@ export default function Perfil() {
         let Ano = Data[0].split('-')[0];
         let Mes = Data[0].split('-')[1];
         let Dia = Data[0].split('-')[2];
-        
+        var Idade = 0;
+
         if (parseInt(Ano) >= DataAtual.getFullYear()) {
-            return 0;
+            Idade = 0;
         }
         else if (parseInt(Mes) > DataAtual.getMonth()) {
-            return (DataAtual.getFullYear() - parseInt(Ano)) - 1;
+            Idade = ((DataAtual.getFullYear() - parseInt(Ano)) - 1);
         }
         else if (parseInt(Mes) === DataAtual.getMonth()) {
             if (parseInt(Dia) <= DataAtual.getDay()) {
-                return (DataAtual.getFullYear() - parseInt(Ano));
+                Idade = (DataAtual.getFullYear() - parseInt(Ano));
             }
             else {
-                return (DataAtual.getFullYear() - parseInt(Ano)) - 1;
+                Idade = ((DataAtual.getFullYear() - parseInt(Ano)) - 1);
             }
         }
         else {
-            return (DataAtual.getFullYear() - parseInt(Ano));
+            Idade = (DataAtual.getFullYear() - parseInt(Ano))
         }
+        console.log(Idade)
+        return Idade;
+    }
+
+    function AlterarImagem(Img) {
+        const DadosFormulario = new FormData();
+        DadosFormulario.append('img', Img);
+        axios.post('http://localhost:5000/api/Perfis', DadosFormulario, {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
+            },
+        })
+            .then((resposta) => {
+                if (resposta.status === 200) {
+                    setTimeout(() => {
+                        setMsgErro('');
+                        window.location.reload();
+                    }, 2000);
+                }
+            })
+            .catch((erro) => {
+                // console.log(erro.toJSON())
+                // console.log(erro)
+
+                setMsgErro('Verifique se o arquivo é da extensão .png, .jpg ou .jpeg e se possui menos de 10MB');
+            })
+    }
+
+    function Logout() {
+        localStorage.removeItem('usuario-login');
+        Navigate('/Login');
     }
 
     function BuscarDados() {
@@ -53,14 +87,13 @@ export default function Perfil() {
             .then((resposta) => {
                 setNome(resposta.data.nome);
                 setEmail(resposta.data.email);
-                setIdade((CalcularIdade(resposta.data.dataDeNascimento)));
+                setIdade(CalcularIdade(resposta.data.dataDeNascimento));
                 if (resposta.data.paciente !== undefined) {
                     setTelefone(resposta.data.paciente.telefone);
                     setCpf(resposta.data.paciente.cpf);
                     setEndereco(resposta.data.paciente.endereco);
                     setRg(resposta.data.paciente.rg);
                 }
-                console.log(Idade);
             }
             )
     }
@@ -74,6 +107,7 @@ export default function Perfil() {
                 <section class="Perfil">
                     <div class="ContainerGrid ContainerPerfil">
                         <h1>{Nome}</h1>
+                        <span className="MsgErro">{MsgErro}</span>
                         <div class="InfosPerfil">
                             <ImgPerfil></ImgPerfil>
                             <div class="ColunaInfosPerfil">
@@ -83,31 +117,32 @@ export default function Perfil() {
                                 </div>
                                 <div class="CampoInfosPerfil">
                                     <h2>Telefone:</h2>
-                                    <span>telefone</span>
+                                    <span>{Telefone}</span>
                                 </div>
                                 <div class="CampoInfosPerfil">
                                     <h2>CPF:</h2>
-                                    <span>cpf</span>
+                                    <span>{Cpf}</span>
                                 </div>
                             </div>
                             <div class="ColunaInfosPerfil">
                                 <div class="CampoInfosPerfil">
                                     <h2>Idade:</h2>
-                                    <span>idade</span>
+                                    <span>{Idade}</span>
                                 </div>
                                 <div class="CampoInfosPerfil">
                                     <h2>Endereço:</h2>
-                                    <span>endereco</span>
+                                    <span>{Endereco}</span>
                                 </div>
                                 <div class="CampoInfosPerfil">
                                     <h2>RG:</h2>
-                                    <span>rg</span>
+                                    <span>{Rg}</span>
                                 </div>
                             </div>
                         </div>
                         <div class="LinksPerfil">
-                            <a class="PerfilAltImg">Alterar Imagem de Perfil</a>
-                            <a class="PerfilLogout">Logout</a>
+                            <label for="AltImg" class="PerfilAltImg">Alterar imagem de perfil</label>
+                            <input type="file" id="AltImg" onChange={(ImgInput) => AlterarImagem(ImgInput.target.files[0])}></input>
+                            <button class="PerfilLogout" onClick={Logout}>Logout</button>
                         </div>
                     </div>
                 </section>
