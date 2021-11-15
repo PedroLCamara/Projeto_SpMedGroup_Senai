@@ -5,6 +5,7 @@ import Home from './pages/Home/App';
 import Login from './pages/Login/Login';
 import Perfil from './pages/Perfil/Perfil.jsx';
 import Cadastro from './pages/Cadastro/Cadastro.jsx';
+import Clinicas from './pages/Clinicas/Clinicas.jsx';
 
 import {
   Routes,
@@ -24,6 +25,7 @@ const Routing = (
         <Route path="/Login" element={<Login />} />
         <Route path="/Perfil" element={<Perfil />} />
         <Route path="/Cadastro" element={<Cadastro />} />
+        <Route path="/Clinicas" element={<Clinicas />} /> 
       </Routes>
     </div>
   </Router>

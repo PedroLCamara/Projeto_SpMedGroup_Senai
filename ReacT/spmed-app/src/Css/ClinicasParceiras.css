@@ -71,39 +71,33 @@ main{
 
 /* Resto da main */
 
-.CadastroMain{
+
+.ClinicaMain{
     padding-top: 120px;
     padding-bottom: 120px;
     background-color: rgba(123, 224, 203, 0.3);
 }
 
-.CadastroUsuario{
-    margin-bottom: 120px;
-}
-
-.CadastroPaciente{
-    margin-bottom: 120px;
-}
-
-.ContainerCadastro{
-    background: #FFFFFF;
-    box-shadow: 8px 8px 8px 8px rgba(0, 0, 0, 0.25);
-    border-radius: 50px;
-    height: 720px;
-    padding: 40px 80px 40px 80px;
+.ContainerCadastroClinica{
+    height: 678px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
+    background: #FFFFFF;
+    box-shadow: 8px 8px 8px 8px rgba(0, 0, 0, 0.25);
+    border-radius: 50px;
+    padding: 40px 80px 40px 80px;
 }
 
-.ContainerCadastro h1{
+.ContainerCadastroClinica span{
     color: #1D6153;
     font-size: 48px;
     font-weight: 400;
+    margin-bottom: 33px;
 }
 
-.ContainerCadastro form{
+.ContainerCadastroClinica form{
     width: 100%;
     height: 560px;
     display: flex;
@@ -112,26 +106,26 @@ main{
     align-items: center;
 }
 
-.LinhaFormCadastro{
+.LinhaFormCadastroClinica{
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
 
-.CampoCadastro{
+.CampoCadastroClinica{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
 
-.CampoCadastro label{
+.CampoCadastroClinica label{
     color: #52615E;
     font-size: 36px;
     font-weight: 400;
     margin-bottom: 15px;
 }
 
-.ContainerCadastro input{
+.ContainerCadastroClinica input{
     width: 420px;
     height: 48px;
     border: 1px solid black;
@@ -140,24 +134,24 @@ main{
     font-size: 28px;
 }
 
-.ContainerCadastro select{
+.ContainerCadastroClinica select{
     width: 420px;
     height: 48px;
     border: 1px solid black; 
+    background-color: white;
     border-radius: 10px;
     font-weight: 400;
     font-size: 28px;
-    background-color: white;
 }
 
-.BoxBotaoCadastro{
+.BoxBotaoCadastroClinica{
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 440px;
 }
 
-.BoxBotaoCadastro button{
+.BoxBotaoCadastroClinica button{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -172,10 +166,125 @@ main{
     background-color: #5FAD9E;
 }
 
-.BoxBotaoCadastro .Link{
-    font-size: 24px;
+.ContainerListaClinicas{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.BoxClinica{
+    margin-top: 120px;
+    width: 100%;
+    padding: 40px 80px 40px 80px;
+    background: #FFFFFF;
+    box-shadow: 8px 8px 8px 8px rgba(0, 0, 0, 0.25);
+    border-radius: 50px;
+}
+
+.InfosClinica{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 300px;
+    justify-content: space-between;
+}
+
+.IdentificadoresClinica{
+    display: flex;
+    align-items: baseline;
+}
+
+.IdentificadoresClinica h1{
+    color: #1D6153;
+    font-size: 48px;
+    font-weight: 400;
+    margin-right: 15px;
+}
+
+.IdentificadoresClinica span{
+    font-size: 36px;
     color: #52615E;
-    text-decoration-line: underline;
+    font-weight: 400;
+}
+
+.DadosClinica{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    height: 240px;
+}
+
+
+.ColunaDadosClinica{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.BoxColDadosClinica{
+    display: flex;
+    flex-direction: column;
+}
+
+.BoxColDadosClinica h2{
+    font-size: 36px;
+    color: #1D6153;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+.BoxColDadosClinica span{
+    color: #52615E;
+    font-size: 36px;
+    font-weight: 400;
+}
+
+.DivisoriaClinica{
+    width: 100%;
+    height: 0.5px;
+    background-color: #5FAD9E;
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.InfosMedsClinica{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.InfosMedsClinica table {
+    border-collapse:collapse;
+    border:solid black 1px;
+}
+
+.InfosMedsClinica td, th {
+    border-left:solid black 1px;
+    border-top:solid black 1px;
+    padding: 10px;
+    text-align: center;
+    width: 290px;
+}
+
+.InfosMedsClinica th {
+    font-size: 36px;
+    font-weight: 400;
+    color: #1D6153;
+    border-top: none;
+}
+
+.InfosMedsClinica td {
+    font-size: 36px;
+    font-weight: 400;
+    color: #52615E;
+}
+
+.InfosMedsClinica td:first-child, th:first-child {
+     border-left: none;
 }
 
 
@@ -308,4 +417,31 @@ footer{
     /* Header, footer e gridacima */
 
 
+    .ContainerCadastroClinica input{
+        width: 270px;
+    }
+
+    .CampoCadastroClinica label{
+        width: 270px;
+    }
+
+    .InfosClinica{
+        height: 600px;
+    }
+
+    .DadosClinica{
+        justify-content: space-between;
+        height: 530px;
+        flex-direction: column;
+    }
+
+    .ColunaDadosClinica{
+        height: 50%;
+        margin-bottom: 30px;
+        width: 100%;
+    }
+
+    .BoxColDadosClinica{
+        width: 100%;
+    }
 }

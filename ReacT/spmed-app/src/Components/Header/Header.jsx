@@ -19,7 +19,10 @@ export default class Header extends Component {
                                 document.title === "SpMed - Home" ?
                                     <Link to="/" class="LinkPaginaAtual">Início</Link> : <Link to="/" class="LinkPagina">Início</Link>
                             }
-                            <Link to="/Login" class="LinkPagina">Clínicas parceiras</Link>
+                            {
+                                document.title === "SpMed - Clinicas" ?
+                                <Link to="/Clinicas" class="LinkPaginaAtual">Clínicas parceiras</Link> : <Link to="/Clinicas" class="LinkPagina">Clínicas parceiras</Link>
+                            }
                             <Link to="/Login" class="LinkPagina">Minhas Consultas</Link>
                             {
                                 document.title === "SpMed - Login" ?
@@ -42,7 +45,10 @@ export default class Header extends Component {
                                 document.title === "SpMed - Home" ?
                                     <Link to="/" class="LinkPaginaAtual">Início</Link> : <Link to="/" class="LinkPagina">Início</Link>
                             }
-                            <a class="LinkPagina">Clínicas</a>
+                            {
+                                document.title === "SpMed - Clinicas" ?
+                                <Link to="/Clinicas" class="LinkPaginaAtual">Clínicas</Link> : <Link to="/Clinicas" class="LinkPagina">Clínicas</Link>
+                            }
                             <a class="LinkPagina">Consultas</a>
                             <a class="LinkPagina">Administração</a>
                             {
@@ -67,7 +73,10 @@ export default class Header extends Component {
                                 document.title === "SpMed - Home" ?
                                     <Link to="/" class="LinkPaginaAtual">Início</Link> : <Link to="/" class="LinkPagina">Início</Link>
                             }
-                            <a class="LinkPagina">Clínicas parceiras</a>
+                            {
+                                document.title === "SpMed - Clinicas" ?
+                                <Link to="/Clinicas" class="LinkPaginaAtual">Clínicas parceiras</Link> : <Link to="/Clinicas" class="LinkPagina">Clínicas parceiras</Link>
+                            }
                             <a class="LinkPagina">Minhas Consultas</a>
                             <Link to="/Perfil" class="LinkImagem"> <ImgPerfil></ImgPerfil> </Link>
                         </nav>

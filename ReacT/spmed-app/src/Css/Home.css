@@ -145,7 +145,7 @@ main{
     color: #52615E;
 }
 
-.BoxClinicasParceiras a{
+.BoxClinicasParceiras .Link{
     color: white;
     background-color: #5FAD9E;
     padding: 30px;

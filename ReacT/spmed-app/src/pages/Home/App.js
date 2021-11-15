@@ -28,7 +28,7 @@ function App() {
                         <div class="BoxClinicasParceiras">
                             <p>Clínicas repletas de especialistas em qualquer lugar do Brasil. Consulte já nossas parceiras e
                                 conheça seus profissionais e especialidades</p>
-                            <a>Ir às clínicas parceiras</a>
+                            <Link Link to="/Clinicas"  className="Link">Ir às clínicas parceiras</Link>
                         </div>
                     </div>
                 </section>

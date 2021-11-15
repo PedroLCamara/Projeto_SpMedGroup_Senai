@@ -6,7 +6,11 @@ export const UsuarioAutenticado = () => {
 };
 
 export const TokenConvertido = () => {
-    let Base64 = localStorage.getItem('usuario-login').split('.')[1];
+    if (localStorage.getItem('usuario-login') !== null) {
+        
+        let Base64 = localStorage.getItem('usuario-login').split('.')[1];
+        return JSON.parse( window.atob(Base64) );
+    }
+    else return null
 
-    return JSON.parse( window.atob(Base64) );
 }

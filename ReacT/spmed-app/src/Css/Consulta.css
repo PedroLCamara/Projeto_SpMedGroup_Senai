@@ -71,39 +71,39 @@ main{
 
 /* Resto da main */
 
-.CadastroMain{
+
+.ConsultaMain{
     padding-top: 120px;
     padding-bottom: 120px;
     background-color: rgba(123, 224, 203, 0.3);
 }
 
-.CadastroUsuario{
-    margin-bottom: 120px;
-}
-
-.CadastroPaciente{
-    margin-bottom: 120px;
-}
-
-.ContainerCadastro{
+.CadastroConsulta{
     background: #FFFFFF;
     box-shadow: 8px 8px 8px 8px rgba(0, 0, 0, 0.25);
     border-radius: 50px;
-    height: 720px;
+    height: 545px;
+    width: 100%;
     padding: 40px 80px 40px 80px;
+}
+
+.ContainerCadastroConsulta{
+    height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
 }
 
-.ContainerCadastro h1{
+.ContainerCadastroConsulta span{
     color: #1D6153;
     font-size: 48px;
     font-weight: 400;
+    margin-bottom: 33px;
 }
 
-.ContainerCadastro form{
+.ContainerCadastroConsulta form{
     width: 100%;
     height: 560px;
     display: flex;
@@ -112,26 +112,26 @@ main{
     align-items: center;
 }
 
-.LinhaFormCadastro{
+.LinhaFormCadastroConsulta{
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
 
-.CampoCadastro{
+.CampoCadastroConsulta{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
 
-.CampoCadastro label{
+.CampoCadastroConsulta label{
     color: #52615E;
     font-size: 36px;
     font-weight: 400;
     margin-bottom: 15px;
 }
 
-.ContainerCadastro input{
+.ContainerCadastroConsulta input{
     width: 420px;
     height: 48px;
     border: 1px solid black;
@@ -140,24 +140,24 @@ main{
     font-size: 28px;
 }
 
-.ContainerCadastro select{
+.ContainerCadastroConsulta select{
     width: 420px;
     height: 48px;
     border: 1px solid black; 
+    background-color: white;
     border-radius: 10px;
     font-weight: 400;
     font-size: 28px;
-    background-color: white;
 }
 
-.BoxBotaoCadastro{
+.BoxBotaoCadastroConsulta{
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 440px;
 }
 
-.BoxBotaoCadastro button{
+.BoxBotaoCadastroConsulta button{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -172,12 +172,124 @@ main{
     background-color: #5FAD9E;
 }
 
-.BoxBotaoCadastro .Link{
-    font-size: 24px;
-    color: #52615E;
-    text-decoration-line: underline;
+.BoxListaCon{
+    margin-top: 120px;
+    background: #FFFFFF;
+    box-shadow: 8px 8px 8px 8px rgba(0, 0, 0, 0.25);
+    border-radius: 50px;
+    padding: 60px 82px 60px 82px;
+    display: flex;
+    justify-content: space-between;
 }
 
+.DivisoriaVertical{
+    border-left: 1px solid #5FAD9E;
+    height: auto;
+    justify-self: center;
+    margin: 0px 30px 0px 30px;
+}
+
+.ColunaBoxListaCon{
+    width: 50%;
+}
+
+.ColunaBoxListaCon{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.TituloBoxListaCon{
+    font-weight: 400;
+    font-size: 48px;
+    color: #1D6153;
+}
+
+.CampoBoxListaCon{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-top: 55px;
+}
+
+.SubTituloBoxListaCon{
+    font-weight: 400;
+    font-size: 36px;
+    color: #1D6153;
+    margin-right: 15px;
+}
+
+.CampoBoxListaCon p{
+    font-weight: 400;
+    font-size: 28px;
+    color: #52615E;
+    margin-top: 20px;
+}
+
+.CampoBoxListaCon input{
+    width: 100%;
+    height: 48px;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-weight: 400;
+    font-size: 28px;
+    margin-top: 10px;
+}
+
+.InfoUserCon{
+    display: flex;
+    align-items: center;
+}
+
+.InfoUserCon img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 30px;
+    border: 1px solid #5FAD9E;
+}
+
+.InfoTextoUserCon{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.LinhaTextoUserCon{
+    display: flex;
+    align-items: baseline;
+}
+
+.LinhaTextoUserCon p{
+    font-weight: 400;
+    font-size: 28px;
+    color: #52615E;
+    margin-top: 30px;
+}
+
+.InfoSituacao{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.CampoSituacaoCon p{
+    font-weight: 400;
+    font-size: 28px;
+    color: #52615E;
+    margin-top: 30px;
+}
+
+.InfoSituacao button{
+    padding: 6px 40px 6px 40px;
+    color: white;
+    background-color: red;
+    font-size: 34px;
+    border-radius: 10px;
+    border: none;
+}
 
 /* Resto da main */
 
@@ -308,4 +420,11 @@ footer{
     /* Header, footer e gridacima */
 
 
+    .ContainerCadastroConsulta select, .ContainerCadastroConsulta input{
+        width: 270px;
+    }
+
+    .DivisoriaVertical{
+        margin: 0px 5px 0px 5px;
+    }
 }
