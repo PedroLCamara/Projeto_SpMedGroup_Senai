@@ -49,8 +49,14 @@ export default class Header extends Component {
                                 document.title === "SpMed - Clinicas" ?
                                 <Link to="/Clinicas" class="LinkPaginaAtual">Clínicas</Link> : <Link to="/Clinicas" class="LinkPagina">Clínicas</Link>
                             }
-                            <a class="LinkPagina">Consultas</a>
-                            <a class="LinkPagina">Administração</a>
+                            {
+                                document.title === "SpMed - Consultas" ?
+                                <Link to="/Consultas" class="LinkPaginaAtual">Consultas</Link> : <Link to="/Consultas" class="LinkPagina">Consultas</Link>
+                            }
+                            {
+                                document.title === "SpMed - Administracao" ?
+                                <Link to="/Administracao" className="LinkPaginaAtual">Administração</Link> : <Link to="/Administracao" className="LinkPagina">Administração</Link>
+                            }
                             {
                                 document.title === 'SpMed - Cadastro' ?
                                 <Link to="/Cadastro" class="LinkPaginaAtual">Cadastro</Link> : <Link to="/Cadastro" class="LinkPagina">Cadastro</Link>
@@ -77,7 +83,10 @@ export default class Header extends Component {
                                 document.title === "SpMed - Clinicas" ?
                                 <Link to="/Clinicas" class="LinkPaginaAtual">Clínicas parceiras</Link> : <Link to="/Clinicas" class="LinkPagina">Clínicas parceiras</Link>
                             }
-                            <a class="LinkPagina">Minhas Consultas</a>
+                            {
+                                document.title === "SpMed - Consultas" ?
+                                <Link to="/Consultas" class="LinkPaginaAtual">Minhas Consultas</Link> : <Link to="/Consultas" class="LinkPagina">Minhas Consultas</Link>
+                            }
                             <Link to="/Perfil" class="LinkImagem"> <ImgPerfil></ImgPerfil> </Link>
                         </nav>
                     </div>

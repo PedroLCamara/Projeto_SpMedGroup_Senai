@@ -3,11 +3,12 @@ import axios from 'axios';
 import '../../Css/CadastroUsuario.css';
 import Footer from '../../Components/Footer/Footer.jsx';
 import Header from '../../Components/Header/Header.jsx';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { TokenConvertido, UsuarioAutenticado } from '../../Services/auth.js'
 
 export default function Cadaastro() {
     document.title = 'SpMed - Cadastro';
+    let Navigate = useNavigate();
     const [ListaUsuario, setListaUsuario] = useState([]);
     const [ListaTipoUsuario, setListaTipoUsuario] = useState([]);
     const [ListaClinica, setListaClinica] = useState([]);
@@ -38,7 +39,10 @@ export default function Cadaastro() {
         }).then((resposta) => {
             setListaUsuario(resposta.data);
         })
-            .catch((erro) => console.log(erro));
+            .catch((erro) => {
+                localStorage.removeItem('usuario-login');
+                Navigate('/Login')
+            });
 
         axios('http://localhost:5000/api/TiposUsuarios', {
             headers: {
@@ -47,41 +51,61 @@ export default function Cadaastro() {
         }).then((resposta) => {
             setListaTipoUsuario(resposta.data);
         })
-            .catch((erro) => console.log(erro));
+        .catch((erro) => {
+            localStorage.removeItem('usuario-login');
+            Navigate('/Login')
+        });
 
         axios('http://localhost:5000/api/Clinicas')
             .then((resposta) => {
                 setListaClinica(resposta.data);
             })
-            .catch((erro) => console.log(erro));
+            .catch((erro) => {
+                localStorage.removeItem('usuario-login');
+                Navigate('/Login')
+            });
 
         axios('http://localhost:5000/api/Especialidades', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
         }).then((resposta) => setListaEspecialidade(resposta.data))
-            .catch((erro) => console.log(erro));
+        .catch((erro) => {
+            localStorage.removeItem('usuario-login');
+            Navigate('/Login')
+        });
 
         axios('http://localhost:5000/api/Pacientes', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
         }).then((resposta) => setListaPaciente(resposta.data))
-            .catch((erro) => console.log(erro));
+        .catch((erro) => {
+            localStorage.removeItem('usuario-login');
+            Navigate('/Login')
+        });
 
         axios('http://localhost:5000/api/Medicos', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
         }).then((resposta) => setListaMedico(resposta.data))
-            .catch((erro) => console.log(erro));
+        .catch((erro) => {
+            localStorage.removeItem('usuario-login');
+            Navigate('/Login')
+        });
     }
 
     function CadastrarUsuario(evento) {
         evento.preventDefault();
         setIsLoading(true);
         if (IdTipoUsuario === 0) {
-            console.log('especifique o usuário!!!')
+            setIsLoading(false);
+            window.alert('especifique o usuário!!!')
+        }
+        else if (new Date(Nascimento) > new Date()) {
+            setIsLoading(false);
+            window.alert('Selecione uma data de nascimento válida!!!')
         }
         else {
             axios.post('http://localhost:5000/api/Usuarios', {
@@ -97,11 +121,17 @@ export default function Cadaastro() {
             }).then((resposta) => {
                 if (resposta.status === 201) {
                     PreencherListas();
-                    console.log('Usuário cadastrado com sucesso!')
+                    window.alert('Usuário cadastrado com sucesso!')
                     setIsLoading(false);
                 }
             }).catch((erro) => {
-                console.log(erro);
+                if (erro.toJSON().status == 400) {
+                    window.alert('O email possivelmente já está em uso, utilize outro endereço de email. Se o erro persistir, busque ajuda do suporte e/ou tente novamente mais tarde.')
+                }
+                else{
+                    localStorage.removeItem('usuario-login');
+                    Navigate('/Login')
+                }
                 setIsLoading(false);
             })
         }
@@ -111,7 +141,8 @@ export default function Cadaastro() {
         Evento.preventDefault();
         setIsLoading(true);
         if (IdUsuarioPac === 0) {
-            console.log('especifique o usuário!!!')
+            setIsLoading(false);
+            window.alert('especifique o usuário!!!')
         }
         else {
             axios.post('http://localhost:5000/api/Pacientes', {
@@ -127,11 +158,17 @@ export default function Cadaastro() {
             }).then((resposta) => {
                 if (resposta.status === 201) {
                     PreencherListas();
-                    console.log('Paciente cadastrado com sucesso!');
+                    window.alert('Paciente cadastrado com sucesso!');
                     setIsLoading(false);
                 }
             }).catch((erro) => {
-                console.log(erro);
+                if (erro.toJSON().status == 400) {
+                    window.alert('O usuário, RG ou CPF possivelmente já estão em uso, utilize outros valores nesses campos. Se o erro persistir, busque ajuda do suporte e/ou tente novamente mais tarde.')
+                }
+                else{
+                    localStorage.removeItem('usuario-login');
+                    Navigate('/Login')
+                }
                 setIsLoading(false);
             })
         }
@@ -141,7 +178,8 @@ export default function Cadaastro() {
         Evento.preventDefault();
         setIsLoading(true);
         if (IdUsuarioMed === 0 || IdClinica === 0 || IdEspecialidade === 0) {
-            console.log('Especifique o usuário, a clínica e a especialidade!!!')
+            setIsLoading(false);
+            window.alert('Especifique o usuário, a clínica e a especialidade!!!')
         }
         else {
             axios.post('http://localhost:5000/api/Medicos', {
@@ -156,17 +194,28 @@ export default function Cadaastro() {
             }).then((resposta) => {
                 if (resposta.status === 201) {
                     PreencherListas();
-                    console.log('Médico cadastrado com sucesso!');
+                    window.alert('Médico cadastrado com sucesso!');
                     setIsLoading(false);
                 }
             }).catch((erro) => {
-                console.log(erro);
+                if (erro.toJSON().status == 400) {
+                    window.alert('O usuário ou CRM possivelmente já estão em uso, utilize outros valores nesses campos. Se o erro persistir, busque ajuda do suporte e/ou tente novamente mais tarde.')
+                }
+                else{
+                    localStorage.removeItem('usuario-login');
+                    Navigate('/Login')
+                }
                 setIsLoading(false);
             })
         }
     }
 
-    useEffect(PreencherListas, []);
+    useEffect(() => {
+        PreencherListas();
+        if (UsuarioAutenticado() === false) {
+            Navigate('/Login');
+        }
+    }, []);
 
     return (
         <div>

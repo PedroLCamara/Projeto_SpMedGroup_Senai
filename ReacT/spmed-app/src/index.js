@@ -6,6 +6,8 @@ import Login from './pages/Login/Login';
 import Perfil from './pages/Perfil/Perfil.jsx';
 import Cadastro from './pages/Cadastro/Cadastro.jsx';
 import Clinicas from './pages/Clinicas/Clinicas.jsx';
+import Consultas from './pages/Consultas/Consultas';
+import Administracao  from './pages/Administracao/Administracao';
 
 import {
   Routes,
@@ -26,6 +28,8 @@ const Routing = (
         <Route path="/Perfil" element={<Perfil />} />
         <Route path="/Cadastro" element={<Cadastro />} />
         <Route path="/Clinicas" element={<Clinicas />} /> 
+        <Route path="/Consultas" element={<Consultas />} />
+        <Route path="/Administracao" element={<Administracao />} />
       </Routes>
     </div>
   </Router>

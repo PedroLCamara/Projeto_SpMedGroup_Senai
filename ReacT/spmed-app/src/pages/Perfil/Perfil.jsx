@@ -44,7 +44,6 @@ export default function Perfil() {
         else {
             Idade = (DataAtual.getFullYear() - parseInt(Ano))
         }
-        console.log(Idade)
         return Idade;
     }
 
@@ -65,10 +64,13 @@ export default function Perfil() {
                 }
             })
             .catch((erro) => {
-                // console.log(erro.toJSON())
-                // console.log(erro)
-
-                setMsgErro('Verifique se o arquivo é da extensão .png, .jpg ou .jpeg e se possui menos de 10MB');
+                if (erro.toJSON().status === 400) {
+                    setMsgErro('Verifique se o arquivo é da extensão .png, .jpg ou .jpeg e se possui menos de 10MB');
+                }
+                else{
+                    localStorage.removeItem('usuario-login');
+                    Navigate('/Login')
+                }
             })
     }
 
@@ -95,7 +97,10 @@ export default function Perfil() {
                     setRg(resposta.data.paciente.rg);
                 }
             }
-            )
+            ).catch( (erro) => {
+                localStorage.removeItem('usuario-login');
+                Navigate('/Login')
+            });
     }
 
     useEffect(BuscarDados, [])

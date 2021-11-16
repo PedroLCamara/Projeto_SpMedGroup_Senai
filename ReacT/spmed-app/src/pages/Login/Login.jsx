@@ -30,7 +30,7 @@ export default function Login() {
             }
         }).catch((erro) => {
             setIsLoading(false);
-            console.log(erro);
+            window.alert('Email ou senha inválidos, tente novamente')
         })
     }
 

@@ -25,7 +25,8 @@ export default function Clinicas() {
                 }
             })
             .catch((erro) => {
-                console.log(erro);
+                localStorage.removeItem('usuario-login');
+                Navigate('/Login')
             })
     }
 
@@ -48,11 +49,17 @@ export default function Clinicas() {
             if (resposta.status === 201) {
                 BuscarClinicas();
                 setIsLoading(false);
-                console.log('Clinica cadastrada!');
+                window.alert('Clinica cadastrada!');
             }
         })
-        .catch( (erro) => {
-            console.log(erro);
+        .catch((erro) => {
+            if (erro.toJSON().status == 400) {
+                window.alert('O CNPJ ou endereço possivelmente já estão em uso, utilize outros valores nesses campos. Se o erro persistir, busque ajuda do suporte e/ou tente novamente mais tarde.')
+            }
+            else{
+                localStorage.removeItem('usuario-login');
+                Navigate('/Login')
+            }
             setIsLoading(false);
         })
     }
@@ -91,7 +98,7 @@ export default function Clinicas() {
                                     <div class="LinhaFormCadastroClinica">
                                         <div class="CampoCadastroClinica">
                                             <label>Horário de Abertura</label>
-                                            <input type="time" value={Abertura} onChange={(inputAbertura) => { setAbertura(inputAbertura.target.value); console.log(Abertura) }} />
+                                            <input type="time" value={Abertura} onChange={(inputAbertura) => setAbertura(inputAbertura.target.value)} />
                                         </div>
                                         <div class="CampoCadastroClinica">
                                             <label>Horário de fechamento</label>

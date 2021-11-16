@@ -40,7 +40,7 @@ namespace SpMedGroup.webAPI.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "1")]
+        [Authorize(Roles = "1,2,3")]
         public IActionResult ListarTodas()
         {
             try

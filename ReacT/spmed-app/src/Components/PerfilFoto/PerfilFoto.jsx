@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { useState, useEffect } from "react";
 import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function ImagemPerfil() {
     const [ImgPerfil, setImg] = useState(null);
+    let Navigate = useNavigate();
 
     function BuscarImg() {
         axios('http://localhost:5000/api/Perfis', {
@@ -16,7 +18,10 @@ export default function ImagemPerfil() {
                     setImg(resposta.data)
                 }
             })
-            .catch((erro) => console.log(erro))
+            .catch((erro) => {
+                localStorage.removeItem('usuario-login');
+                Navigate('/Login')
+            })
     }
 
     useEffect(BuscarImg, []);
