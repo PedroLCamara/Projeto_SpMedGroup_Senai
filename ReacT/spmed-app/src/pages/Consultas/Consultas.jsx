@@ -29,8 +29,15 @@ export default function Consultas() {
                 setListaConsulta(resposta.data);
             }
         }).catch((erro) => {
-            localStorage.removeItem('usuario-login');
-            Navigate('/Login')
+            console.log(erro);
+            var ErroJson = erro.toJSON();
+            if (ErroJson.status === 400) {
+                window.alert('Erro no servidor, reinicie a página. Se o erro persistir, busque ajuda do suporte e/ou tente novamente mais tarde.')
+            }
+            else{
+                localStorage.removeItem('usuario-login');
+                Navigate('/Login')
+            }
         })
     }
 
@@ -186,8 +193,8 @@ export default function Consultas() {
 
     useEffect(() => {
         if (TokenConvertido().Role === "1") {
-            ListarTodas();
             ListarSituacoes();
+            ListarTodas();
             ListarUsuarios();
         }
         else {
