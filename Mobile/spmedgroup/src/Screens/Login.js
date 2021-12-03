@@ -39,6 +39,9 @@ export default class Login extends Component {
             });
             const token = resposta.data.tokenRetorno;
             await AsyncStorage.setItem('usuario-login', token);
+            if (resposta.status === 200) {
+                this.props.navigation.navigate('Main');
+            }
         } catch (error) {
             console.warn(error);
         }
@@ -96,7 +99,6 @@ const styles = StyleSheet.create({
     },
     InputLogin: {
         width: 200,
-        // height: 20,
         borderRadius: 10,
         borderColor: '#BFBFBF',
         borderWidth: 1,

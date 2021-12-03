@@ -28,7 +28,8 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-import Login from './src/Screens/Login'
+import Login from './src/Screens/Login';
+import Main from './src/Screens/main';
 
 const StackNavigator = createStackNavigator();
 
@@ -43,8 +44,8 @@ export default function Stack() {
         screenOptions={{
           headerShown: false,
         }}>
-          <StackNavigator.Screen name = "Login" component={Login}>
-          </StackNavigator.Screen>
+          <StackNavigator.Screen name = "Login" component={Login} />
+          <StackNavigator.Screen name = "Main" component={Main} />
         </StackNavigator.Navigator>
       </NavigationContainer>
     )
