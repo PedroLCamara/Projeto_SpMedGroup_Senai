@@ -19,6 +19,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import Home from './home';
 import Consultas from './consultas';
+import Perfil from './perfil';
 
 const DrawerNavigator = createDrawerNavigator();
 
@@ -40,6 +41,7 @@ export default Main = () => {
         <DrawerNavigator.Navigator initialRouteName="Home" drawerContent={(props) => <CustomDrawerContent {...props} />}>
             <DrawerNavigator.Screen name="Home" component={Home}></DrawerNavigator.Screen>
             <DrawerNavigator.Screen name="Consultas" component={Consultas}></DrawerNavigator.Screen>
+            <DrawerNavigator.Screen name="Perfil" component={Perfil}></DrawerNavigator.Screen>
         </DrawerNavigator.Navigator>
     )
 }
