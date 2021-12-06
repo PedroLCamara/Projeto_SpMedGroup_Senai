@@ -102,6 +102,7 @@ export default class Consulta extends Component {
                     data={this.state.ListaConsultas}
                     keyExtractor={item => item.idConsulta}
                     renderItem={this.renderItem}
+                    style={styles.Lista}
                 />
             </View>
         )
@@ -223,7 +224,7 @@ const styles = StyleSheet.create({
     DadosItem: {
         color: '#52615E',
         fontSize: 15,
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
     },
     CampoDadosItemHorizontal: {
         alignItems: 'baseline',

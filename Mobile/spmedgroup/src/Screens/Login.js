@@ -27,7 +27,8 @@ export default class Login extends Component {
         super(props);
         this.state = {
             Email: '',
-            Senha: ''
+            Senha: '',
+            MsgErro: '',
         }
     }
 
@@ -35,15 +36,21 @@ export default class Login extends Component {
         try {
             const resposta = await api.post('/Login', {
                 email: this.state.Email,
-                Senha: this.state.Senha
+                senha: this.state.Senha,
             });
             const token = resposta.data.tokenRetorno;
             await AsyncStorage.setItem('usuario-login', token);
+            await this.setState({Email: ''});
+            await this.setState({Senha: ''});
+            await this.setState({MsgErro: ''});
             if (resposta.status === 200) {
                 this.props.navigation.navigate('Main');
             }
         } catch (error) {
-            console.warn(error);
+            // console.warn(JSON.parse(error))
+            // if (JSON.parse(error).status == 404) {
+                this.setState({MsgErro: 'E-mail ou senha inválidos! Tente novamente'})
+            // }
         }
     }
 
@@ -54,10 +61,11 @@ export default class Login extends Component {
                 <View style={styles.Main}>
                     <Image style={styles.LogoLogin} source={require('../../assets/Group48.png')}></Image>
                     <View style={styles.BoxLogin}>
+                        <Text style={styles.MensagemErro}>{this.state.MsgErro}</Text>
                         <Text style={styles.TituloLogin}>Login</Text>
-                        <TextInput style={styles.InputLogin} placeholder="Email" placeholderTextColor="#52615E"
+                        <TextInput value={this.state.Email} style={styles.InputLogin} placeholder="Email" placeholderTextColor="#52615E"
                             keyboardType="email-address" onChangeText={(Email) => this.setState({ Email })}></TextInput>
-                        <TextInput style={styles.InputLogin} placeholder="Senha" placeholderTextColor="#52615E" secureTextEntry={true} keyboardType="default" onChangeText={(Senha) => this.setState({ Senha })}></TextInput>
+                        <TextInput value={this.state.Senha} style={styles.InputLogin} placeholder="Senha" placeholderTextColor="#52615E" secureTextEntry={true} keyboardType="default" onChangeText={(Senha) => this.setState({ Senha })}></TextInput>
                         <TouchableOpacity style={styles.BotaoLogin} onPress={this.Logar}>
                             <Text style={styles.TextoBotao}>Entrar</Text>
                         </TouchableOpacity>
@@ -120,5 +128,9 @@ const styles = StyleSheet.create({
     TextoBotao: {
         color: "#FFF",
         fontSize: 24
+    },
+    MensagemErro: {
+        color: '#FF0000',
+        fontSize: 13
     }
 })
