@@ -132,7 +132,7 @@ export default class Perfil extends Component {
                 <Text style={styles.Titulo}>{this.state.Nome}</Text>
                 <View style={styles.SectionImgPerfil}>
                     <Image style={styles.ImgPerfil} source={{uri: `data:image/jpg;base64,${this.state.Base64}`}}></Image>
-                    <TouchableOpacity style={styles.BotaoAlterarImgPerfil}>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('PerfilCamera')} style={styles.BotaoAlterarImgPerfil}>
                         <Text style={styles.TextoAlterarImgPerfil}>Alterar Imagem de Perfil</Text>
                     </TouchableOpacity>
                 </View>
@@ -151,7 +151,7 @@ export default class Perfil extends Component {
                     </View>
                     <View style={styles.BoxDadosUser}>
                         <Text style={styles.TituloDadosUser}>Idade:</Text>
-                        <Text style={styles.DadosUser}>{this.CalcularIdade(this.state.DataDeNascimento)}</Text>
+                        <Text style={styles.DadosUser}>{this.state.DataDeNascimento !== undefined ? this.CalcularIdade(this.state.DataDeNascimento) : 'Indefinida'}</Text>
                     </View>
                     <View style={styles.BoxDadosUser}>
                         <Text style={styles.TituloDadosUser}>Endereço:</Text>
@@ -177,7 +177,8 @@ const styles = StyleSheet.create({
     Titulo: {
         fontSize: 40,
         color: '#1D6153',
-        marginBottom: 10
+        marginBottom: 10,
+        fontFamily: 'Questrial-Regular'
     },
     SectionImgPerfil: {
         height: 110,
@@ -195,7 +196,8 @@ const styles = StyleSheet.create({
     TextoAlterarImgPerfil: {
         fontSize: 15,
         color: '#1D6153',
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: 'Questrial-Regular'
     },
     ListaDadosUser: {
         marginTop: 64,
@@ -211,11 +213,13 @@ const styles = StyleSheet.create({
     TituloDadosUser: {
         fontSize: 20,
         color: '#1D6153',
-        marginRight: 10
+        marginRight: 10,
+        fontFamily: 'Questrial-Regular'
     },
     DadosUser: {
         fontSize: 15,
         color: '#52615E',
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
+        fontFamily: 'Questrial-Regular'
     }
 })

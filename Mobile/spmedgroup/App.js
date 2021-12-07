@@ -30,6 +30,7 @@ import {
 
 import Login from './src/Screens/Login';
 import Main from './src/Screens/main';
+import PerfilCamera from './src/Screens/camera';
 
 const StackNavigator = createStackNavigator();
 
@@ -46,6 +47,7 @@ export default function Stack() {
         }}>
           <StackNavigator.Screen name = "Login" component={Login} />
           <StackNavigator.Screen name = "Main" component={Main} />
+          <StackNavigator.Screen name = "PerfilCamera" component={PerfilCamera} />
         </StackNavigator.Navigator>
       </NavigationContainer>
     )

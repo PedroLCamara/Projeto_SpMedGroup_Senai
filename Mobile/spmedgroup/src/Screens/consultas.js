@@ -189,7 +189,8 @@ const styles = StyleSheet.create({
         width: 180,
         color: '#1D6153',
         textAlign: 'center',
-        marginTop: 42
+        marginTop: 42,
+        fontFamily: 'Questrial-Regular'
     },
     ContainerItem: {
         width: 300,
@@ -209,22 +210,25 @@ const styles = StyleSheet.create({
     TituloItem: {
         fontSize: 25,
         color: '#1D6153',
-        marginBottom: 22
+        marginBottom: 22,
+        fontFamily: 'Questrial-Regular'
     },
     CampoDadosItem: {
         flexDirection: 'column',
-        marginBottom: 22
+        marginBottom: 22,
     },
     SubtituloItem: {
         fontSize: 20,
         color: '#52615E',
         marginRight: 10,
-        marginBottom: 10
+        marginBottom: 10,
+        fontFamily: 'Questrial-Regular'
     },
     DadosItem: {
         color: '#52615E',
         fontSize: 15,
         flexWrap: 'wrap',
+        fontFamily: 'Questrial-Regular'
     },
     CampoDadosItemHorizontal: {
         alignItems: 'baseline',

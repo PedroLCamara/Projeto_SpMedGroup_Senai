@@ -12,6 +12,7 @@ import {
     View,
     Image
 } from 'react-native';
+import { ceil } from 'react-native-reanimated';
 import {
     Colors,
     DebugInstructions,
@@ -26,9 +27,14 @@ export default class Home extends Component {
         this.props.navigation.navigate('Consultas');
     }
 
+    RedirecionarPerfil = () => {
+        this.props.navigation.navigate('Perfil');
+    }
+
     render() {
         return (
-            <View style={styles.Main}>
+            <ScrollView style={styles.Main}>
+                <View style={styles.MainScroll}>
                 <ImageBackground style={styles.GrafismoHome} source={require('../../assets/VectorHome.png')}>
                     <Text style={styles.TituloHome}>
                         Sp Medical Group
@@ -43,8 +49,18 @@ export default class Home extends Component {
                         </TouchableOpacity>
                     </View>
                 </View>
+                <View style={styles.SectionHome}>
+                    <Text style={styles.TextoSectionHome}>Administre seu perfil pessoal dentro do nosso sistema e verifique a integridade dos dados fornecidos.</Text>
+                    <View style={styles.ElementosSectionHome}>
+                        <Image source={require('../../assets/Vector2.png')}></Image>
+                        <TouchableOpacity style={styles.BotaoSectionHome} onPress={this.RedirecionarPerfil}>
+                            <Text style={styles.TextoBotaoSectionHome}>Ir ao meu perfil</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
                 <View style={styles.Overlay}></View>
-            </View>
+                </View>
+            </ScrollView>
         )
     }
 }
@@ -53,7 +69,10 @@ const styles = StyleSheet.create({
     Main: {
         flex: 1,
         backgroundColor: '#FFF',
+    },
+    MainScroll: {
         alignItems: 'center',
+        width: '100%',
     },
     GrafismoHome: {
         width: '100%',
@@ -65,7 +84,8 @@ const styles = StyleSheet.create({
         color: '#FFF',
         fontSize: 40,
         width: 200,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: 'Questrial-Regular'
     },
     SectionHome: {
         width: 300,
@@ -81,7 +101,8 @@ const styles = StyleSheet.create({
     },
     TextoSectionHome: {
         width: 130,
-        fontSize: 14
+        fontSize: 14,
+        fontFamily: 'Questrial-Regular'
     },
     ElementosSectionHome: {
         height: '100%',
@@ -98,6 +119,7 @@ const styles = StyleSheet.create({
     },
     TextoBotaoSectionHome: {
         color: '#FFF',
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: 'Questrial-Regular'
     }
 })

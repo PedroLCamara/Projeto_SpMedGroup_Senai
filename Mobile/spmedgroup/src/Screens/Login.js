@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
     TituloLogin: {
         fontSize: 25,
         color: '#1D6153',
+        fontFamily: 'Questrial-Regular'
     },
     InputLogin: {
         width: 200,
@@ -112,6 +113,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         fontSize: 15,
         color: '#52615E',
+        fontFamily: 'Questrial-Regular'
     },
     LogoLogin: {
         width: 68,
@@ -127,7 +129,8 @@ const styles = StyleSheet.create({
     },
     TextoBotao: {
         color: "#FFF",
-        fontSize: 24
+        fontSize: 24,
+        fontFamily: 'Questrial-Regular'
     },
     MensagemErro: {
         color: '#FF0000',
