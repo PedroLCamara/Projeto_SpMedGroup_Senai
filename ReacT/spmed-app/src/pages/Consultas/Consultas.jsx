@@ -20,7 +20,7 @@ export default function Consultas() {
     const [DataHora, setDataHora] = useState('');
 
     function ListarTodas() {
-        axios('http://localhost:5000/api/Consultas', {
+        axios('http://192.168.6.108:5000/api/Consultas', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
@@ -42,7 +42,7 @@ export default function Consultas() {
     }
 
     function ListarPorUsuario() {
-        axios('http://localhost:5000/api/Consultas/ListarMinhas', {
+        axios('http://192.168.6.108:5000/api/Consultas/ListarMinhas', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
@@ -57,7 +57,7 @@ export default function Consultas() {
     }
 
     function ListarUsuarios() {
-        axios('http://localhost:5000/api/Pacientes', {
+        axios('http://192.168.6.108:5000/api/Pacientes', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
@@ -67,7 +67,7 @@ export default function Consultas() {
                 Navigate('/Login')
             });
 
-        axios('http://localhost:5000/api/Medicos', {
+        axios('http://192.168.6.108:5000/api/Medicos', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
@@ -79,7 +79,7 @@ export default function Consultas() {
     }
 
     function ListarSituacoes() {
-        axios('http://localhost:5000/api/Situacoes', {
+        axios('http://192.168.6.108:5000/api/Situacoes', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
@@ -101,7 +101,7 @@ export default function Consultas() {
         if (IdPaciente !== 0 && IdMedico !== 0) {
             setIsLoading(true);
             if (Descricao === '') {
-                axios.post('http://localhost:5000/api/Consultas', {
+                axios.post('http://192.168.6.108:5000/api/Consultas', {
                     "idPaciente": IdPaciente,
                     "idMedico": IdMedico,
                     "dataHorario": DataHora,
@@ -123,7 +123,7 @@ export default function Consultas() {
                 })
             }
             else {
-                axios.post('http://localhost:5000/api/Consultas', {
+                axios.post('http://192.168.6.108:5000/api/Consultas', {
                     "idPaciente": IdPaciente,
                     "idMedico": IdMedico,
                     "dataHorario": DataHora,
@@ -152,7 +152,7 @@ export default function Consultas() {
         Evento.preventDefault();
         setIsLoading(true);
 
-        axios.patch('http://localhost:5000/api/Consultas/Cancelar/' + idConsultaCancelada, null, {
+        axios.patch('http://192.168.6.108:5000/api/Consultas/Cancelar/' + idConsultaCancelada, null, {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
@@ -172,7 +172,7 @@ export default function Consultas() {
     function AlterarDescricao(Evento, IdConsulta) {
         Evento.preventDefault();
         setIsLoading(true);
-        axios.patch('http://localhost:5000/api/Consultas/AlterarDescricao/'+IdConsulta, {
+        axios.patch('http://192.168.6.108:5000/api/Consultas/AlterarDescricao/'+IdConsulta, {
             "descricao": DescricaoAtualizada
         }, {
             headers: {

@@ -5,6 +5,7 @@ import Footer from '../../Components/Footer/Footer.jsx';
 import Header from '../../Components/Header/Header.jsx';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { TokenConvertido, UsuarioAutenticado } from '../../Services/auth.js';
+import { Wrapper, Status } from "@googlemaps/react-wrapper";
 
 export default function Administracao() {
     document.title = 'SpMed - Administracao';
@@ -41,10 +42,12 @@ export default function Administracao() {
     // const [RazaoSocialClinica, setRazaoSocialClinica] = useState('');
     // const [AberturaClinica, setAberturaClinica] = useState('');
     // const [FechamentoClinica, setFechamentoClinica] = useState('');
+    const [LatitudeCadastro, setLatitudeCadastro] = useState('');
+    const [LongitudeCadastro, setLongitudeCadastro] = useState('');
 
     function PreencherListas() {
 
-        axios('http://localhost:5000/api/Usuarios', {
+        axios('http://192.168.6.108:5000/api/Usuarios', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
@@ -58,7 +61,7 @@ export default function Administracao() {
         });
 
 
-        axios('http://localhost:5000/api/Medicos', {
+        axios('http://192.168.6.108:5000/api/Medicos', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
@@ -72,7 +75,7 @@ export default function Administracao() {
         });
 
 
-        axios('http://localhost:5000/api/Pacientes', {
+        axios('http://192.168.6.108:5000/api/Pacientes', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
@@ -86,7 +89,7 @@ export default function Administracao() {
         });
 
 
-        axios('http://localhost:5000/api/Especialidades', {
+        axios('http://192.168.6.108:5000/api/Especialidades', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
@@ -100,7 +103,7 @@ export default function Administracao() {
         });
 
 
-        axios('http://localhost:5000/api/TiposUsuarios', {
+        axios('http://192.168.6.108:5000/api/TiposUsuarios', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
@@ -114,7 +117,7 @@ export default function Administracao() {
         });
 
 
-        axios('http://localhost:5000/api/Clinicas', {
+        axios('http://192.168.6.108:5000/api/Clinicas', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
@@ -126,7 +129,6 @@ export default function Administracao() {
             localStorage.removeItem('usuario-login');
             Navigate('/Login')
         });
-
     }
 
     function PreencherLista(Evento, Lista) {
@@ -156,7 +158,7 @@ export default function Administracao() {
 
     function DeletarUsuario(Evento, Id) {
         Evento.preventDefault();
-        axios.delete('http://localhost:5000/api/Usuarios/'+Id, {
+        axios.delete('http://192.168.6.108:5000/api/Usuarios/' + Id, {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
@@ -167,7 +169,7 @@ export default function Administracao() {
                     window.location.reload();
                 }, 2000);
             }
-        }).catch( (erro) => {
+        }).catch((erro) => {
             localStorage.removeItem('usuario-login');
             Navigate('/Login')
         })
@@ -175,7 +177,7 @@ export default function Administracao() {
 
     function DeletarMedico(Evento, Id) {
         Evento.preventDefault();
-        axios.delete('http://localhost:5000/api/Medicos/'+Id, {
+        axios.delete('http://192.168.6.108:5000/api/Medicos/' + Id, {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
@@ -186,7 +188,7 @@ export default function Administracao() {
                     window.location.reload();
                 }, 2000);
             }
-        }).catch( (erro) => {
+        }).catch((erro) => {
             localStorage.removeItem('usuario-login');
             Navigate('/Login')
         })
@@ -194,7 +196,7 @@ export default function Administracao() {
 
     function DeletarPaciente(Evento, Id) {
         Evento.preventDefault();
-        axios.delete('http://localhost:5000/api/Pacientes/'+Id, {
+        axios.delete('http://192.168.6.108:5000/api/Pacientes/' + Id, {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
@@ -205,7 +207,7 @@ export default function Administracao() {
                     window.location.reload();
                 }, 2000);
             }
-        }).catch( (erro) => {
+        }).catch((erro) => {
             localStorage.removeItem('usuario-login');
             Navigate('/Login')
         })
@@ -213,7 +215,7 @@ export default function Administracao() {
 
     function DeletarEspecialidade(Evento, Id) {
         Evento.preventDefault();
-        axios.delete('http://localhost:5000/api/Especialidades/'+Id, {
+        axios.delete('http://192.168.6.108:5000/api/Especialidades/' + Id, {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
@@ -224,7 +226,7 @@ export default function Administracao() {
                     window.location.reload();
                 }, 2000);
             }
-        }).catch( (erro) => {
+        }).catch((erro) => {
             localStorage.removeItem('usuario-login');
             Navigate('/Login')
         })
@@ -233,7 +235,7 @@ export default function Administracao() {
     function DeletarClinica(Evento, Id) {
         Evento.preventDefault();
         if (Id !== 0) {
-            axios.delete('http://localhost:5000/api/Clinicas/'+Id, {
+            axios.delete('http://192.168.6.108:5000/api/Clinicas/' + Id, {
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
                 },
@@ -244,7 +246,7 @@ export default function Administracao() {
                         window.location.reload();
                     }, 2000);
                 }
-            }).catch( (erro) => {
+            }).catch((erro) => {
                 localStorage.removeItem('usuario-login');
                 Navigate('/Login')
             })
@@ -254,7 +256,7 @@ export default function Administracao() {
 
     function CadastrarEspecialidade(Evento) {
         Evento.preventDefault();
-        axios.post('http://localhost:5000/api/Especialidades', {
+        axios.post('http://192.168.6.108:5000/api/Especialidades', {
             "nome": NomeEspecialidadeCadastro
         }, {
             headers: {
@@ -268,15 +270,42 @@ export default function Administracao() {
                     window.location.reload();
                 }, 2000);
             }
-        }).catch( (erro) => {
+        }).catch((erro) => {
             if (erro.toJSON().status == 400) {
                 window.alert('O nome da especialidade possivelmente já está em uso, utilize outros valores nesses campos. Se o erro persistir, busque ajuda do suporte e/ou tente novamente mais tarde.')
             }
-            else{
+            else {
                 localStorage.removeItem('usuario-login');
                 Navigate('/Login')
             }
         })
+    }
+
+    function CadastrarLocalizacao(Evento) {
+        Evento.preventDefault();
+        if (LongitudeCadastro !== null && LatitudeCadastro !== null) {
+            axios.post('http://192.168.6.108:5000/api/Especialidades', {
+                latitude: LatitudeCadastro,
+                longitude: LongitudeCadastro
+            }, {
+                headers: {
+                    Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
+                },
+            }).then((resposta) => {
+
+            }).catch((erro) => {
+                if (erro.toJSON().status == 400) {
+                    window.alert('Verifique a latitude e a longitude fornecidas');
+                }
+                else {
+                    localStorage.removeItem('usuario-login');
+                    Navigate('/Login')
+                }
+            })
+        }
+        else {
+            window.alert('Forneça uma longitude e uma latitude válidas!!!!!!!!!!!!!!!!!!!!!!!')
+        }
     }
 
     useEffect(PreencherListas, []);
@@ -311,7 +340,7 @@ export default function Administracao() {
                                                         <td>{Usuario.email}</td>
                                                         <td>{ListaTipoUsu.find((TpU) => TpU.idTipoUsuario === Usuario.idTipoUsuario).tituloTipoUsuario}</td>
                                                         <td>{Usuario.dataDeNascimento}</td>
-                                                        <td><button onClick={(Evento) => {DeletarUsuario(Evento, Usuario.idUsuario)}}><i class="fas fa-trash"></i></button></td>
+                                                        <td><button onClick={(Evento) => { DeletarUsuario(Evento, Usuario.idUsuario) }}><i class="fas fa-trash"></i></button></td>
                                                     </tr>
                                                 )
                                             })
@@ -536,7 +565,7 @@ export default function Administracao() {
                                 <button onClick={(Evento) => CadastrarEspecialidade(Evento)}>Cadastrar</button>
                                 <div class="CampoCadastro">
                                     <label>Nome</label>
-                                    <input type="text" maxLength="70" value={NomeEspecialidadeCadastro} onChange={(inputNomeEspecialidadeCadastro) => setNomeEspecialidadeCadastro(inputNomeEspecialidadeCadastro.target.value)}/>
+                                    <input type="text" maxLength="70" value={NomeEspecialidadeCadastro} onChange={(inputNomeEspecialidadeCadastro) => setNomeEspecialidadeCadastro(inputNomeEspecialidadeCadastro.target.value)} />
                                 </div>
                             </div>
                         </div>
@@ -550,8 +579,8 @@ export default function Administracao() {
                                     <optgroup>
                                         <option value="0">Selecione uma clínica válida</option>
                                         {
-                                            ListaClinica.map( (Clinica) => {
-                                                return(
+                                            ListaClinica.map((Clinica) => {
+                                                return (
                                                     <option value={Clinica.idClinica}>{Clinica.razaoSocial}</option>
                                                 )
                                             })
@@ -599,6 +628,27 @@ export default function Administracao() {
                                     </div>
                                 </form>
                             </div> */}
+                        </div>
+                    </div>
+                    <div class="BoxAdminPadrao BoxAdmin">
+                        <div class="ContainerBoxAdminPadrao ContainerGrid">
+                            <h1>Mapeamento pacientes</h1>
+                            <div class="CadastrarAdmin">
+                                <button onClick={(Evento) => CadastrarLocalizacao(Evento)}>Cadastrar</button>
+                                <div class="CampoCadastro">
+                                    <label>Latitude</label>
+                                    <input type="number" value={LatitudeCadastro} onChange={(LatInput) => setLatitudeCadastro(LatInput.target.value)} />
+                                </div>
+                                <div class="CampoCadastro">
+                                    <label>Longitude</label>
+                                    <input type="number" value={LongitudeCadastro} onChange={(LongInput) => setLongitudeCadastro(LongInput.target.value)} />
+                                </div>
+                            </div>
+                            <div className="ListaMapas">
+                                <Wrapper apiKey={"AIzaSyD2iqvlmpETB-L0AYbikStCEEBj9zhHU5A"}>
+                                    <MyMapComponent />
+                                </Wrapper>
+                            </div>
                         </div>
                     </div>
                 </section>

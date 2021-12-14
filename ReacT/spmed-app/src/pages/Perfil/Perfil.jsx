@@ -50,7 +50,7 @@ export default function Perfil() {
     function AlterarImagem(Img) {
         const DadosFormulario = new FormData();
         DadosFormulario.append('img', Img);
-        axios.post('http://localhost:5000/api/Perfis', DadosFormulario, {
+        axios.post('http://192.168.6.108:5000/api/Perfis', DadosFormulario, {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
@@ -80,7 +80,7 @@ export default function Perfil() {
     }
 
     function BuscarDados() {
-        axios('http://localhost:5000/api/Usuarios/' + TokenConvertido().jti,
+        axios('http://192.168.6.108:5000/api/Usuarios/' + TokenConvertido().jti,
             {
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
