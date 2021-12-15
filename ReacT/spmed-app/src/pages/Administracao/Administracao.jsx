@@ -294,8 +294,8 @@ export default function Administracao() {
         })
     }
 
-    function GeocodificarEndereco(Endereco) {
-        axios('https://geocode.search.hereapi.com/v1/geocode' + "?q=" + Endereco, {
+    const GeocodificarEndereco = async (Endereco) => {
+        await axios('https://geocode.search.hereapi.com/v1/geocode' + "?q=" + Endereco, {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('token-geocode'),
             },
