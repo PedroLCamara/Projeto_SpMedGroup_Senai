@@ -2,16 +2,20 @@ import { useState, useEffect, useRef } from "react";
 import axios from 'axios';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import GoogleMapReact from 'google-map-react';
+import Marker from '../../assets_/Marker.png';
+import '../../Css/Mapa.css';
 
-const AnyReactComponent = () => <div><h1>Teste yayyy</h1></div>;
+const Marcador = () => <img className="ImgMarker" src={Marker}></img>;
 
 export default function Mapa() {
     const [ListaLocalizacoes, setListaLocalizacoes] = useState([]);
     const Center = {
-        lat: -21.292246,
-        lng: -50.342843
+        lat: -23.555771,
+        lng: -46.639557
     }
+    // -23.555771,-46.639557
     const Zoom = 11;
+    let Navigate = useNavigate();
 
     function PreencherLista() {
         axios('http://192.168.6.108:5000/api/Localizacoes', {
@@ -29,11 +33,11 @@ export default function Mapa() {
     }
 
     useEffect(async () => {
-        PreencherLista();
+        await PreencherLista();
     });
 
     return (
-        <div style={{ height: '400px', width: '100%' }}>
+        <div className="DivMapa" class="DivMapa">
             <GoogleMapReact
                 bootstrapURLKeys={{ key: 'AIzaSyD2iqvlmpETB-L0AYbikStCEEBj9zhHU5A' }}
                 defaultCenter={Center}
@@ -41,10 +45,12 @@ export default function Mapa() {
             >
                 {
                     ListaLocalizacoes.map((Localizacao) => {
-                        <AnyReactComponent
-                            lat={Localizacao.latitude}
-                            lng={Localizacao.Longitude}
-                        />
+                        return (
+                            <Marcador
+                                lat={Localizacao.latitude}
+                                lng={Localizacao.longitude}
+                            />
+                        )
                     })
                 }
             </GoogleMapReact>

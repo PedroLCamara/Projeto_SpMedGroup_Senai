@@ -20,5 +20,9 @@ namespace SpMedGroup.webAPI.Domains
         [BsonElement("longitude")]
         [BsonRequired]
         public string Longitude { get; set; }
+
+        [BsonElement("endereco")]
+        [BsonRequired]
+        public string Endereco { get; set; }
     }
 }

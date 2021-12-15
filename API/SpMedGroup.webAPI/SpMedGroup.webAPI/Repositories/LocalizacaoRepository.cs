@@ -26,7 +26,7 @@ namespace SpMedGroup.webAPI.Repositories
 
         public List<Localizacao> Listar()
         {
-            return _Localizacoes.Find(L => L != null).ToList();
+            return _Localizacoes.Find(L => true).ToList();
         }
     }
 }

@@ -42,8 +42,8 @@ export default function Administracao() {
     // const [RazaoSocialClinica, setRazaoSocialClinica] = useState('');
     // const [AberturaClinica, setAberturaClinica] = useState('');
     // const [FechamentoClinica, setFechamentoClinica] = useState('');
-    const [LatitudeCadastro, setLatitudeCadastro] = useState('');
-    const [LongitudeCadastro, setLongitudeCadastro] = useState('');
+    const [ListaLocalizacoes, setListaLocalizacoes] = useState([]);
+    const [LocalizacaoCadastro, setLocalizacaoCadastro] = useState({});
 
     function PreencherListas() {
 
@@ -124,6 +124,19 @@ export default function Administracao() {
         }).then((resposta) => {
             if (resposta.status === 200) {
                 setListaClinica(resposta.data);
+            }
+        }).catch((erro) => {
+            localStorage.removeItem('usuario-login');
+            Navigate('/Login')
+        });
+
+        axios('http://192.168.6.108:5000/api/Localizacoes', {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
+            },
+        }).then((resposta) => {
+            if (resposta.status === 200) {
+                setListaLocalizacoes(resposta.data);
             }
         }).catch((erro) => {
             localStorage.removeItem('usuario-login');
@@ -281,34 +294,88 @@ export default function Administracao() {
         })
     }
 
-    function CadastrarLocalizacao(Evento) {
-        Evento.preventDefault();
-        if (LongitudeCadastro !== null && LatitudeCadastro !== null) {
-            axios.post('http://192.168.6.108:5000/api/Especialidades', {
-                latitude: LatitudeCadastro,
-                longitude: LongitudeCadastro
-            }, {
-                headers: {
-                    Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
-                },
-            }).then((resposta) => {
-
-            }).catch((erro) => {
-                if (erro.toJSON().status == 400) {
-                    window.alert('Verifique a latitude e a longitude fornecidas');
-                }
-                else {
-                    localStorage.removeItem('usuario-login');
-                    Navigate('/Login')
-                }
-            })
-        }
-        else {
-            window.alert('Forneça uma longitude e uma latitude válidas!!!!!!!!!!!!!!!!!!!!!!!')
-        }
+    function GeocodificarEndereco(Endereco) {
+        axios('https://geocode.search.hereapi.com/v1/geocode' + "?q=" + Endereco, {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('token-geocode'),
+            },
+        }).then((resposta) => {
+            console.log(resposta.data.items[0].position);
+            setLocalizacaoCadastro(resposta.data.items[0].position);
+        }).catch((erro) => {
+            console.log(erro);
+        })
     }
 
-    useEffect(PreencherListas, []);
+    const DefinirMarcadores = async (Endereco) => {
+        await GeocodificarEndereco(Endereco);
+        console.log(LocalizacaoCadastro);
+        // axios.post('http://192.168.6.108:5000/api/Localizacoes', {
+        //     latitude: LocalizacaoCadastro.lat,
+        //     longitude: LocalizacaoCadastro.lng,
+        //     endereco: Endereco
+        // }, {
+        //     headers: {
+        //         Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
+        //     },
+        // }).then((resposta) => {
+        //     if (resposta.status === 201) {
+        //         console.log('GGWP');
+        //     }
+        // }).catch((erro) => {
+        //     if (erro.toJSON().status == 400) {
+        //         window.alert('Erro de formatação no momento de cadastro, alguns endereços podem não ser mapeados')
+        //     }
+        //     else {
+        //         localStorage.removeItem('usuario-login');
+        //         Navigate('/Login')
+        //     }
+        // })
+        // ListaPaciente.forEach((Paciente) => {
+        //     if (ListaLocalizacoes.find((Localizacao) =>
+        //         Localizacao.endereco == Paciente.endereco
+        //     ) === undefined) {
+        //         let EnderecoGeocodificado = GeocodificarEndereco(Paciente.endereco);
+        //         console.log(EnderecoGeocodificado);
+        //         //   axios.post('http://192.168.6.108:5000/api/Localizacoes', {
+        //         //     latitude : GeocodificarEndereco(Paciente.endereco).lat
+        //         //   })  
+        //     }
+        // });   
+        // // ListaPaciente.map((Paciente) => {
+        // //     if (ListaLocalizacoes.find((Localizacao) =>
+        // //         Localizacao.endereco == Paciente.endereco
+        // //     ) === undefined) {
+        // //         let EnderecoGeocodificado = GeocodificarEndereco(Paciente.endereco);
+        // //         console.log(EnderecoGeocodificado);
+        // //         //   axios.post('http://192.168.6.108:5000/api/Localizacoes', {
+        // //         //     latitude : GeocodificarEndereco(Paciente.endereco).lat
+        // //         //   })  
+        // //     }
+
+        //     // return(
+        //     //     ListaLocalizacoes.find((Localizacao) => Localizacao.endereco == Paciente.endereco) === undefined && (
+        //     //         GeocodificarEndereco(Paciente.endereco),
+        //     //         console.log(LocalizacaoCadastro)
+        //     //     )
+        //     // )
+        // // })
+    }
+
+    useEffect(async () => {
+        await PreencherListas();
+        ListaPaciente.forEach((Paciente) => {
+            console.log(ListaLocalizacoes.find((Localizacao) =>
+            Localizacao.endereco == Paciente.endereco
+        ))
+            if (ListaLocalizacoes.find((Localizacao) =>
+                Localizacao.endereco == Paciente.endereco
+            ) === undefined) {
+                DefinirMarcadores(Paciente.endereco);
+            }
+        }
+        )
+    }, []);
 
     return (
         <div>
@@ -633,17 +700,6 @@ export default function Administracao() {
                     <div class="BoxAdminPadrao BoxAdmin">
                         <div class="ContainerBoxAdminPadrao ContainerGrid">
                             <h1>Mapeamento pacientes</h1>
-                            <div class="CadastrarAdmin">
-                                <button onClick={(Evento) => CadastrarLocalizacao(Evento)}>Cadastrar</button>
-                                <div class="CampoCadastro">
-                                    <label>Latitude</label>
-                                    <input type="number" value={LatitudeCadastro} onChange={(LatInput) => setLatitudeCadastro(LatInput.target.value)} />
-                                </div>
-                                <div class="CampoCadastro">
-                                    <label>Longitude</label>
-                                    <input type="number" value={LongitudeCadastro} onChange={(LongInput) => setLongitudeCadastro(LongInput.target.value)} />
-                                </div>
-                            </div>
                             <div className="ListaMapas">
                                 <Mapa></Mapa>
                             </div>
