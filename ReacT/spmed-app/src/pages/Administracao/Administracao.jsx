@@ -5,7 +5,7 @@ import Footer from '../../Components/Footer/Footer.jsx';
 import Header from '../../Components/Header/Header.jsx';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { TokenConvertido, UsuarioAutenticado } from '../../Services/auth.js';
-import { Wrapper, Status } from "@googlemaps/react-wrapper";
+import Mapa from "../../Components/Mapa/Mapa";
 
 export default function Administracao() {
     document.title = 'SpMed - Administracao';
@@ -645,9 +645,7 @@ export default function Administracao() {
                                 </div>
                             </div>
                             <div className="ListaMapas">
-                                <Wrapper apiKey={"AIzaSyD2iqvlmpETB-L0AYbikStCEEBj9zhHU5A"}>
-                                    <MyMapComponent />
-                                </Wrapper>
+                                <Mapa></Mapa>
                             </div>
                         </div>
                     </div>
