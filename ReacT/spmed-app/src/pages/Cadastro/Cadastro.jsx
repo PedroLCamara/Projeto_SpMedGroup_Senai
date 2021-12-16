@@ -32,7 +32,7 @@ export default function Cadaastro() {
     const [IsLoading, setIsLoading] = useState(false);
 
     function PreencherListas() {
-        axios('http://192.168.6.108:5000/api/Usuarios', {
+        axios('http://192.168.15.80:5000/api/Usuarios', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
@@ -44,7 +44,7 @@ export default function Cadaastro() {
                 Navigate('/Login')
             });
 
-        axios('http://192.168.6.108:5000/api/TiposUsuarios', {
+        axios('http://192.168.15.80:5000/api/TiposUsuarios', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
@@ -56,7 +56,7 @@ export default function Cadaastro() {
             Navigate('/Login')
         });
 
-        axios('http://192.168.6.108:5000/api/Clinicas')
+        axios('http://192.168.15.80:5000/api/Clinicas')
             .then((resposta) => {
                 setListaClinica(resposta.data);
             })
@@ -65,7 +65,7 @@ export default function Cadaastro() {
                 Navigate('/Login')
             });
 
-        axios('http://192.168.6.108:5000/api/Especialidades', {
+        axios('http://192.168.15.80:5000/api/Especialidades', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
@@ -75,7 +75,7 @@ export default function Cadaastro() {
             Navigate('/Login')
         });
 
-        axios('http://192.168.6.108:5000/api/Pacientes', {
+        axios('http://192.168.15.80:5000/api/Pacientes', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
@@ -85,7 +85,7 @@ export default function Cadaastro() {
             Navigate('/Login')
         });
 
-        axios('http://192.168.6.108:5000/api/Medicos', {
+        axios('http://192.168.15.80:5000/api/Medicos', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
@@ -108,7 +108,7 @@ export default function Cadaastro() {
             window.alert('Selecione uma data de nascimento válida!!!')
         }
         else {
-            axios.post('http://192.168.6.108:5000/api/Usuarios', {
+            axios.post('http://192.168.15.80:5000/api/Usuarios', {
                 "email": Email,
                 "senha": Senha,
                 "idTipoUsuario": IdTipoUsuario,
@@ -145,7 +145,7 @@ export default function Cadaastro() {
             window.alert('especifique o usuário!!!')
         }
         else {
-            axios.post('http://192.168.6.108:5000/api/Pacientes', {
+            axios.post('http://192.168.15.80:5000/api/Pacientes', {
                 "idUsuario": IdUsuarioPac,
                 "telefone": Telefone,
                 "cpf": Cpf,
@@ -182,7 +182,7 @@ export default function Cadaastro() {
             window.alert('Especifique o usuário, a clínica e a especialidade!!!')
         }
         else {
-            axios.post('http://192.168.6.108:5000/api/Medicos', {
+            axios.post('http://192.168.15.80:5000/api/Medicos', {
                 "idUsuario": IdUsuarioMed,
                 "idClinica": IdClinica,
                 "idEspecialidade": IdEspecialidade,

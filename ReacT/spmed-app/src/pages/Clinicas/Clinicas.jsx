@@ -18,7 +18,7 @@ export default function Clinicas() {
     const [IsLoading, setIsLoading] = useState(false);
 
     function BuscarClinicas() {
-        axios('http://192.168.6.108:5000/api/Clinicas')
+        axios('http://192.168.15.80:5000/api/Clinicas')
             .then((resposta) => {
                 if (resposta.status === 200) {
                     setListaClinica(resposta.data);
@@ -34,7 +34,7 @@ export default function Clinicas() {
         Evento.preventDefault();
         setIsLoading(true);
 
-        axios.post('http://192.168.6.108:5000/api/Clinicas', {
+        axios.post('http://192.168.15.80:5000/api/Clinicas', {
             "horarioDeAbertura": Abertura,
             "horarioDeFechamento": Fechamento,
             "endereco": Endereco,

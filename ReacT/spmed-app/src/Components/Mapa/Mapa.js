@@ -18,7 +18,7 @@ export default function Mapa() {
     let Navigate = useNavigate();
 
     function PreencherLista() {
-        axios('http://192.168.6.108:5000/api/Localizacoes', {
+        axios('http://192.168.15.80:5000/api/Localizacoes', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
