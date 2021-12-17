@@ -47,7 +47,7 @@ export default function Administracao() {
 
     function PreencherListas() {
 
-        axios('http://192.168.15.80:5000/api/Usuarios', {
+        axios('http://192.168.6.108:5000/api/Usuarios', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
@@ -61,7 +61,7 @@ export default function Administracao() {
         });
 
 
-        axios('http://192.168.15.80:5000/api/Medicos', {
+        axios('http://192.168.6.108:5000/api/Medicos', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
@@ -75,7 +75,7 @@ export default function Administracao() {
         });
 
 
-        axios('http://192.168.15.80:5000/api/Pacientes', {
+        axios('http://192.168.6.108:5000/api/Pacientes', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
@@ -89,7 +89,7 @@ export default function Administracao() {
         });
 
 
-        axios('http://192.168.15.80:5000/api/Especialidades', {
+        axios('http://192.168.6.108:5000/api/Especialidades', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
@@ -103,7 +103,7 @@ export default function Administracao() {
         });
 
 
-        axios('http://192.168.15.80:5000/api/TiposUsuarios', {
+        axios('http://192.168.6.108:5000/api/TiposUsuarios', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
@@ -117,7 +117,7 @@ export default function Administracao() {
         });
 
 
-        axios('http://192.168.15.80:5000/api/Clinicas', {
+        axios('http://192.168.6.108:5000/api/Clinicas', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
@@ -130,7 +130,7 @@ export default function Administracao() {
             Navigate('/Login')
         });
 
-        axios('http://192.168.15.80:5000/api/Localizacoes', {
+        axios('http://192.168.6.108:5000/api/Localizacoes', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
@@ -171,7 +171,7 @@ export default function Administracao() {
 
     function DeletarUsuario(Evento, Id) {
         Evento.preventDefault();
-        axios.delete('http://192.168.15.80:5000/api/Usuarios/' + Id, {
+        axios.delete('http://192.168.6.108:5000/api/Usuarios/' + Id, {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
@@ -190,7 +190,7 @@ export default function Administracao() {
 
     function DeletarMedico(Evento, Id) {
         Evento.preventDefault();
-        axios.delete('http://192.168.15.80:5000/api/Medicos/' + Id, {
+        axios.delete('http://192.168.6.108:5000/api/Medicos/' + Id, {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
@@ -209,7 +209,7 @@ export default function Administracao() {
 
     function DeletarPaciente(Evento, Id) {
         Evento.preventDefault();
-        axios.delete('http://192.168.15.80:5000/api/Pacientes/' + Id, {
+        axios.delete('http://192.168.6.108:5000/api/Pacientes/' + Id, {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
@@ -228,7 +228,7 @@ export default function Administracao() {
 
     function DeletarEspecialidade(Evento, Id) {
         Evento.preventDefault();
-        axios.delete('http://192.168.15.80:5000/api/Especialidades/' + Id, {
+        axios.delete('http://192.168.6.108:5000/api/Especialidades/' + Id, {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
@@ -248,7 +248,7 @@ export default function Administracao() {
     function DeletarClinica(Evento, Id) {
         Evento.preventDefault();
         if (Id !== 0) {
-            axios.delete('http://192.168.15.80:5000/api/Clinicas/' + Id, {
+            axios.delete('http://192.168.6.108:5000/api/Clinicas/' + Id, {
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
                 },
@@ -269,7 +269,7 @@ export default function Administracao() {
 
     function CadastrarEspecialidade(Evento) {
         Evento.preventDefault();
-        axios.post('http://192.168.15.80:5000/api/Especialidades', {
+        axios.post('http://192.168.6.108:5000/api/Especialidades', {
             "nome": NomeEspecialidadeCadastro
         }, {
             headers: {
@@ -311,14 +311,14 @@ export default function Administracao() {
 
     const DefinirMarcadores = async (Evento) => {
         Evento.preventDefault()
-        for(const Paciente of ListaPaciente) {
+        for (const Paciente of ListaPaciente) {
             if (ListaLocalizacoes.find((Localizacao) =>
                 Localizacao.endereco == Paciente.endereco
             ) === undefined) {
-                
+
                 let EnderecoGeocodificado = await GeocodificarEndereco(Paciente.endereco);
                 console.log(EnderecoGeocodificado);
-                await axios.post('http://192.168.15.80:5000/api/Localizacoes', {
+                await axios.post('http://192.168.6.108:5000/api/Localizacoes', {
                     latitude: EnderecoGeocodificado.lat,
                     longitude: EnderecoGeocodificado.lng,
                     endereco: Paciente.endereco
@@ -339,15 +339,16 @@ export default function Administracao() {
                         Navigate('/Login')
                     }
                 })
+            }
         }
-        }
+        PreencherListas();
         // ListaPaciente.forEach((Paciente) => {
         //     if (ListaLocalizacoes.find((Localizacao) =>
         //         Localizacao.endereco == Paciente.endereco
         //     ) === undefined) {
         //         let EnderecoGeocodificado = GeocodificarEndereco(Paciente.endereco);
         //         console.log(EnderecoGeocodificado);
-        //         //   axios.post('http://192.168.15.80:5000/api/Localizacoes', {
+        //         //   axios.post('http://192.168.6.108:5000/api/Localizacoes', {
         //         //     latitude : GeocodificarEndereco(Paciente.endereco).lat
         //         //   })  
         //     }
@@ -358,7 +359,7 @@ export default function Administracao() {
         // //     ) === undefined) {
         // //         let EnderecoGeocodificado = GeocodificarEndereco(Paciente.endereco);
         // //         console.log(EnderecoGeocodificado);
-        // //         //   axios.post('http://192.168.15.80:5000/api/Localizacoes', {
+        // //         //   axios.post('http://192.168.6.108:5000/api/Localizacoes', {
         // //         //     latitude : GeocodificarEndereco(Paciente.endereco).lat
         // //         //   })  
         // //     }

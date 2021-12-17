@@ -22,7 +22,7 @@ export default function Login() {
             senha: Senha
         }
 
-        axios.post('http://192.168.15.80:5000/api/Login', DadosLogin).then( (resposta) => {
+        axios.post('http://192.168.6.108:5000/api/Login', DadosLogin).then( (resposta) => {
             if (resposta.status == 200) {
                 localStorage.setItem('usuario-login', resposta.data.tokenRetorno);
                 setIsLoading(false);

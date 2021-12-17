@@ -8,7 +8,7 @@ export default function ImagemPerfil() {
     let Navigate = useNavigate();
 
     function BuscarImg() {
-        axios('http://192.168.15.80:5000/api/Perfis', {
+        axios('http://192.168.6.108:5000/api/Perfis', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
