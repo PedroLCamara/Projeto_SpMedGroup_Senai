@@ -20,11 +20,13 @@ export default function Consultas() {
     const [DataHora, setDataHora] = useState('');
 
     function ListarTodas() {
-        axios('https://6205531a161670001741b8fb.mockapi.io/Consulta', {
-            headers: {
-                Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
-            },
-        }).then((resposta) => {
+        axios('https://6205531a161670001741b8fb.mockapi.io/Consulta'
+        // , {
+        //     headers: {
+        //         Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
+        //     },
+        // }
+        ).then((resposta) => {
             if (resposta.status === 200) {
                 setListaConsulta(resposta.data);
             }
@@ -57,24 +59,28 @@ export default function Consultas() {
     // }
 
     function ListarUsuarios() {
-        axios('https://6205531a161670001741b8fb.mockapi.io/Paciente', {
-            headers: {
-                Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
-            },
-        }).then((resposta) => setListaPaciente(resposta.data))
+        axios('https://6205531a161670001741b8fb.mockapi.io/Paciente'
+        // , {
+        //     headers: {
+        //         Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
+        //     },
+        // }
+        ).then((resposta) => setListaPaciente(resposta.data))
             .catch((erro) => {
-                localStorage.removeItem('usuario-login');
-                Navigate('/Login')
+                console.log(erro);
+                // Navigate('/Login')
             });
 
-        axios('https://6205531a161670001741b8fb.mockapi.io/Medico', {
-            headers: {
-                Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
-            },
-        }).then((resposta) => setListaMedico(resposta.data))
+        axios('https://6205531a161670001741b8fb.mockapi.io/Medico'
+        // , {
+        //     headers: {
+        //         Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
+        //     },
+        // }
+        ).then((resposta) => setListaMedico(resposta.data))
             .catch((erro) => {
-                localStorage.removeItem('usuario-login');
-                Navigate('/Login')
+                console.log(erro);
+                // Navigate('/Login')
             });
     }
 
@@ -106,19 +112,21 @@ export default function Consultas() {
                     "idMedico": IdMedico,
                     "dataHorario": DataHora,
                     "descricao": 'Não especificada',
-                }, {
-                    headers: {
-                        Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
-                    },
-                }).then((resposta) => {
+                }
+                // , {
+                //     headers: {
+                //         Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
+                //     },
+                // }
+                ).then((resposta) => {
                     if (resposta.status === 201) {
                         ListarTodas();
                         setIsLoading(false);
                         window.alert('Consulta agendada!')
                     }
                 }).catch((erro) => {
-                    localStorage.removeItem('usuario-login');
-                    Navigate('/Login')
+                    console.log(erro)
+                    // Navigate('/Login')
                     setIsLoading(false);
                 })
             }
@@ -128,19 +136,21 @@ export default function Consultas() {
                     "idMedico": IdMedico,
                     "dataHorario": DataHora,
                     "descricao": Descricao,
-                }, {
-                    headers: {
-                        Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
-                    },
-                }).then((resposta) => {
+                }
+                // , {
+                //     headers: {
+                //         Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
+                //     },
+                // }
+                ).then((resposta) => {
                     if (resposta.status === 201) {
                         ListarTodas();
                         setIsLoading(false);
                         window.alert('Consulta agendada!')
                     }
                 }).catch((erro) => {
-                    localStorage.removeItem('usuario-login');
-                    Navigate('/Login')
+                    console.log(erro)
+                    // Navigate('/Login')
                     setIsLoading(false);
                 })
             }
