@@ -20,7 +20,7 @@ export default function Consultas() {
     const [DataHora, setDataHora] = useState('');
 
     function ListarTodas() {
-        axios('http://192.168.6.108:5000/api/Consultas', {
+        axios('https://6205531a161670001741b8fb.mockapi.io/Consulta', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
@@ -30,34 +30,34 @@ export default function Consultas() {
             }
         }).catch((erro) => {
             console.log(erro);
-            var ErroJson = erro.toJSON();
-            if (ErroJson.status === 400) {
+            // var ErroJson = erro.toJSON();
+            // if (ErroJson.status === 400) {
                 window.alert('Erro no servidor, reinicie a página. Se o erro persistir, busque ajuda do suporte e/ou tente novamente mais tarde.')
-            }
-            else{
-                localStorage.removeItem('usuario-login');
-                Navigate('/Login')
-            }
+            // }
+            // else{
+            //     localStorage.removeItem('usuario-login');
+            //     // Navigate('/Login')
+            // }
         })
     }
 
-    function ListarPorUsuario() {
-        axios('http://192.168.6.108:5000/api/Consultas/ListarMinhas', {
-            headers: {
-                Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
-            },
-        }).then((resposta) => {
-            if (resposta.status === 200) {
-                setListaConsulta(resposta.data);
-            }
-        }).catch((erro) => {
-            localStorage.removeItem('usuario-login');
-            Navigate('/Login')
-        })
-    }
+    // function ListarPorUsuario() {
+    //     axios('http://192.168.6.108:5000/api/Consultas/ListarMinhas', {
+    //         headers: {
+    //             Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
+    //         },
+    //     }).then((resposta) => {
+    //         if (resposta.status === 200) {
+    //             setListaConsulta(resposta.data);
+    //         }
+    //     }).catch((erro) => {
+    //         localStorage.removeItem('usuario-login');
+    //         Navigate('/Login')
+    //     })
+    // }
 
     function ListarUsuarios() {
-        axios('http://192.168.6.108:5000/api/Pacientes', {
+        axios('https://6205531a161670001741b8fb.mockapi.io/Paciente', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
@@ -67,7 +67,7 @@ export default function Consultas() {
                 Navigate('/Login')
             });
 
-        axios('http://192.168.6.108:5000/api/Medicos', {
+        axios('https://6205531a161670001741b8fb.mockapi.io/Medico', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
@@ -78,30 +78,30 @@ export default function Consultas() {
             });
     }
 
-    function ListarSituacoes() {
-        axios('http://192.168.6.108:5000/api/Situacoes', {
-            headers: {
-                Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
-            },
-        }).then((resposta) => {
-            if (resposta.status === 200) {
-                setListaSituacao(resposta.data)
-            }
-        })
-            .catch((erro) => {
-                {
-                    localStorage.removeItem('usuario-login');
-                    Navigate('/Login')
-                };
-            })
-    }
+    // function ListarSituacoes() {
+    //     axios('http://192.168.6.108:5000/api/Situacoes', {
+    //         headers: {
+    //             Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
+    //         },
+    //     }).then((resposta) => {
+    //         if (resposta.status === 200) {
+    //             setListaSituacao(resposta.data)
+    //         }
+    //     })
+    //         .catch((erro) => {
+    //             {
+    //                 localStorage.removeItem('usuario-login');
+    //                 Navigate('/Login')
+    //             };
+    //         })
+    // }
 
     function AgendarConsulta(Evento) {
         Evento.preventDefault();
         if (IdPaciente !== 0 && IdMedico !== 0) {
             setIsLoading(true);
             if (Descricao === '') {
-                axios.post('http://192.168.6.108:5000/api/Consultas', {
+                axios.post('https://6205531a161670001741b8fb.mockapi.io/Consulta', {
                     "idPaciente": IdPaciente,
                     "idMedico": IdMedico,
                     "dataHorario": DataHora,
@@ -123,7 +123,7 @@ export default function Consultas() {
                 })
             }
             else {
-                axios.post('http://192.168.6.108:5000/api/Consultas', {
+                axios.post('https://6205531a161670001741b8fb.mockapi.io/Consulta', {
                     "idPaciente": IdPaciente,
                     "idMedico": IdMedico,
                     "dataHorario": DataHora,
@@ -148,62 +148,54 @@ export default function Consultas() {
         else window.alert("É necessário selecionar um médico e um paciente válidos");
     }
 
-    function CancelarConsulta(Evento, idConsultaCancelada) {
-        Evento.preventDefault();
-        setIsLoading(true);
+    // function CancelarConsulta(Evento, idConsultaCancelada) {
+    //     Evento.preventDefault();
+    //     setIsLoading(true);
 
-        axios.patch('http://192.168.6.108:5000/api/Consultas/Cancelar/' + idConsultaCancelada, null, {
-            headers: {
-                Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
-            },
-        }).then((resposta) => {
-            if (resposta.status === 204) {
-                window.alert('Consulta cancelada com sucesso!');
-                ListarTodas();
-                setIsLoading(false);
-            }
-        }).catch((erro) => {
-            setIsLoading(false);
-            localStorage.removeItem('usuario-login');
-            Navigate('/Login')
-        })
-    }
+    //     axios.patch('http://192.168.6.108:5000/api/Consultas/Cancelar/' + idConsultaCancelada, null, {
+    //         headers: {
+    //             Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
+    //         },
+    //     }).then((resposta) => {
+    //         if (resposta.status === 204) {
+    //             window.alert('Consulta cancelada com sucesso!');
+    //             ListarTodas();
+    //             setIsLoading(false);
+    //         }
+    //     }).catch((erro) => {
+    //         setIsLoading(false);
+    //         localStorage.removeItem('usuario-login');
+    //         Navigate('/Login')
+    //     })
+    // }
 
-    function AlterarDescricao(Evento, IdConsulta) {
-        Evento.preventDefault();
-        setIsLoading(true);
-        axios.patch('http://192.168.6.108:5000/api/Consultas/AlterarDescricao/'+IdConsulta, {
-            "descricao": DescricaoAtualizada
-        }, {
-            headers: {
-                Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
-            },
-        }).then( (resposta) => {
-            if (resposta.status === 204) {
-                setIsLoading(false);
-                setDescricaoAtualizada('');
-                ListarPorUsuario();
-            }
-        }).catch( (erro) => {
-            setIsLoading(false);
-            localStorage.removeItem('usuario-login');
-            Navigate('/Login')
-        })
-    }
+    // function AlterarDescricao(Evento, IdConsulta) {
+    //     Evento.preventDefault();
+    //     setIsLoading(true);
+    //     axios.patch('http://192.168.6.108:5000/api/Consultas/AlterarDescricao/'+IdConsulta, {
+    //         "descricao": DescricaoAtualizada
+    //     }, {
+    //         headers: {
+    //             Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
+    //         },
+    //     }).then( (resposta) => {
+    //         if (resposta.status === 204) {
+    //             setIsLoading(false);
+    //             setDescricaoAtualizada('');
+    //             ListarPorUsuario();
+    //         }
+    //     }).catch( (erro) => {
+    //         setIsLoading(false);
+    //         localStorage.removeItem('usuario-login');
+    //         Navigate('/Login')
+    //     })
+    // }
 
     useEffect(() => {
-        if (TokenConvertido().Role === "1") {
-            ListarSituacoes();
             ListarTodas();
             ListarUsuarios();
-        }
-        else {
-            ListarPorUsuario();
-            ListarSituacoes();
-        }
     }, [])
 
-    if (TokenConvertido().Role === "1") {
         return (
             <div>
                 <Header></Header>
@@ -342,11 +334,13 @@ export default function Consultas() {
                                                 <div class="CampoSituacaoCon">
                                                     <span class="TituloBoxListaCon">Situação:</span>
                                                     <div class="InfoSituacao">
-                                                        <p>{ListaSituacao.find(S => S.idSituacao === Consulta.idSituacao).nome}</p>
-                                                        {
+                                                        <p>{Consulta.idSituacaoNavigation.nome}</p>
+                                                        {/* {
                                                             IsLoading === true ?
-                                                            <button onClick={(Evento) => CancelarConsulta(Evento, Consulta.idConsulta)} disabled>Cancelando...</button> : <button onClick={(Evento) => CancelarConsulta(Evento, Consulta.idConsulta)}>Cancelar</button>
-                                                        }
+                                                            <button 
+                                                            // onClick={(Evento) => CancelarConsulta(Evento, Consulta.idConsulta)} disabled
+                                                            >Cancelando...</button> : <button onClick={(Evento) => CancelarConsulta(Evento, Consulta.idConsulta)}>Cancelar</button>
+                                                        } */}
                                                     </div>
                                                 </div>
                                             </div>
@@ -360,206 +354,207 @@ export default function Consultas() {
                 <Footer></Footer>
             </div>
         )
-    }
-    else if (TokenConvertido().Role === "2") {
-        return (
-            <div>
-                <Header></Header>
-                <main class="ConsultaMain">
-                    <div class="ContainerConsulta ContainerGrid">
-                        <section class="ListaConsulta">
-                            {
-                                ListaConsulta.map((Consulta) => {
-                                    return (
-                                        <div class="BoxListaCon">
-                                            <div class="ColunaBoxListaCon">
-                                                <span class="TituloBoxListaCon">Informações da consulta</span>
-                                                <div class="CampoBoxListaCon">
-                                                    <span class="SubTituloBoxListaCon">Descrição</span>
-                                                    <p>{Consulta.descricao}</p>
-                                                    <form onSubmit={(Evento) => AlterarDescricao(Evento, Consulta.idConsulta)}>
-                                                        <input type="text" value={DescricaoAtualizada} onChange={ (InputDescricaoAtualizada) => setDescricaoAtualizada(InputDescricaoAtualizada.target.value)} placeholder="Alterar descrição..." required/>
-                                                        {
-                                                            IsLoading === true ? 
-                                                            <button type="submit" disabled></button> : <button type="submit" ></button>
-                                                        }
-                                                    </form>
-                                                </div>
-                                                <div class="CampoBoxListaCon">
-                                                    <span class="SubTituloBoxListaCon">Data</span>
-                                                    <p>{new Intl.DateTimeFormat('pt-BR', { timeZone: 'UTC' }).format(new Date(Consulta.dataHorario.split('T')[0]))}</p>
-                                                </div>
-                                                <div class="CampoBoxListaCon">
-                                                    <span class="SubTituloBoxListaCon">Hora</span>
-                                                    <p>{Consulta.dataHorario.split('T')[1]}</p>
-                                                </div>
-                                                <div class="CampoBoxListaCon">
-                                                    <span class="SubTituloBoxListaCon">CNPJ da clínica</span>
-                                                    <p>{Consulta.idMedicoNavigation.idClinicaNavigation.cnpj}</p>
-                                                </div>
-                                                <div class="CampoBoxListaCon">
-                                                    <span class="SubTituloBoxListaCon">Endereço</span>
-                                                    <p>{Consulta.idMedicoNavigation.idClinicaNavigation.endereco}</p>
-                                                </div>
-                                            </div>
-                                            <div class="DivisoriaVertical"></div>
-                                            <div class="ColunaBoxListaCon">
-                                                <div class="CampoUserCon">
-                                                    <span class="TituloBoxListaCon">Médico</span>
-                                                    <div class="InfoUserCon">
-                                                        {/* <img src="../assets_/padrao.jpg" /> */}
-                                                        <div class="InfoTextoUserCon">
-                                                            <div class="LinhaTextoUserCon">
-                                                                <span class="SubTituloBoxListaCon">Nome:</span>
-                                                                <p>{Consulta.idMedicoNavigation.idUsuarioNavigation.nome}</p>
-                                                            </div>
-                                                            <div class="LinhaTextoUserCon">
-                                                                <span class="SubTituloBoxListaCon">Email:</span>
-                                                                <p>{Consulta.idMedicoNavigation.idUsuarioNavigation.email}</p>
-                                                            </div>
-                                                            <div class="LinhaTextoUserCon">
-                                                                <span class="SubTituloBoxListaCon">CRM:</span>
-                                                                <p>{Consulta.idMedicoNavigation.crm}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="CampoUserCon">
-                                                    <span class="TituloBoxListaCon">Paciente</span>
-                                                    <div class="InfoUserCon">
-                                                        {/* <img src="../assets_/padrao.jpg" /> */}
-                                                        <div class="InfoTextoUserCon">
-                                                            <div class="LinhaTextoUserCon">
-                                                                <span class="SubTituloBoxListaCon">Nome:</span>
-                                                                <p>{Consulta.idPacienteNavigation.idUsuarioNavigation.nome}</p>
-                                                            </div>
-                                                            <div class="LinhaTextoUserCon">
-                                                                <span class="SubTituloBoxListaCon">Email:</span>
-                                                                <p>{Consulta.idPacienteNavigation.idUsuarioNavigation.email}</p>
-                                                            </div>
-                                                            <div class="LinhaTextoUserCon">
-                                                                <span class="SubTituloBoxListaCon">CPF:</span>
-                                                                <p>{Consulta.idPacienteNavigation.cpf}</p>
-                                                            </div>
-                                                            <div class="LinhaTextoUserCon">
-                                                                <span class="SubTituloBoxListaCon">RG:</span>
-                                                                <p>{Consulta.idPacienteNavigation.rg}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="CampoSituacaoCon">
-                                                    <span class="TituloBoxListaCon">Situação:</span>
-                                                    <div class="InfoSituacao">
-                                                        <p>{ListaSituacao.find(S => S.idSituacao === Consulta.idSituacao).nome}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )
-                                })
-                            }
-                        </section>
-                    </div>
-                </main>
-                <Footer></Footer>
-            </div>
-        )
-    }
-    else return (
-        <div>
-            <Header></Header>
-            <main class="ConsultaMain">
-                <div class="ContainerConsulta ContainerGrid">
-                    <section class="ListaConsulta">
-                        {
-                            ListaConsulta.map((Consulta) => {
-                                return (
-                                    <div class="BoxListaCon">
-                                        <div class="ColunaBoxListaCon">
-                                            <span class="TituloBoxListaCon">Informações da consulta</span>
-                                            <div class="CampoBoxListaCon">
-                                                <span class="SubTituloBoxListaCon">Descrição</span>
-                                                <p>{Consulta.descricao}</p>
-                                            </div>
-                                            <div class="CampoBoxListaCon">
-                                                <span class="SubTituloBoxListaCon">Data</span>
-                                                <p>{new Intl.DateTimeFormat('pt-BR', { timeZone: 'UTC' }).format(new Date(Consulta.dataHorario.split('T')[0]))}</p>
-                                            </div>
-                                            <div class="CampoBoxListaCon">
-                                                <span class="SubTituloBoxListaCon">Hora</span>
-                                                <p>{Consulta.dataHorario.split('T')[1]}</p>
-                                            </div>
-                                            <div class="CampoBoxListaCon">
-                                                <span class="SubTituloBoxListaCon">CNPJ da clínica</span>
-                                                <p>{Consulta.idMedicoNavigation.idClinicaNavigation.cnpj}</p>
-                                            </div>
-                                            <div class="CampoBoxListaCon">
-                                                <span class="SubTituloBoxListaCon">Endereço</span>
-                                                <p>{Consulta.idMedicoNavigation.idClinicaNavigation.endereco}</p>
-                                            </div>
-                                        </div>
-                                        <div class="DivisoriaVertical"></div>
-                                        <div class="ColunaBoxListaCon">
-                                            <div class="CampoUserCon">
-                                                <span class="TituloBoxListaCon">Médico</span>
-                                                <div class="InfoUserCon">
-                                                    {/* <img src="../assets_/padrao.jpg" /> */}
-                                                    <div class="InfoTextoUserCon">
-                                                        <div class="LinhaTextoUserCon">
-                                                            <span class="SubTituloBoxListaCon">Nome:</span>
-                                                            <p>{Consulta.idMedicoNavigation.idUsuarioNavigation.nome}</p>
-                                                        </div>
-                                                        <div class="LinhaTextoUserCon">
-                                                            <span class="SubTituloBoxListaCon">Email:</span>
-                                                            <p>{Consulta.idMedicoNavigation.idUsuarioNavigation.email}</p>
-                                                        </div>
-                                                        <div class="LinhaTextoUserCon">
-                                                            <span class="SubTituloBoxListaCon">CRM:</span>
-                                                            <p>{Consulta.idMedicoNavigation.crm}</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="CampoUserCon">
-                                                <span class="TituloBoxListaCon">Paciente</span>
-                                                <div class="InfoUserCon">
-                                                    {/* <img src="../assets_/padrao.jpg" /> */}
-                                                    <div class="InfoTextoUserCon">
-                                                        <div class="LinhaTextoUserCon">
-                                                            <span class="SubTituloBoxListaCon">Nome:</span>
-                                                            <p>{Consulta.idPacienteNavigation.idUsuarioNavigation.nome}</p>
-                                                        </div>
-                                                        <div class="LinhaTextoUserCon">
-                                                            <span class="SubTituloBoxListaCon">Email:</span>
-                                                            <p>{Consulta.idPacienteNavigation.idUsuarioNavigation.email}</p>
-                                                        </div>
-                                                        <div class="LinhaTextoUserCon">
-                                                            <span class="SubTituloBoxListaCon">CPF:</span>
-                                                            <p>{Consulta.idPacienteNavigation.cpf}</p>
-                                                        </div>
-                                                        <div class="LinhaTextoUserCon">
-                                                            <span class="SubTituloBoxListaCon">RG:</span>
-                                                            <p>{Consulta.idPacienteNavigation.rg}</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="CampoSituacaoCon">
-                                                <span class="TituloBoxListaCon">Situação:</span>
-                                                <div class="InfoSituacao">
-                                                    <p>{ListaSituacao.find(S => S.idSituacao === Consulta.idSituacao).nome}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                )
-                            })
-                        }
-                    </section>
-                </div>
-            </main>
-            <Footer></Footer>
-        </div>
-    )
+    // else if (TokenConvertido().Role === "2") {
+    //     return (
+    //         <div>
+    //             <Header></Header>
+    //             <main class="ConsultaMain">
+    //                 <div class="ContainerConsulta ContainerGrid">
+    //                     <section class="ListaConsulta">
+    //                         {
+    //                             ListaConsulta.map((Consulta) => {
+    //                                 return (
+    //                                     <div class="BoxListaCon">
+    //                                         <div class="ColunaBoxListaCon">
+    //                                             <span class="TituloBoxListaCon">Informações da consulta</span>
+    //                                             <div class="CampoBoxListaCon">
+    //                                                 <span class="SubTituloBoxListaCon">Descrição</span>
+    //                                                 <p>{Consulta.descricao}</p>
+    //                                                 <form
+    //                                                 // onSubmit={(Evento) => AlterarDescricao(Evento, Consulta.idConsulta)}
+    //                                                 >
+    //                                                     <input type="text" value={DescricaoAtualizada} onChange={ (InputDescricaoAtualizada) => setDescricaoAtualizada(InputDescricaoAtualizada.target.value)} placeholder="Alterar descrição..." required/>
+    //                                                     {
+    //                                                         IsLoading === true ? 
+    //                                                         <button type="submit" disabled></button> : <button type="submit" ></button>
+    //                                                     }
+    //                                                 </form>
+    //                                             </div>
+    //                                             <div class="CampoBoxListaCon">
+    //                                                 <span class="SubTituloBoxListaCon">Data</span>
+    //                                                 <p>{new Intl.DateTimeFormat('pt-BR', { timeZone: 'UTC' }).format(new Date(Consulta.dataHorario.split('T')[0]))}</p>
+    //                                             </div>
+    //                                             <div class="CampoBoxListaCon">
+    //                                                 <span class="SubTituloBoxListaCon">Hora</span>
+    //                                                 <p>{Consulta.dataHorario.split('T')[1]}</p>
+    //                                             </div>
+    //                                             <div class="CampoBoxListaCon">
+    //                                                 <span class="SubTituloBoxListaCon">CNPJ da clínica</span>
+    //                                                 <p>{Consulta.idMedicoNavigation.idClinicaNavigation.cnpj}</p>
+    //                                             </div>
+    //                                             <div class="CampoBoxListaCon">
+    //                                                 <span class="SubTituloBoxListaCon">Endereço</span>
+    //                                                 <p>{Consulta.idMedicoNavigation.idClinicaNavigation.endereco}</p>
+    //                                             </div>
+    //                                         </div>
+    //                                         <div class="DivisoriaVertical"></div>
+    //                                         <div class="ColunaBoxListaCon">
+    //                                             <div class="CampoUserCon">
+    //                                                 <span class="TituloBoxListaCon">Médico</span>
+    //                                                 <div class="InfoUserCon">
+    //                                                     {/* <img src="../assets_/padrao.jpg" /> */}
+    //                                                     <div class="InfoTextoUserCon">
+    //                                                         <div class="LinhaTextoUserCon">
+    //                                                             <span class="SubTituloBoxListaCon">Nome:</span>
+    //                                                             <p>{Consulta.idMedicoNavigation.idUsuarioNavigation.nome}</p>
+    //                                                         </div>
+    //                                                         <div class="LinhaTextoUserCon">
+    //                                                             <span class="SubTituloBoxListaCon">Email:</span>
+    //                                                             <p>{Consulta.idMedicoNavigation.idUsuarioNavigation.email}</p>
+    //                                                         </div>
+    //                                                         <div class="LinhaTextoUserCon">
+    //                                                             <span class="SubTituloBoxListaCon">CRM:</span>
+    //                                                             <p>{Consulta.idMedicoNavigation.crm}</p>
+    //                                                         </div>
+    //                                                     </div>
+    //                                                 </div>
+    //                                             </div>
+    //                                             <div class="CampoUserCon">
+    //                                                 <span class="TituloBoxListaCon">Paciente</span>
+    //                                                 <div class="InfoUserCon">
+    //                                                     {/* <img src="../assets_/padrao.jpg" /> */}
+    //                                                     <div class="InfoTextoUserCon">
+    //                                                         <div class="LinhaTextoUserCon">
+    //                                                             <span class="SubTituloBoxListaCon">Nome:</span>
+    //                                                             <p>{Consulta.idPacienteNavigation.idUsuarioNavigation.nome}</p>
+    //                                                         </div>
+    //                                                         <div class="LinhaTextoUserCon">
+    //                                                             <span class="SubTituloBoxListaCon">Email:</span>
+    //                                                             <p>{Consulta.idPacienteNavigation.idUsuarioNavigation.email}</p>
+    //                                                         </div>
+    //                                                         <div class="LinhaTextoUserCon">
+    //                                                             <span class="SubTituloBoxListaCon">CPF:</span>
+    //                                                             <p>{Consulta.idPacienteNavigation.cpf}</p>
+    //                                                         </div>
+    //                                                         <div class="LinhaTextoUserCon">
+    //                                                             <span class="SubTituloBoxListaCon">RG:</span>
+    //                                                             <p>{Consulta.idPacienteNavigation.rg}</p>
+    //                                                         </div>
+    //                                                     </div>
+    //                                                 </div>
+    //                                             </div>
+    //                                             <div class="CampoSituacaoCon">
+    //                                                 <span class="TituloBoxListaCon">Situação:</span>
+    //                                                 <div class="InfoSituacao">
+    //                                                     <p>{ListaSituacao.find(S => S.idSituacao === Consulta.idSituacao).nome}</p>
+    //                                                 </div>
+    //                                             </div>
+    //                                         </div>
+    //                                     </div>
+    //                                 )
+    //                             })
+    //                         }
+    //                     </section>
+    //                 </div>
+    //             </main>
+    //             <Footer></Footer>
+    //         </div>
+    //     )
+    // }
+    // else return (
+    //     <div>
+    //         <Header></Header>
+    //         <main class="ConsultaMain">
+    //             <div class="ContainerConsulta ContainerGrid">
+    //                 <section class="ListaConsulta">
+    //                     {
+    //                         ListaConsulta.map((Consulta) => {
+    //                             return (
+    //                                 <div class="BoxListaCon">
+    //                                     <div class="ColunaBoxListaCon">
+    //                                         <span class="TituloBoxListaCon">Informações da consulta</span>
+    //                                         <div class="CampoBoxListaCon">
+    //                                             <span class="SubTituloBoxListaCon">Descrição</span>
+    //                                             <p>{Consulta.descricao}</p>
+    //                                         </div>
+    //                                         <div class="CampoBoxListaCon">
+    //                                             <span class="SubTituloBoxListaCon">Data</span>
+    //                                             <p>{new Intl.DateTimeFormat('pt-BR', { timeZone: 'UTC' }).format(new Date(Consulta.dataHorario.split('T')[0]))}</p>
+    //                                         </div>
+    //                                         <div class="CampoBoxListaCon">
+    //                                             <span class="SubTituloBoxListaCon">Hora</span>
+    //                                             <p>{Consulta.dataHorario.split('T')[1]}</p>
+    //                                         </div>
+    //                                         <div class="CampoBoxListaCon">
+    //                                             <span class="SubTituloBoxListaCon">CNPJ da clínica</span>
+    //                                             <p>{Consulta.idMedicoNavigation.idClinicaNavigation.cnpj}</p>
+    //                                         </div>
+    //                                         <div class="CampoBoxListaCon">
+    //                                             <span class="SubTituloBoxListaCon">Endereço</span>
+    //                                             <p>{Consulta.idMedicoNavigation.idClinicaNavigation.endereco}</p>
+    //                                         </div>
+    //                                     </div>
+    //                                     <div class="DivisoriaVertical"></div>
+    //                                     <div class="ColunaBoxListaCon">
+    //                                         <div class="CampoUserCon">
+    //                                             <span class="TituloBoxListaCon">Médico</span>
+    //                                             <div class="InfoUserCon">
+    //                                                 {/* <img src="../assets_/padrao.jpg" /> */}
+    //                                                 <div class="InfoTextoUserCon">
+    //                                                     <div class="LinhaTextoUserCon">
+    //                                                         <span class="SubTituloBoxListaCon">Nome:</span>
+    //                                                         <p>{Consulta.idMedicoNavigation.idUsuarioNavigation.nome}</p>
+    //                                                     </div>
+    //                                                     <div class="LinhaTextoUserCon">
+    //                                                         <span class="SubTituloBoxListaCon">Email:</span>
+    //                                                         <p>{Consulta.idMedicoNavigation.idUsuarioNavigation.email}</p>
+    //                                                     </div>
+    //                                                     <div class="LinhaTextoUserCon">
+    //                                                         <span class="SubTituloBoxListaCon">CRM:</span>
+    //                                                         <p>{Consulta.idMedicoNavigation.crm}</p>
+    //                                                     </div>
+    //                                                 </div>
+    //                                             </div>
+    //                                         </div>
+    //                                         <div class="CampoUserCon">
+    //                                             <span class="TituloBoxListaCon">Paciente</span>
+    //                                             <div class="InfoUserCon">
+    //                                                 {/* <img src="../assets_/padrao.jpg" /> */}
+    //                                                 <div class="InfoTextoUserCon">
+    //                                                     <div class="LinhaTextoUserCon">
+    //                                                         <span class="SubTituloBoxListaCon">Nome:</span>
+    //                                                         <p>{Consulta.idPacienteNavigation.idUsuarioNavigation.nome}</p>
+    //                                                     </div>
+    //                                                     <div class="LinhaTextoUserCon">
+    //                                                         <span class="SubTituloBoxListaCon">Email:</span>
+    //                                                         <p>{Consulta.idPacienteNavigation.idUsuarioNavigation.email}</p>
+    //                                                     </div>
+    //                                                     <div class="LinhaTextoUserCon">
+    //                                                         <span class="SubTituloBoxListaCon">CPF:</span>
+    //                                                         <p>{Consulta.idPacienteNavigation.cpf}</p>
+    //                                                     </div>
+    //                                                     <div class="LinhaTextoUserCon">
+    //                                                         <span class="SubTituloBoxListaCon">RG:</span>
+    //                                                         <p>{Consulta.idPacienteNavigation.rg}</p>
+    //                                                     </div>
+    //                                                 </div>
+    //                                             </div>
+    //                                         </div>
+    //                                         <div class="CampoSituacaoCon">
+    //                                             <span class="TituloBoxListaCon">Situação:</span>
+    //                                             <div class="InfoSituacao">
+    //                                                 <p>{ListaSituacao.find(S => S.idSituacao === Consulta.idSituacao).nome}</p>
+    //                                             </div>
+    //                                         </div>
+    //                                     </div>
+    //                                 </div>
+    //                             )
+    //                         })
+    //                     }
+    //                 </section>
+    //             </div>
+    //         </main>
+    //         <Footer></Footer>
+    //     </div>
+    // )
 }

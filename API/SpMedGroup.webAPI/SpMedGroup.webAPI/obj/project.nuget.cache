@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "E4rIZvxYz3oUgIAxR6JEhCFAkG3FodPXwl6vFUGCzUEsEVsrssgYuxx9MkOW9GTY2+jC4hFh0P9E2f/aaJgclw==",
+  "dgSpecHash": "UnRtSNV6zHw46em3znkx6N7Ozc9lp/5DhLS6yQMsXIFNA8gkcXDt7QTZtcfu3glCU3flLFVgQ/a8HrpsQRgp0A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\43392993832\\Desktop\\PedroL\\Projeto_SpMedGroup_Senai\\API\\SpMedGroup.webAPI\\SpMedGroup.webAPI\\SpMedGroup.webAPI.csproj",
+  "projectFilePath": "C:\\Users\\43392993832\\Desktop\\Projetos\\Projeto_SpMedGroup_Senai\\API\\SpMedGroup.webAPI\\SpMedGroup.webAPI\\SpMedGroup.webAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\43392993832\\.nuget\\packages\\dnsclient\\1.4.0\\dnsclient.1.4.0.nupkg.sha512",
     "C:\\Users\\43392993832\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

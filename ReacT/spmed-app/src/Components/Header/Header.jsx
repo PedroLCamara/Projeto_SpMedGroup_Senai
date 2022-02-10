@@ -7,33 +7,33 @@ import ImgPerfil from '../PerfilFoto/PerfilFoto.jsx'
 
 export default class Header extends Component {
     render() {
-        if (UsuarioAutenticado() === false) {
-            return (
-                <header>
-                    <div class="ContainerGrid ContainerHeader">
-                        <Link to="/">
-                            <img class="LogoHeader" src={Logo} alt="Logo da empresa SpMedicalGroup" />
-                        </Link>
-                        <nav class="NavHeader">
-                            {
-                                document.title === "SpMed - Home" ?
-                                    <Link to="/" class="LinkPaginaAtual">Início</Link> : <Link to="/" class="LinkPagina">Início</Link>
-                            }
-                            {
-                                document.title === "SpMed - Clinicas" ?
-                                <Link to="/Clinicas" class="LinkPaginaAtual">Clínicas parceiras</Link> : <Link to="/Clinicas" class="LinkPagina">Clínicas parceiras</Link>
-                            }
-                            <Link to="/Login" class="LinkPagina">Minhas Consultas</Link>
-                            {
-                                document.title === "SpMed - Login" ?
-                                    <Link to="/Login" class="LinkPaginaAtual">Login</Link> : <Link to="/Login" class="LinkPagina">Login</Link>
-                            }
-                        </nav>
-                    </div>
-                </header>
-            )
-        }
-        else if (TokenConvertido().Role === "1") {
+        // if (UsuarioAutenticado() === false) {
+        //     return (
+        //         <header>
+        //             <div class="ContainerGrid ContainerHeader">
+        //                 <Link to="/">
+        //                     <img class="LogoHeader" src={Logo} alt="Logo da empresa SpMedicalGroup" />
+        //                 </Link>
+        //                 <nav class="NavHeader">
+        //                     {
+        //                         document.title === "SpMed - Home" ?
+        //                             <Link to="/" class="LinkPaginaAtual">Início</Link> : <Link to="/" class="LinkPagina">Início</Link>
+        //                     }
+        //                     {
+        //                         document.title === "SpMed - Clinicas" ?
+        //                         <Link to="/Clinicas" class="LinkPaginaAtual">Clínicas parceiras</Link> : <Link to="/Clinicas" class="LinkPagina">Clínicas parceiras</Link>
+        //                     }
+        //                     <Link to="/Login" class="LinkPagina">Minhas Consultas</Link>
+        //                     {
+        //                         document.title === "SpMed - Login" ?
+        //                             <Link to="/Login" class="LinkPaginaAtual">Login</Link> : <Link to="/Login" class="LinkPagina">Login</Link>
+        //                     }
+        //                 </nav>
+        //             </div>
+        //         </header>
+        //     )
+        // }
+        // else if (TokenConvertido().Role === "1") {
             return (
                 <header>
                     <div class="ContainerGrid ContainerHeader">
@@ -66,32 +66,32 @@ export default class Header extends Component {
                     </div>
                 </header>
             )
-        }
-        else if (TokenConvertido().Role === "2" || TokenConvertido().Role === "3") {
-            return (
-                <header>
-                    <div class="ContainerGrid ContainerHeader">
-                        <Link to="/">
-                            <img class="LogoHeader" src={Logo} alt="Logo da empresa SpMedicalGroup" />
-                        </Link>
-                        <nav class="NavHeader">
-                            {
-                                document.title === "SpMed - Home" ?
-                                    <Link to="/" class="LinkPaginaAtual">Início</Link> : <Link to="/" class="LinkPagina">Início</Link>
-                            }
-                            {
-                                document.title === "SpMed - Clinicas" ?
-                                <Link to="/Clinicas" class="LinkPaginaAtual">Clínicas parceiras</Link> : <Link to="/Clinicas" class="LinkPagina">Clínicas parceiras</Link>
-                            }
-                            {
-                                document.title === "SpMed - Consultas" ?
-                                <Link to="/Consultas" class="LinkPaginaAtual">Minhas Consultas</Link> : <Link to="/Consultas" class="LinkPagina">Minhas Consultas</Link>
-                            }
-                            <Link to="/Perfil" class="LinkImagem"> <ImgPerfil></ImgPerfil> </Link>
-                        </nav>
-                    </div>
-                </header>
-            )
-        }
+        // }
+        // else if (TokenConvertido().Role === "2" || TokenConvertido().Role === "3") {
+        //     return (
+        //         <header>
+        //             <div class="ContainerGrid ContainerHeader">
+        //                 <Link to="/">
+        //                     <img class="LogoHeader" src={Logo} alt="Logo da empresa SpMedicalGroup" />
+        //                 </Link>
+        //                 <nav class="NavHeader">
+        //                     {
+        //                         document.title === "SpMed - Home" ?
+        //                             <Link to="/" class="LinkPaginaAtual">Início</Link> : <Link to="/" class="LinkPagina">Início</Link>
+        //                     }
+        //                     {
+        //                         document.title === "SpMed - Clinicas" ?
+        //                         <Link to="/Clinicas" class="LinkPaginaAtual">Clínicas parceiras</Link> : <Link to="/Clinicas" class="LinkPagina">Clínicas parceiras</Link>
+        //                     }
+        //                     {
+        //                         document.title === "SpMed - Consultas" ?
+        //                         <Link to="/Consultas" class="LinkPaginaAtual">Minhas Consultas</Link> : <Link to="/Consultas" class="LinkPagina">Minhas Consultas</Link>
+        //                     }
+        //                     <Link to="/Perfil" class="LinkImagem"> <ImgPerfil></ImgPerfil> </Link>
+        //                 </nav>
+        //             </div>
+        //         </header>
+        //     )
+        // }
     }
 }
