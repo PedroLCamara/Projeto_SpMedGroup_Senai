@@ -1,0 +1,397 @@
+{
+	"info": {
+		"_postman_id": "7f6da9de-89d2-434f-9a8b-bb510a9e1003",
+		"name": "Mock.SpMed",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Consulta",
+			"item": [
+				{
+					"name": "GET",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://6205531a161670001741b8fb.mockapi.io/Consulta",
+							"protocol": "https",
+							"host": [
+								"6205531a161670001741b8fb",
+								"mockapi",
+								"io"
+							],
+							"path": [
+								"Consulta"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GETBYID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://6205531a161670001741b8fb.mockapi.io/Consulta/1",
+							"protocol": "https",
+							"host": [
+								"6205531a161670001741b8fb",
+								"mockapi",
+								"io"
+							],
+							"path": [
+								"Consulta",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"DataHorario\": \"2018-07-20T21:35:02.179Z\",\r\n    \"Descricao\": \"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\",\r\n    \"idPacienteNavigation\": {\r\n        \"idPaciente\": 0,\r\n        \"idUsuario\": 0,\r\n        \"telefone\": \"string\",\r\n        \"cpf\": \"string\",\r\n        \"endereco\": \"string\",\r\n        \"rg\": \"string\",\r\n        \"idUsuarioNavigation\": {\r\n            \"idUsuario\": 0,\r\n            \"email\": \"string\",\r\n            \"senha\": \"stringst\",\r\n            \"idTipoUsuario\": 0,\r\n            \"dataDeNascimento\": \"2022-02-10T18:50:01.866Z\",\r\n            \"nome\": \"string\",\r\n            \"imagemPerfil\": \"string\",\r\n            \"idTipoUsuarioNavigation\": {\r\n                \"idTipoUsuario\": 0,\r\n                \"tituloTipoUsuario\": \"string\",\r\n                \"usuarios\": [\r\n                    \"string\"\r\n                ]\r\n            },\r\n            \"medico\": \"string\",\r\n            \"paciente\": \"string\"\r\n        },\r\n        \"consulta\": [\r\n            \"string\"\r\n        ]\r\n    },\r\n    \"idMedicoNavigation\": {\r\n        \"idMedico\": 0,\r\n        \"idUsuario\": 0,\r\n        \"idClinica\": 0,\r\n        \"idEspecialidade\": 0,\r\n        \"crm\": \"string\",\r\n        \"idClinicaNavigation\": {\r\n            \"idClinica\": 0,\r\n            \"horarioDeAbertura\": {\r\n                \"ticks\": 0,\r\n                \"days\": 0,\r\n                \"hours\": 0,\r\n                \"milliseconds\": 0,\r\n                \"minutes\": 0,\r\n                \"seconds\": 0\r\n            },\r\n            \"horarioDeFechamento\": {\r\n                \"ticks\": 0,\r\n                \"days\": 0,\r\n                \"hours\": 0,\r\n                \"milliseconds\": 0,\r\n                \"minutes\": 0,\r\n                \"seconds\": 0\r\n            },\r\n            \"endereco\": \"string\",\r\n            \"razaoSocial\": \"string\",\r\n            \"nomeFantasia\": \"string\",\r\n            \"cnpj\": \"string\"\r\n        },\r\n        \"idEspecialidadeNavigation\": {\r\n            \"idEspecialidade\": 0,\r\n            \"nome\": \"string\",\r\n            \"medicos\": [\r\n                \"string\"\r\n            ]\r\n        },\r\n        \"idUsuarioNavigation\": {\r\n            \"idUsuario\": 0,\r\n            \"email\": \"string\",\r\n            \"senha\": \"stringst\",\r\n            \"idTipoUsuario\": 0,\r\n            \"dataDeNascimento\": \"2022-02-10T18:50:01.866Z\",\r\n            \"nome\": \"string\",\r\n            \"imagemPerfil\": \"string\",\r\n            \"idTipoUsuarioNavigation\": {\r\n                \"idTipoUsuario\": 0,\r\n                \"tituloTipoUsuario\": \"string\",\r\n                \"usuarios\": [\r\n                    \"string\"\r\n                ]\r\n            },\r\n            \"medico\": \"string\",\r\n            \"paciente\": \"string\"\r\n        },\r\n        \"consulta\": [\r\n            \"string\"\r\n        ]\r\n    },\r\n    \"idConsulta\": \"1\",\r\n    \"idSituacao\": 0,\r\n    \"idPaciente\": 0,\r\n    \"idMedico\": 0,\r\n    \"dataHorario\": \"2025-04-22T03:49:29.732Z\",\r\n    \"descricao\": \"DESCRICAO\",\r\n    \"idSituacaoNavigation\": {\r\n        \"idSituacao\": 0,\r\n        \"nome\": \"string\",\r\n        \"consulta\": [\r\n            \"string\"\r\n        ]\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://6205531a161670001741b8fb.mockapi.io/Consulta/1",
+							"protocol": "https",
+							"host": [
+								"6205531a161670001741b8fb",
+								"mockapi",
+								"io"
+							],
+							"path": [
+								"Consulta",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://6205531a161670001741b8fb.mockapi.io/Consulta/1",
+							"protocol": "https",
+							"host": [
+								"6205531a161670001741b8fb",
+								"mockapi",
+								"io"
+							],
+							"path": [
+								"Consulta",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "GET",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://6205531a161670001741b8fb.mockapi.io/Usuario",
+							"protocol": "https",
+							"host": [
+								"6205531a161670001741b8fb",
+								"mockapi",
+								"io"
+							],
+							"path": [
+								"Usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GETBYID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://6205531a161670001741b8fb.mockapi.io/Usuario/1",
+							"protocol": "https",
+							"host": [
+								"6205531a161670001741b8fb",
+								"mockapi",
+								"io"
+							],
+							"path": [
+								"Usuario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"ALEXANDRO.Waelchi96@yahoo.com\",\r\n    \"senha\": \"mRf2G1wCpdg9hI4\",\r\n    \"dataDeNascimento\": \"2022-02-10T18:58:27.964Z\",\r\n    \"idUsuarioNavigation\": {},\r\n    \"idUsuario\": \"1\",\r\n    \"idTipoUsuario\": 0,\r\n    \"nome\": \"Oral\",\r\n    \"imagemPerfil\": \"string\",\r\n    \"idTipoUsuarioNavigation\": {\r\n        \"idTipoUsuario\": 0,\r\n        \"tituloTipoUsuario\": \"string\",\r\n        \"usuarios\": [\r\n            \"string\"\r\n        ]\r\n    },\r\n    \"medico\": {\r\n        \"idMedico\": 0,\r\n        \"idUsuario\": 0,\r\n        \"idClinica\": 0,\r\n        \"idEspecialidade\": 0,\r\n        \"crm\": \"string\",\r\n        \"idClinicaNavigation\": {\r\n            \"idClinica\": 0,\r\n            \"horarioDeAbertura\": {\r\n                \"ticks\": 0,\r\n                \"days\": 0,\r\n                \"hours\": 0,\r\n                \"milliseconds\": 0,\r\n                \"minutes\": 0,\r\n                \"seconds\": 0\r\n            },\r\n            \"horarioDeFechamento\": {\r\n                \"ticks\": 0,\r\n                \"days\": 0,\r\n                \"hours\": 0,\r\n                \"milliseconds\": 0,\r\n                \"minutes\": 0,\r\n                \"seconds\": 0\r\n            },\r\n            \"endereco\": \"string\",\r\n            \"razaoSocial\": \"string\",\r\n            \"nomeFantasia\": \"string\",\r\n            \"cnpj\": \"string\",\r\n            \"medicos\": [\r\n                \"string\"\r\n            ]\r\n        },\r\n        \"idEspecialidadeNavigation\": {\r\n            \"idEspecialidade\": 0,\r\n            \"nome\": \"string\",\r\n            \"medicos\": [\r\n                \"string\"\r\n            ]\r\n        },\r\n        \"idUsuarioNavigation\": \"string\",\r\n        \"consulta\": [\r\n            {\r\n                \"idConsulta\": 0,\r\n                \"idSituacao\": 0,\r\n                \"idPaciente\": 0,\r\n                \"idMedico\": 0,\r\n                \"dataHorario\": \"2022-02-10T18:58:27.965Z\",\r\n                \"descricao\": \"string\",\r\n                \"idMedicoNavigation\": \"string\",\r\n                \"idPacienteNavigation\": \"string\",\r\n                \"idSituacaoNavigation\": {\r\n                    \"idSituacao\": 0,\r\n                    \"nome\": \"Letha\",\r\n                    \"consulta\": [\r\n                        \"string\"\r\n                    ]\r\n                }\r\n            }\r\n        ]\r\n    },\r\n    \"paciente\": {\r\n        \"idPaciente\": 0,\r\n        \"idUsuario\": 0,\r\n        \"telefone\": \"string\",\r\n        \"cpf\": \"string\",\r\n        \"endereco\": \"string\",\r\n        \"rg\": \"string\",\r\n        \"idUsuarioNavigation\": \"string\",\r\n        \"consulta\": [\r\n            {\r\n                \"idConsulta\": 0,\r\n                \"idSituacao\": 0,\r\n                \"idPaciente\": 0,\r\n                \"idMedico\": 0,\r\n                \"dataHorario\": \"2022-02-10T18:58:27.965Z\",\r\n                \"descricao\": \"string\",\r\n                \"idMedicoNavigation\": \"string\",\r\n                \"idPacienteNavigation\": \"string\",\r\n                \"idSituacaoNavigation\": {\r\n                    \"idSituacao\": 0,\r\n                    \"nome\": \"string\",\r\n                    \"consulta\": [\r\n                        \"string\"\r\n                    ]\r\n                }\r\n            }\r\n        ]\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://6205531a161670001741b8fb.mockapi.io/Usuario/1",
+							"protocol": "https",
+							"host": [
+								"6205531a161670001741b8fb",
+								"mockapi",
+								"io"
+							],
+							"path": [
+								"Usuario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DLETE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://6205531a161670001741b8fb.mockapi.io/Usuario/1",
+							"protocol": "https",
+							"host": [
+								"6205531a161670001741b8fb",
+								"mockapi",
+								"io"
+							],
+							"path": [
+								"Usuario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Medico",
+			"item": [
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://6205531a161670001741b8fb.mockapi.io/Medico",
+							"protocol": "https",
+							"host": [
+								"6205531a161670001741b8fb",
+								"mockapi",
+								"io"
+							],
+							"path": [
+								"Medico"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GETBYID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://6205531a161670001741b8fb.mockapi.io/Medico/1",
+							"protocol": "https",
+							"host": [
+								"6205531a161670001741b8fb",
+								"mockapi",
+								"io"
+							],
+							"path": [
+								"Medico",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"crm\": \"0800-90\",\r\n    \"idUsuarioNavigation\": {\r\n        \"idUsuario\": 0,\r\n        \"email\": \"Chanelle.Ebert@yahoo.com\",\r\n        \"senha\": \"stringst\",\r\n        \"idTipoUsuario\": 0,\r\n        \"dataDeNascimento\": \"2022-02-10T19:01:59.870Z\",\r\n        \"nome\": \"Dixie\",\r\n        \"imagemPerfil\": \"string\",\r\n        \"idTipoUsuarioNavigation\": {\r\n            \"idTipoUsuario\": 0,\r\n            \"tituloTipoUsuario\": \"string\",\r\n            \"usuarios\": [\r\n                \"string\"\r\n            ]\r\n        },\r\n        \"medico\": \"string\",\r\n        \"paciente\": {\r\n            \"idPaciente\": 0,\r\n            \"idUsuario\": 0,\r\n            \"telefone\": \"string\",\r\n            \"cpf\": \"string\",\r\n            \"endereco\": \"string\",\r\n            \"rg\": \"string\",\r\n            \"idUsuarioNavigation\": \"string\",\r\n            \"consulta\": [\r\n                \"string\"\r\n            ]\r\n        }\r\n    },\r\n    \"idMedico\": \"1\",\r\n    \"idUsuario\": 0,\r\n    \"idClinica\": 0,\r\n    \"idEspecialidade\": 0,\r\n    \"idClinicaNavigation\": {\r\n        \"idClinica\": 0,\r\n        \"horarioDeAbertura\": {\r\n            \"ticks\": 0,\r\n            \"days\": 0,\r\n            \"hours\": 0,\r\n            \"milliseconds\": 0,\r\n            \"minutes\": 0,\r\n            \"seconds\": 0\r\n        },\r\n        \"horarioDeFechamento\": {\r\n            \"ticks\": 0,\r\n            \"days\": 0,\r\n            \"hours\": 0,\r\n            \"milliseconds\": 0,\r\n            \"minutes\": 0,\r\n            \"seconds\": 0\r\n        },\r\n        \"endereco\": \"string\",\r\n        \"razaoSocial\": \"string\",\r\n        \"nomeFantasia\": \"string\",\r\n        \"cnpj\": \"string\",\r\n        \"medicos\": [\r\n            \"string\"\r\n        ]\r\n    },\r\n    \"idEspecialidadeNavigation\": {\r\n        \"idEspecialidade\": 0,\r\n        \"nome\": \"string\",\r\n        \"medicos\": [\r\n            \"string\"\r\n        ]\r\n    },\r\n    \"consulta\": [\r\n        {\r\n            \"idConsulta\": 0,\r\n            \"idSituacao\": 0,\r\n            \"idPaciente\": 0,\r\n            \"idMedico\": 0,\r\n            \"dataHorario\": \"2022-02-10T19:01:59.870Z\",\r\n            \"descricao\": \"string\",\r\n            \"idMedicoNavigation\": \"string\",\r\n            \"idPacienteNavigation\": {\r\n                \"idPaciente\": 0,\r\n                \"idUsuario\": 0,\r\n                \"telefone\": \"string\",\r\n                \"cpf\": \"string\",\r\n                \"endereco\": \"string\",\r\n                \"rg\": \"string\",\r\n                \"idUsuarioNavigation\": \"string\",\r\n                \"consulta\": [\r\n                    \"string\"\r\n                ]\r\n            },\r\n            \"idSituacaoNavigation\": {\r\n                \"idSituacao\": 0,\r\n                \"nome\": \"string\",\r\n                \"consulta\": [\r\n                    \"string\"\r\n                ]\r\n            }\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://6205531a161670001741b8fb.mockapi.io/Medico/1",
+							"protocol": "https",
+							"host": [
+								"6205531a161670001741b8fb",
+								"mockapi",
+								"io"
+							],
+							"path": [
+								"Medico",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://6205531a161670001741b8fb.mockapi.io/Medico/1",
+							"protocol": "https",
+							"host": [
+								"6205531a161670001741b8fb",
+								"mockapi",
+								"io"
+							],
+							"path": [
+								"Medico",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Paciente",
+			"item": [
+				{
+					"name": "GET",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://6205531a161670001741b8fb.mockapi.io/Paciente",
+							"protocol": "https",
+							"host": [
+								"6205531a161670001741b8fb",
+								"mockapi",
+								"io"
+							],
+							"path": [
+								"Paciente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GETBYID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://6205531a161670001741b8fb.mockapi.io/Paciente/1",
+							"protocol": "https",
+							"host": [
+								"6205531a161670001741b8fb",
+								"mockapi",
+								"io"
+							],
+							"path": [
+								"Paciente",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"telefone\": \"(200) 200-2000\",\r\n    \"cpf\": \"string\",\r\n    \"endereco\": \"string\",\r\n    \"rg\": \"string\",\r\n    \"idUsuarioNavigation\": {\r\n        \"idUsuario\": 0,\r\n        \"email\": \"Althea.Lubowitz74@gmail.com\",\r\n        \"senha\": \"stringst\",\r\n        \"idTipoUsuario\": 0,\r\n        \"dataDeNascimento\": \"2022-02-10T19:04:08.197Z\",\r\n        \"nome\": \"Sarina\",\r\n        \"imagemPerfil\": \"string\",\r\n        \"idTipoUsuarioNavigation\": {\r\n            \"idTipoUsuario\": 0,\r\n            \"tituloTipoUsuario\": \"string\",\r\n            \"usuarios\": [\r\n                \"string\"\r\n            ]\r\n        },\r\n        \"medico\": {\r\n            \"idMedico\": 0,\r\n            \"idUsuario\": 0,\r\n            \"idClinica\": 0,\r\n            \"idEspecialidade\": 0,\r\n            \"crm\": \"string\",\r\n            \"idClinicaNavigation\": {\r\n                \"idClinica\": 0,\r\n                \"horarioDeAbertura\": {\r\n                    \"ticks\": 0,\r\n                    \"days\": 0,\r\n                    \"hours\": 0,\r\n                    \"milliseconds\": 0,\r\n                    \"minutes\": 0,\r\n                    \"seconds\": 0\r\n                },\r\n                \"horarioDeFechamento\": {\r\n                    \"ticks\": 0,\r\n                    \"days\": 0,\r\n                    \"hours\": 0,\r\n                    \"milliseconds\": 0,\r\n                    \"minutes\": 0,\r\n                    \"seconds\": 0\r\n                },\r\n                \"endereco\": \"string\",\r\n                \"razaoSocial\": \"string\",\r\n                \"nomeFantasia\": \"string\",\r\n                \"cnpj\": \"string\",\r\n                \"medicos\": [\r\n                    \"string\"\r\n                ]\r\n            },\r\n            \"idEspecialidadeNavigation\": {\r\n                \"idEspecialidade\": 0,\r\n                \"nome\": \"string\",\r\n                \"medicos\": [\r\n                    \"string\"\r\n                ]\r\n            },\r\n            \"idUsuarioNavigation\": \"string\",\r\n            \"consulta\": [\r\n                \"string\"\r\n            ]\r\n        },\r\n        \"paciente\": \"string\"\r\n    },\r\n    \"idPaciente\": \"1\",\r\n    \"idUsuario\": 0,\r\n    \"consulta\": [\r\n        {\r\n            \"idConsulta\": 0,\r\n            \"idSituacao\": 0,\r\n            \"idPaciente\": 0,\r\n            \"idMedico\": 0,\r\n            \"dataHorario\": \"2022-02-10T19:04:08.197Z\",\r\n            \"descricao\": \"string\",\r\n            \"idMedicoNavigation\": {\r\n                \"idMedico\": 0,\r\n                \"idUsuario\": 0,\r\n                \"idClinica\": 0,\r\n                \"idEspecialidade\": 0,\r\n                \"crm\": \"string\",\r\n                \"idClinicaNavigation\": {\r\n                    \"idClinica\": 0,\r\n                    \"horarioDeAbertura\": {\r\n                        \"ticks\": 0,\r\n                        \"days\": 0,\r\n                        \"hours\": 0,\r\n                        \"milliseconds\": 0,\r\n                        \"minutes\": 0,\r\n                        \"seconds\": 0\r\n                    },\r\n                    \"horarioDeFechamento\": {\r\n                        \"ticks\": 0,\r\n                        \"days\": 0,\r\n                        \"hours\": 0,\r\n                        \"milliseconds\": 0,\r\n                        \"minutes\": 0,\r\n                        \"seconds\": 0\r\n                    },\r\n                    \"endereco\": \"string\",\r\n                    \"razaoSocial\": \"string\",\r\n                    \"nomeFantasia\": \"string\",\r\n                    \"cnpj\": \"string\",\r\n                    \"medicos\": [\r\n                        \"string\"\r\n                    ]\r\n                },\r\n                \"idEspecialidadeNavigation\": {\r\n                    \"idEspecialidade\": 0,\r\n                    \"nome\": \"string\",\r\n                    \"medicos\": [\r\n                        \"string\"\r\n                    ]\r\n                },\r\n                \"idUsuarioNavigation\": \"string\",\r\n                \"consulta\": [\r\n                    \"string\"\r\n                ]\r\n            },\r\n            \"idPacienteNavigation\": \"string\",\r\n            \"idSituacaoNavigation\": {\r\n                \"idSituacao\": 0,\r\n                \"nome\": \"string\",\r\n                \"consulta\": [\r\n                    \"string\"\r\n                ]\r\n            }\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://6205531a161670001741b8fb.mockapi.io/Paciente/1",
+							"protocol": "https",
+							"host": [
+								"6205531a161670001741b8fb",
+								"mockapi",
+								"io"
+							],
+							"path": [
+								"Paciente",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://6205531a161670001741b8fb.mockapi.io/Paciente/1",
+							"protocol": "https",
+							"host": [
+								"6205531a161670001741b8fb",
+								"mockapi",
+								"io"
+							],
+							"path": [
+								"Paciente",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
