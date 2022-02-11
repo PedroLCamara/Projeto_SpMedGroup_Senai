@@ -20,7 +20,7 @@ export default function ImagemPerfil() {
             })
             .catch((erro) => {
                 localStorage.removeItem('usuario-login');
-                Navigate('/Login')
+                // Navigate('/Login')
             })
     }
 

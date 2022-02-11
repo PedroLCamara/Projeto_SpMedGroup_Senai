@@ -32,7 +32,7 @@ export default function Cadaastro() {
     const [IsLoading, setIsLoading] = useState(false);
 
     function PreencherListas() {
-        axios('http://192.168.6.108:5000/api/Usuarios', {
+        axios('https://6205531a161670001741b8fb.mockapi.io/Usuario', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
@@ -40,78 +40,82 @@ export default function Cadaastro() {
             setListaUsuario(resposta.data);
         })
             .catch((erro) => {
-                localStorage.removeItem('usuario-login');
-                Navigate('/Login')
+                console.log(erro)
+                // localStorage.removeItem('usuario-login');
+                // Navigate('/Login')
             });
 
-        axios('http://192.168.6.108:5000/api/TiposUsuarios', {
-            headers: {
-                Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
-            },
-        }).then((resposta) => {
-            setListaTipoUsuario(resposta.data);
-        })
-        .catch((erro) => {
-            localStorage.removeItem('usuario-login');
-            Navigate('/Login')
-        });
+        // axios('http://192.168.6.108:5000/api/TiposUsuarios', {
+        //     headers: {
+        //         Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
+        //     },
+        // }).then((resposta) => {
+        //     setListaTipoUsuario(resposta.data);
+        // })
+        // .catch((erro) => {
+        //     localStorage.removeItem('usuario-login');
+        //     Navigate('/Login')
+        // });
 
-        axios('http://192.168.6.108:5000/api/Clinicas')
-            .then((resposta) => {
-                setListaClinica(resposta.data);
-            })
-            .catch((erro) => {
-                localStorage.removeItem('usuario-login');
-                Navigate('/Login')
-            });
+        // axios('https://6205531a161670001741b8fb.mockapi.io/Clinicas')
+        //     .then((resposta) => {
+        //         setListaClinica(resposta.data);
+        //     })
+        //     .catch((erro) => {
+        //         console.log(erro)
+        //         // localStorage.removeItem('usuario-login');
+        //         // Navigate('/Login')
+        //     });
 
-        axios('http://192.168.6.108:5000/api/Especialidades', {
-            headers: {
-                Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
-            },
-        }).then((resposta) => setListaEspecialidade(resposta.data))
-        .catch((erro) => {
-            localStorage.removeItem('usuario-login');
-            Navigate('/Login')
-        });
+        // axios('http://192.168.6.108:5000/api/Especialidades', {
+        //     headers: {
+        //         Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
+        //     },
+        // }).then((resposta) => setListaEspecialidade(resposta.data))
+        // .catch((erro) => {
+        //     localStorage.removeItem('usuario-login');
+        //     Navigate('/Login')
+        // });
 
-        axios('http://192.168.6.108:5000/api/Pacientes', {
+        axios('https://6205531a161670001741b8fb.mockapi.io/Paciente', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
         }).then((resposta) => setListaPaciente(resposta.data))
         .catch((erro) => {
-            localStorage.removeItem('usuario-login');
-            Navigate('/Login')
+            console.log(erro)
+            // localStorage.removeItem('usuario-login');
+            // Navigate('/Login')
         });
 
-        axios('http://192.168.6.108:5000/api/Medicos', {
+        axios('https://6205531a161670001741b8fb.mockapi.io/Medico', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('usuario-login'),
             },
         }).then((resposta) => setListaMedico(resposta.data))
         .catch((erro) => {
-            localStorage.removeItem('usuario-login');
-            Navigate('/Login')
+            console.log(erro)
+            // localStorage.removeItem('usuario-login');
+            // Navigate('/Login')
         });
     }
 
     function CadastrarUsuario(evento) {
         evento.preventDefault();
         setIsLoading(true);
-        if (IdTipoUsuario === 0) {
-            setIsLoading(false);
-            window.alert('especifique o usuário!!!')
-        }
-        else if (new Date(Nascimento) > new Date()) {
+        // if (IdTipoUsuario === 0) {
+        //     setIsLoading(false);
+        //     window.alert('especifique o usuário!!!')
+        // }
+        if (new Date(Nascimento) > new Date()) {
             setIsLoading(false);
             window.alert('Selecione uma data de nascimento válida!!!')
         }
         else {
-            axios.post('http://192.168.6.108:5000/api/Usuarios', {
+            axios.post('https://6205531a161670001741b8fb.mockapi.io/Usuario', {
                 "email": Email,
                 "senha": Senha,
-                "idTipoUsuario": IdTipoUsuario,
+                // "idTipoUsuario": IdTipoUsuario,
                 "dataDeNascimento": Nascimento,
                 "nome": Nome
             }, {
@@ -129,8 +133,9 @@ export default function Cadaastro() {
                     window.alert('O email possivelmente já está em uso, utilize outro endereço de email. Se o erro persistir, busque ajuda do suporte e/ou tente novamente mais tarde.')
                 }
                 else{
-                    localStorage.removeItem('usuario-login');
-                    Navigate('/Login')
+                    console.log(erro)
+                    // localStorage.removeItem('usuario-login');
+                    // Navigate('/Login')
                 }
                 setIsLoading(false);
             })
@@ -145,7 +150,7 @@ export default function Cadaastro() {
             window.alert('especifique o usuário!!!')
         }
         else {
-            axios.post('http://192.168.6.108:5000/api/Pacientes', {
+            axios.post('https://6205531a161670001741b8fb.mockapi.io/Paciente', {
                 "idUsuario": IdUsuarioPac,
                 "telefone": Telefone,
                 "cpf": Cpf,
@@ -166,8 +171,9 @@ export default function Cadaastro() {
                     window.alert('O usuário, RG ou CPF possivelmente já estão em uso, utilize outros valores nesses campos. Se o erro persistir, busque ajuda do suporte e/ou tente novamente mais tarde.')
                 }
                 else{
-                    localStorage.removeItem('usuario-login');
-                    Navigate('/Login')
+                    console.log(erro)
+                    // localStorage.removeItem('usuario-login');
+                    // Navigate('/Login')
                 }
                 setIsLoading(false);
             })
@@ -177,15 +183,15 @@ export default function Cadaastro() {
     function CadastrarMedico(Evento) {
         Evento.preventDefault();
         setIsLoading(true);
-        if (IdUsuarioMed === 0 || IdClinica === 0 || IdEspecialidade === 0) {
+        if (IdUsuarioMed === 0) {
             setIsLoading(false);
-            window.alert('Especifique o usuário, a clínica e a especialidade!!!')
+            window.alert('Especifique o usuário!!!')
         }
         else {
-            axios.post('http://192.168.6.108:5000/api/Medicos', {
+            axios.post('https://6205531a161670001741b8fb.mockapi.io/Medico', {
                 "idUsuario": IdUsuarioMed,
-                "idClinica": IdClinica,
-                "idEspecialidade": IdEspecialidade,
+                // "idClinica": IdClinica,
+                // "idEspecialidade": IdEspecialidade,
                 "crm": Crm
             }, {
                 headers: {
@@ -202,8 +208,9 @@ export default function Cadaastro() {
                     window.alert('O usuário ou CRM possivelmente já estão em uso, utilize outros valores nesses campos. Se o erro persistir, busque ajuda do suporte e/ou tente novamente mais tarde.')
                 }
                 else{
-                    localStorage.removeItem('usuario-login');
-                    Navigate('/Login')
+                    console.log(erro)
+                    // localStorage.removeItem('usuario-login');
+                    // Navigate('/Login')
                 }
                 setIsLoading(false);
             })
@@ -212,9 +219,9 @@ export default function Cadaastro() {
 
     useEffect(() => {
         PreencherListas();
-        if (UsuarioAutenticado() === false) {
-            Navigate('/Login');
-        }
+        // if (UsuarioAutenticado() === false) {
+        //     Navigate('/Login');
+        // }
     }, []);
 
     return (
@@ -246,7 +253,7 @@ export default function Cadaastro() {
                                 </div>
                             </div>
                             <div class="CampoCadastro">
-                                <label>Tipo de usuário</label>
+                                {/* <label>Tipo de usuário</label>
                                 <select value={IdTipoUsuario} onChange={(inputTipoUsuario) => setIdTipoUsuario(inputTipoUsuario.target.value)} required>
                                     <optgroup>
                                         <option value="0">Selecione um tipo de usuário</option>
@@ -256,7 +263,7 @@ export default function Cadaastro() {
                                             )
                                         })}
                                     </optgroup>
-                                </select>
+                                </select> */}
                             </div>
                             <div class="BoxBotaoCadastro">
                                 {
@@ -299,8 +306,6 @@ export default function Cadaastro() {
                                         <option value="0">Selecione um usuário disponível</option>
                                         {
                                             ListaUsuario.filter((Usuario) => {
-                                                return Usuario.idTipoUsuario === 3
-                                            }).filter((Usuario) => {
                                                 return ((ListaPaciente.find(Paciente => Paciente.idUsuario === Usuario.idUsuario)) === undefined) === true
                                             }).map((Usuario) => {
                                                 return (
@@ -331,7 +336,7 @@ export default function Cadaastro() {
                                     <input type="text" maxLength="13" value={Crm} onChange={(inputCrm) => setCrm(inputCrm.target.value)} required />
                                 </div>
                                 <div class="CampoCadastro">
-                                    <label>Especialidade</label>
+                                    {/* <label>Especialidade</label>
                                     <select value={IdEspecialidade} onChange={(inputIdEspecialidade) => setIdEspecialidade(inputIdEspecialidade.target.value)} required>
                                         <optgroup>
                                             <option value="0">Selecione uma especialidade</option>
@@ -343,12 +348,12 @@ export default function Cadaastro() {
                                                 })
                                             }
                                         </optgroup>
-                                    </select>
+                                    </select> */}
                                 </div>
                             </div>
                             <div class="LinhaFormCadastro">
                                 <div class="CampoCadastro">
-                                    <label>Clínica</label>
+                                    {/* <label>Clínica</label>
                                     <select value={IdClinica} onChange={(InputIdClinica) => setIdClinica(InputIdClinica.target.value)} required>
                                         <optgroup>
                                             <option value="0">Selecione uma clínica</option>
@@ -360,7 +365,7 @@ export default function Cadaastro() {
                                                 })
                                             }
                                         </optgroup>
-                                    </select>
+                                    </select> */}
                                 </div>
                                 <div class="CampoCadastro">
                                     <label>Usuário</label>
@@ -369,8 +374,6 @@ export default function Cadaastro() {
                                             <option value="0">Selecione um usuário disponível</option>
                                             {
                                                 ListaUsuario.filter((Usuario) => {
-                                                    return Usuario.idTipoUsuario === 2
-                                                }).filter((Usuario) => {
                                                     return ((ListaMedico.find(Medico => Medico.idUsuario === Usuario.idUsuario)) === undefined) === true
                                                 }).map((Usuario) => {
                                                     return (
